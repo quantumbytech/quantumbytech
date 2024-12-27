@@ -1,0 +1,500 @@
+body {
+  background-color: #0c0c0c !important;
+  font-family: sans-serif;
+  margin: 0; /* Remove default margin */
+}
+
+body p,h1,a{
+  color: whitesmoke !important;
+}
+
+html {
+  scroll-behavior: smooth; /* Enable smooth scrolling */
+}
+
+.header {
+  display: flex; /* Use flexbox for alignment */
+  justify-content: space-between; /* Space between logo and back to home */
+  align-items: center; /* Center items vertically */
+  padding: 10px 10px; /* Reduced padding for smaller screens */
+  flex-wrap: nowrap; /* Prevent wrapping */
+}
+
+.header--logo {
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Center items vertically */
+  text-decoration: none; /* Remove underline from link */
+  color: #fff; /* White color for the text */
+  margin: 0; /* Remove default margin */
+  padding: 0;
+}
+
+.header--logo p {
+  margin: 0; /* Remove default margin */
+  font-family: 'Montserrat', sans-serif; /* Use Montserrat font */
+  font-weight: 900; /* Bold font weight */
+  font-size: 1.1em; /* Font size for the logo text */
+  text-transform: uppercase; /* Uppercase text */
+  padding: 0;
+  margin-left: 2rem;
+}
+
+.q {
+  color: #0fc26d; /* Green color for the 'Q' */
+  font-size: 40px; /* Font size for the 'Q' */
+  font-weight: bolder; /* Bolder font weight for emphasis */
+  font-family: sans-serif; /* Font family */
+  margin: 0; /* Remove default margin */
+}
+
+.toHome {
+  text-decoration: none;
+  color: white;
+  font-family: 'Montserrat-Black', sans-serif; /* Ensure Montserrat-Black is used */
+  font-weight: 900;
+  font-size: 1.1em; /* Adjusted font size */
+  margin-left: 10px; /* Reduced space between logo and back to home */
+  margin-right: 2rem;
+  transition: color 0.5s ease, transform 0.5s ease; /* Add transition for color and transform */
+}
+
+.toHome:hover {
+  color: #0fc26d !important; /* Change color on hover */
+  transform: scale(1.1); /* Slightly scale up on hover */
+  opacity: 1;
+}
+
+.sticky-header {
+  position: sticky !important;
+  top: 0;
+  padding: 10px 16px;
+  z-index: 9999;
+}
+
+.h1span {
+  color: #0fc26d;
+  font-size: 2.5rem; /* Green color for highlighted text */
+}
+.e{
+  color: #0fc26d; /* Green color for the 'Q' */
+  font-size: 2.5rem !important; /* Font size for the 'Q' */
+  font-weight: bolder; /* Bolder font weight for emphasis */
+  font-family: sans-serif; /* Font family */
+  margin: 0; /* Remove default margin */
+}
+
+
+.intro {
+  position: relative; /* Ensure positioning for the intro section */
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center;
+  text-align: left;
+  width: 100%; /* Full width */
+  max-width: 900px; /* Limit max width */
+  margin:  150px 50px 150px 0; /* Center the intro section */
+  text-wrap: nowrap;
+  height: 50vh;
+}
+
+.intro--banner {
+  position: relative; /* Positioning for the banner */
+  padding: 20px; /* Add padding for spacing */
+  text-align: justify;
+}
+.intro--banner h1 {
+  margin-left: 24px; /* Left margin for the heading */
+  padding: 0; /* Remove padding */
+  font-size: 2.5em; /* Adjust font size as needed */
+  font-weight: 900; /* Bold font weight */
+}
+
+.intro--banner p {
+  padding: 0 0 0 24px; /* Left padding for the paragraph */
+  color: #b5b2b2 !important; /* White text color */
+  line-height: 1.6; /* Line height for readability */
+}
+
+.h1span {
+  color: #0fc26d; /* Green color for highlighted text */
+}
+
+
+svg {
+  fill: currentColor;
+}
+
+.flipPreview {
+  animation-name: flip;
+  animation-duration: 1s;
+  animation-delay: 2s;
+  animation-timing-function: ease;
+  animation-iteration-count: 2;
+  animation-direction: alternate;
+}
+
+@keyframes flip {
+  from {transform: rotateY(0deg);}
+  to {transform: rotateY(180deg);}
+}
+
+
+
+
+.flip-container {
+  width: 100%;
+  height: 300px;
+  
+  .card {
+    width: 100%;
+    height: 100%;
+    margin-top: 100px;
+    border-radius: 25px;
+  }
+}
+
+.flip-container {
+  perspective: 1000px;
+  
+  &:hover .flip {
+    transform: rotateY(180deg);
+  }
+  
+  .flip {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .flip {
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
+
+    .flip-front {
+      z-index: 2;
+      transform: rotateY(0deg);
+    }
+
+    .flip-back {
+      transform: rotateY(180deg);
+    }
+
+    .flip-front,
+    .flip-back {
+      backface-visibility: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      will-change: transform;
+    }
+  }
+}
+.card.bg-primary,
+.card.bg-danger,
+.card.bg-warning,
+.card.bg-success {
+    background-color: #0fc26d !important; /* Use !important to override Bootstrap styles */
+    color: white; /* Ensure text color is white for contrast */
+    border-radius: 25px;
+}
+.card.bg-primary p,
+.card.bg-danger p,
+.card.bg-warning p,
+.card.bg-success p{
+    background-color: #0fc26d !important; /* Use !important to override Bootstrap styles */
+    color: #0c0c0c !important; /* Ensure text color is white for contrast */
+}
+
+.card-title{
+  font-family:'Montserrat-Black', sans-serif !important;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0c0c0c !important;
+}
+
+.card-text{
+  font-family:'Montserrat-Black', sans-serif !important;
+  color: #b5b2b2 !important;
+  text-align: justify;
+
+}
+
+.services-section {
+  margin-top: 0;
+  margin-bottom: 20px; /* Space between sections */
+  flex: 1 1 calc(50% - 20px); /* Two cards in each row on larger screens */
+  padding: 15px; /* Padding inside each section */
+}
+
+.services--banner h1 {
+  color: #0fc26d !important; /* Match the color used in other headings */
+  font-family: 'Montserrat', sans-serif; /* Use Montserrat font */
+  font-weight: 900; /* Bold font weight */
+  font-size: 3em; /* Adjust font size as needed */
+  margin-bottom: 0px; /* Space below the heading */
+  margin-top: 150px;
+  padding: 0;
+  text-align: left;
+}
+
+.services--banner p {
+
+  font-family: 'Montserrat', sans-serif; /* Use Montserrat font */
+  font-size: 1rem;
+  text-wrap: wrap;
+  text-align: left;
+
+}
+
+.services-title {
+  color: #0fc26d; /* Match the color used in other headings */
+  font-family: 'Montserrat', sans-serif; /* Use Montserrat font */
+  font-weight: 900; /* Bold font weight */
+  font-size: 1.5em; /* Adjust font size as needed */
+  margin-bottom: 25px; /* Space below the heading */
+  text-align: left;
+
+}
+
+.services-list {
+  list-style-type: disc; /* Use bullet points */
+  padding-left: 20px; /* Indent the list */
+  color: rgb(176, 171, 171); /* Match the text color used in other sections */
+  font-family: 'Montserrat', sans-serif; /* Use Montserrat font */
+  font-size: 1em; /* Font size for list items */
+  margin-bottom: 50px !important;
+  padding: 0;
+    text-align: left;
+
+}
+
+.services-list-span {
+  list-style-type: disc; /* Use bullet points */
+  color: #fff; /* Match the text color used in other sections */
+  font-family: 'Montserrat', sans-serif; /* Use Montserrat font */
+  font-size: 1em; /* Font size for list items */
+  font-weight: 600;
+  padding-left: 20px;
+}
+
+.services-flex-container {
+  display: flex; /* Use flexbox for layout */
+  flex-wrap: wrap; /* Allow wrapping to the next line if necessary */
+  justify-content: space-between; /* Space between sections */
+}
+
+.services-section {
+  flex: 1 1 calc(50% - 20px); /* Two cards in each row on larger screens */
+  margin: 10px; /* Space around each section */
+  padding: 15px; /* Padding inside each section */
+}
+
+.whatsapp-button {
+  position: fixed;
+  bottom: 20px; /* Distance from the bottom of the screen */
+  right: 20px; /* Distance from the right of the screen */
+  background-color: #25D366; /* WhatsApp green color */
+  border-radius: 50%; /* Circular button */
+  padding: 10px; /* Padding around the icon */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+  z-index: 9999 !important; /* Ensure it appears above other content */
+}
+
+.scroll-down {
+  opacity: 1;
+  -webkit-transition: all .5s ease-in 3s;
+  transition: all .5s ease-in 3s;
+}
+
+.scroll-down {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  margin-left: -16px;
+  display: block;
+  width: 32px;
+  height: 32px;
+  border: 2px solid #FFF;
+  background-size: 14px auto;
+  border-radius: 50%;
+  z-index: 2;
+  -webkit-animation: bounce 2s infinite 2s;
+  animation: bounce 2s infinite 2s;
+  -webkit-transition: all .2s ease-in;
+  transition: all .2s ease-in;
+  transform: scale(1)
+}
+
+.scroll-down:before {
+    position: absolute;
+    top: calc(50% - 8px);
+    left: calc(50% - 6px);
+    transform: rotate(-45deg);
+    display: block;
+    width: 12px;
+    height: 12px;
+    content: "";
+    border: 2px solid white;
+    border-width: 0px 0 2px 2px;
+}
+
+.special-things-table {
+  margin: 20px auto;
+  width: 80%;
+  border-collapse: collapse; /* Ensure the borders merge neatly */
+  font-family: Arial, sans-serif;
+  border-radius: 16px; /* Smooth, rounded corners for the table */
+  overflow: hidden; /* Ensures the border-radius applies to the table */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  margin-bottom: 80px;
+}
+
+.special-things-table table {
+  width: 100%;
+  border: none; /* Remove table border */
+}
+
+.special-things-table thead {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  background: linear-gradient(90deg, #0fc26d, #0e8c57); /* Gradient for header */
+  color: white;
+  border-bottom: 2px solid #0e8c57; /* Cleaner separation for the header */
+}
+
+.special-things-table th,
+.special-things-table td {
+  padding: 14px 20px; /* Comfortable spacing */
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0; /* Light grey line for rows */
+  transition: all 0.3s ease; /* Smooth hover effect */
+}
+
+.special-things-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9; /* Softer row contrast */
+}
+
+.special-things-table tbody tr:nth-child(odd) {
+  background-color: #ffffff; /* Keep it clean */
+}
+
+.special-things-table tbody tr:hover {
+  background-color: #f1f8f5; /* Slightly tinted green hover */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+.special-things-table th {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-right: 1px solid #e0e0e0; /* Subtle column separator */
+}
+
+.special-things-table th:last-child {
+  border-right: none; /* Remove border for the last column */
+}
+
+.special-things-table td {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333; /* Neutral text color */
+}
+
+.special-things-table tbody tr:last-child td {
+  border-bottom: none; /* Remove border for the last row */
+}
+
+/* Add spacing and polish between header and rows */
+.special-things-table tbody tr:first-child td {
+  border-top: 2px solid #0e8c57; /* Bold line between header and rows */
+}
+
+
+@keyframes bounce {
+  0%, 100%, 20%, 50%, 80% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-8px);
+  }
+  60% {
+    transform: translateY(-4px);
+  }
+}
+
+.whatsapp-button img {
+  width: 50px; /* Size of the WhatsApp icon */
+  height: 50px; /* Size of the WhatsApp icon */
+}
+
+
+/* Responsive Styles for Mobile Devices */
+@media (max-width: 768px) {
+  .services-section {
+    flex: 1 1 100%; /* One card in each row on mobile */
+  }
+}
+
+svg {
+  fill: currentColor;
+}
+
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .header {
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+
+  .header--logo p {
+    font-size: 1.1em; /* Keep the same font size for smaller screens */
+  }
+
+  .q {
+    font-size: 40px; /* Keep the same font size for the 'Q' */
+  }
+
+  .toHome {
+    font-size: 1.1em; /* Keep the same font size for smaller screens */
+  }
+
+  .intro {
+    margin: 40px auto; /* Adjust margin for smaller screens */
+    height: auto; /* Allow height to adjust based on content */
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 5px; /* Further reduce padding for very small screens */
+  }
+
+  .header--logo {
+    flex-direction: row; /* Keep elements in a row on very small screens */
+    align-items: center; /* Center items */
+  }
+
+  .header--logo p {
+    font-size: 1.1em; /* Keep the same font size */
+  }
+
+  .q {
+    font-size: 30px; /* Slightly reduce font size for the 'Q' */
+  }
+
+  .toHome {
+    font-size: 1em; /* Slightly reduce font size for 'Back to Home' */
+  }
+}

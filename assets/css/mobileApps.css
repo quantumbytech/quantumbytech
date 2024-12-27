@@ -1,0 +1,625 @@
+body ,html{
+    background-color: #0c0c0c !important;
+    font-family: 'Montserrat-Black', sans-serif; /* Ensure Montserrat-Black is used */
+    margin: 0 !important; /* Remove default margin */
+}
+*{
+    font-family: 'Montserrat-Black', sans-serif; /* Ensure Montserrat-Black is used */
+
+}
+
+body h1,h2,a{
+    color: whitesmoke !important; /* Set text color */
+}
+
+html {
+    scroll-behavior: smooth !important; /* Enable smooth scrolling */
+}
+
+
+.header {
+    display: flex; /* Use flexbox for alignment */
+    justify-content: space-between; /* Space between logo and back to home */
+    align-items: center; /* Center items vertically */
+    padding: 10px 10px; /* Reduced padding for smaller screens */
+    flex-wrap: nowrap; /* Prevent wrapping */
+  }
+
+
+  .header--logo {
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center items vertically */
+    text-decoration: none; /* Remove underline from link */
+    color: #fff; /* White color for the text */
+    margin: 0; /* Remove default margin */
+    padding: 0;
+  }
+  
+  .header--logo p {
+    margin: 0; /* Remove default margin */
+    font-family: 'Montserrat', sans-serif; /* Use Montserrat font */
+    font-weight: 900; /* Bold font weight */
+    font-size: 1.1em; /* Font size for the logo text */
+    text-transform: uppercase; /* Uppercase text */
+    padding: 0;
+    margin-left: 2rem;
+  }
+  
+  .q {
+    color: #0fc26d; /* Green color for the 'Q' */
+    font-size: 40px; /* Font size for the 'Q' */
+    font-weight: bolder; /* Bolder font weight for emphasis */
+    font-family: sans-serif; /* Font family */
+    margin: 0; /* Remove default margin */
+  }
+
+
+  .toHome {
+    text-decoration: none;
+    color: white;
+    font-family: 'Montserrat-Black', sans-serif; /* Ensure Montserrat-Black is used */
+    font-weight: 900;
+    font-size: 1.1em; /* Adjusted font size */
+    margin-left: 10px; /* Reduced space between logo and back to home */
+    margin-right: 2rem;
+    transition: color 0.5s ease, transform 0.5s ease; /* Add transition for color and transform */
+}
+
+.toHome:hover {
+    color: #0fc26d !important; /* Change color on hover */
+    transform: scale(1.1); /* Slightly scale up on hover */
+    opacity: 1;
+}
+
+.sticky-header {
+    position: sticky !important;
+    top: 0;
+    padding: 10px 16px;
+    z-index: 9999;
+}
+
+.h1span {
+    color: #0fc26d;
+    font-size: 2.5rem; /* Green color for highlighted text */
+  }
+
+.q {
+    color: #0fc26d !important; /* Green color for the 'Q' */
+    font-size: 40px !important; /* Font size for the 'Q' */
+    font-weight: bolder !important; /* Bolder font weight for emphasis */
+}
+svg {
+    fill: currentColor;
+  }
+  
+.intro {
+    position: relative; /* Ensure positioning for the intro section */
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center;
+    text-align: left;
+    width: 100%; /* Full width */
+    max-width: 900px; /* Limit max width */
+    margin:  150px 50px 150px 0; /* Center the intro section */
+    text-wrap: nowrap;
+    height: 50vh;
+}
+
+    
+/* WhatsApp Button */
+.whatsapp-button {
+    position: fixed !important;
+    bottom: 20px !important; /* Distance from the bottom of the screen */
+    right: 20px !important; /* Distance from the right of the screen */
+    background-color: #25D366 !important; /* WhatsApp green color */
+    border-radius: 50% !important; /* Circular button */
+    padding: 10px !important; /* Padding around the icon */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2) !important; /* Shadow for depth */
+    z-index: 9999 !important; /* Ensure it appears above other content */
+}
+
+.whatsapp-button img {
+    width: 50px !important; /* Size of the WhatsApp icon */
+    height: 50px !important; /* Size of the WhatsApp icon */
+}
+
+/* Scroll Down Button */
+.scroll-down {
+    opacity: 1;
+    -webkit-transition: all .5s ease-in 3s;
+    transition: all .5s ease-in 3s;
+}
+
+.scroll-down {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    margin-left: -16px;
+    display: block;
+    width: 32px;
+    height: 32px;
+    border: 2px solid #FFF;
+    background-size: 14px auto;
+    border-radius: 50%;
+    z-index: 2;
+    -webkit-animation: bounce 2s infinite 2s;
+    animation: bounce 2s infinite 2s;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+    transform: scale(1)
+}
+
+.scroll-down:before {
+    position: absolute;
+    top: calc(50% - 8px);
+    left: calc(50% - 6px);
+    transform: rotate(-45deg);
+    display: block;
+    width: 12px;
+    height: 12px;
+    content: "";
+    border: 2px solid white;
+    border-width: 0px 0 2px 2px;
+}
+@keyframes bounce {
+    0%, 100%, 20%, 50%, 80% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-8px);
+    }
+    60% {
+        transform: translateY(-4px);
+    }
+}
+/* Additional Styles */
+a,
+a:visited,
+h2 strong,
+.media-body h4 {
+    color: #0fc26d; /* Match your existing color */
+}
+
+a:hover,
+a:active {
+    color: #0fc26d; /* Match your existing hover color */
+}
+
+.col-sm-4 {
+    margin-bottom: 40px;
+}
+
+.heading {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 150px;
+    height: 100% !important;
+}
+
+.heading p {
+    padding: 0 0 0 24px; /* Left padding for the paragraph */
+    color: #b5b2b2 !important; /* White text color */
+    line-height: 1.6; /* Line height for readability */
+}
+
+.buttons{
+margin-top: 20px;
+gap: 20px;
+}
+
+.heading h2 {
+    margin-top: 60px;
+    font-size: 3em;
+    font-weight: 900; /* Match your existing font weight */
+}
+
+
+.heading h5 {
+    color: #b5b2b2; /* Match your existing text color */
+    width: 70%;
+    margin: auto;
+    font-weight: 200;
+    font-size: 1.5rem;
+    font-family: 'Montserrat-Black', sans-serif; /* Ensure Montserrat-Black is used */
+
+}
+
+.header-section h1 {
+    margin-top: 20px; /* Adjust the value as needed */
+}
+
+#features {
+    padding-top: 0;
+    margin-top: 80px;
+}
+
+#features .img-thumbnail {
+    border: none;
+    max-width: 230px;
+    margin: auto;
+    height: 100%;
+    
+}
+
+.media i{
+    color: #0fc26d !important;
+    font-weight: 700;
+}
+
+#features .media {
+    margin-top: 40px;
+    display: flex;
+}
+
+#features .media:first-child {
+    margin-top: 0;
+}
+
+#features .media .media-left {
+    margin-right: 15px;
+    padding-right: 0;
+}
+
+#features .media .media-right {
+    margin-left: 15px;
+    padding-left: 0;
+}
+
+#features .media .media-left,
+#features .media .media-right {
+    text-align: center;
+    min-width: 55px;
+}
+
+#features .media .media-body h5 {
+    font-weight: bold;
+    margin-top: 0;
+    font-size: 1.250em;
+    font-family: 'Montserrat-Black', sans-serif; /* Ensure Montserrat-Black is used */
+    
+}
+
+#features .media .media-body p {
+    font-size: 0.875em;
+    color: #dee2e65a;
+
+}
+
+#features .media .media-body a{
+    text-decoration: none;
+}
+
+#details {
+    background-color: #0c0c0c; /* Match your existing background color */
+    padding-top: 20px;
+    border-top: 1px solid #e8e8e8; /* Keep this for contrast */
+    padding-bottom: 0;
+}
+
+#details .row {
+    margin-bottom: 40px;
+    margin-top: 30px;
+}
+
+#details .row:first-child {
+    margin-bottom: 0;
+}
+
+#details .row .media .media-body {
+    vertical-align: middle;
+}
+
+#details .media-heading {
+    font-weight: bold;
+}
+
+#details .media-left {
+    padding-right: 20px;
+}
+
+#details .media-right {
+    padding-left: 30px;
+}
+
+#details .media-object {
+    max-width: 120px;
+}
+
+.media-body p{
+    color: #dee2e65a;
+}
+
+.small-img {
+    width: 40%; /* Adjust this percentage for smaller images */
+    max-width: 60px; /* Set a smaller maximum width */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.scroll-down {
+    margin-top: 10px; /* Space above the scroll down button */
+}
+
+/* Ensure images and text are centered on small devices */
+@media (max-width: 576px) {
+    #details .row {
+        display: flex; /* Use flexbox for alignment */
+        justify-content: center; /* Center align items horizontally */
+        align-items: center; /* Center align items vertically */
+        text-align: center; /* Center text within the row */
+    }
+
+    .small-img {
+        width: 100%; /* Adjust width for small devices */
+        max-width: 60px; /* Set a smaller maximum width */
+    }
+
+    .media {
+        display: flex; /* Ensure media is flexible */
+        justify-content: center; /* Center the media items */
+        align-items: center; /* Align items vertically */
+        margin-bottom: 20px; /* Space between media items */
+    }
+
+    .media-left, .media-right {
+        padding: 0; /* Remove padding on small devices */
+        margin: 0 10px; /* Add space between image and text */
+    }
+
+    .media-body {
+        text-align: center; /* Ensure text aligns to the center */
+    }
+}
+
+/* Adding margin between images on large devices */
+@media (min-width: 768px) {
+    #details .media {
+        display: flex; /* Use flexbox for alignment */
+        justify-content: space-between; /* Space between image and text */
+        margin-bottom: 20px; /* Add margin between media items */
+    }
+
+    #details .media-left,
+    #details .media-right {
+        width: 50%; /* Ensure images take half the width */
+    }
+
+    #details .media-body {
+        width: 50%; /* Ensure text takes half the width */
+    }
+}
+
+
+.small-img {
+    width: 40%; /* Adjust this percentage for smaller images */
+    max-width: 60px; /* Set a smaller maximum width */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.scroll-down {
+    margin-top: 10px; /* Space above the scroll down button */
+}
+
+/* Ensure images are next to each other on small devices */
+@media (max-width: 576px) {
+    .col-12 {
+        display: flex; /* Use flexbox for alignment */
+        justify-content: center; /* Center align items */
+        align-items: center; /* Center align items vertically */
+    }
+    
+    .col-6 {
+        margin-right: 5px; /* Adjust this value to decrease space between buttons */
+    }
+
+    .small-img {
+        width: 40%; /* Adjust width for small devices */
+        max-width: 60px; /* Set a smaller maximum width */
+    }
+}
+
+/* Adding margin between images on large devices */
+@media (min-width: 768px) {
+    #details .media {
+        display: flex; /* Use flexbox for alignment */
+        justify-content: space-between; /* Space between image and text */
+        margin-bottom: 20px; /* Add margin between media items */
+    }
+
+    #details .media-left,
+    #details .media-right {
+        width: 50%; /* Ensure images take half the width */
+    }
+
+    #details .media-body {
+        width: 50%; /* Ensure text takes half the width */
+    }
+}
+
+.img-responsive {
+    max-width: 100%; /* Ensure the image does not exceed its container's width */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.center-block {
+    display: block; /* Make the image a block element */
+    margin-left: auto; /* Center horizontally */
+    margin-right: auto; /* Center horizontally */
+}
+
+.img-thumbnail {
+    border: 1px solid #dee2e6; /* Add a border */
+    border-radius: .25rem; /* Rounded corners */
+    padding: .25rem; /* Padding inside the thumbnail */
+    background-color: #f8f9fa; /* Light background color */
+}
+
+
+
+#pros {
+    border-top: 1px solid #e8e8e8;
+    padding-top: 0px;
+    margin-bottom: 30px;
+}
+
+
+#pros h4{
+    color: #fff;
+}
+
+#pros i{
+    margin-top: 15px;
+}
+
+#pros .pros-wrapper {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#pros .pros-wrapper > p {
+    text-align: justify;
+    max-width: 90%;
+    margin: auto;
+    color: #dee2e65a;
+
+}
+
+#pros .pros-wrapper > i {
+    color: #0fc26d; /* Match your existing color */
+    margin-bottom: 10px;
+}
+
+footer {
+    background-color: #0c0c0c; /* Match your existing background color */
+    border-top: 1px solid #e8e8e8; /* Keep this for contrast */
+    padding-top: 10px;
+    padding-bottom: 50px;
+    margin-bottom: 35px;
+}
+
+header figure,
+footer figure {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header figure img,
+footer figure img {
+    max-width: 100%;
+    height: auto;
+    margin: auto;
+}
+
+/* Responsive Styles */
+@media (min-width: 768px) {
+    #features .media:first-child {
+        margin-top: 10px;
+    }
+    #features .col-sm-4:first-child .media-right {
+        order: 2;
+    }
+    #features .col-sm-4:first-child .media-body {
+        order: 1;
+        text-align: right;
+    }
+    .heading {
+        margin-bottom: 3em;
+    }
+    #details {
+        padding-bottom: 100px;
+    }
+    #details .row {
+        margin-bottom: -30px;
+    }
+    #details .media-left {
+        padding-right: 30px;
+    }
+    #pros .pros-wrapper > i,
+    #pros .pros-wrapper > h4 {
+        margin-bottom: 20px;
+    }
+
+}
+
+@media (min-width: 992px) {
+    #features .media {
+        margin-top: 60px;
+    }
+    #features .media:first-child {
+        margin-top: 40px;
+    }
+    #details {
+        padding-bottom: 50px;
+    }
+    .heading {
+        margin-bottom: 4em;
+    }
+    
+}
+
+/* Responsive Styles for Mobile Devices */
+@media (max-width: 768px) {
+    .header {
+        padding: 10px !important; /* Adjust padding for smaller screens */
+    }
+
+    .intro {
+        margin: 20px 0 !important; /* Adjust margin for smaller screens */
+    }
+
+    .services-title {
+        font-size: 1.3em !important; /* Adjust font size for smaller screens */
+    }
+
+    .services-list {
+        font-size: 0.9em !important; /* Adjust font size for smaller screens */
+    }
+
+    /* Adjust features layout for smaller screens */
+    #features .media {
+        flex-direction: column; /* Stack media items vertically */
+        align-items: center; /* Center align items */
+    }
+
+    #features .media .media-left {
+        margin-bottom: 10px; /* Space below the icon */
+    }
+    .heading {
+        margin-top: 4rem; /* Adjusted margin for small devices */
+    }
+    .media-body h5, p{
+        text-align: center !important;
+        font-family: 'Montserrat-Black', sans-serif; /* Ensure Montserrat-Black is used */
+        
+
+    }
+    #features {
+        display: flex; /* Use flexbox for alignment */
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items horizontally */
+    }
+
+    #features .img-thumbnail {
+        max-width: 100%; /* Allow images to take full width */
+        margin: 0 auto; /* Center the images */
+        display: block; /* Ensure they are block elements for centering */
+    }
+    
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: 5px !important; /* Further reduce padding for very small screens */
+    }
+
+    .header--logo p {
+        font-size: 1.1em !important; /* Keep the same font size */
+    }
+
+    .intro--banner h1 {
+        font-size: 2em !important; /* Adjust font size for smaller screens */
+    }
+
+    .intro--banner p {
+        font-size: 0.9em !important; /* Adjust font size for smaller screens */
+    }
+}

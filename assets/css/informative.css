@@ -1,0 +1,361 @@
+body {
+    background-color: #0c0c0c !important;
+    font-family: sans-serif;
+    margin: 0; /* Remove default margin */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+body p, h1, a {
+    color: whitesmoke !important;
+}
+
+html {
+    scroll-behavior: smooth; /* Enable smooth scrolling */
+}
+
+.header {
+    display: flex; /* Use flexbox for alignment */
+    justify-content: space-between; /* Space between logo and back to home */
+    align-items: center; /* Center items vertically */
+    padding: 10px 15px; /* Padding for header */
+    background-color: #1a1a1a; /* Dark background for header */
+    border-bottom: 1px solid #333; /* Subtle border for separation */
+    width: 100%; /* Full width */
+}
+
+.header--logo {
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center items vertically */
+    text-decoration: none; /* Remove underline from link */
+    color: #fff; /* White color for the text */
+}
+
+.header--logo p {
+    margin: 0; /* Remove default margin */
+    font-weight: 900; /* Bold font weight */
+    font-size: 1.5em; /* Larger font size for mobile */
+    text-transform: uppercase; /* Uppercase text */
+}
+
+.toHome {
+    text-decoration: none;
+    color: white; /* Match color */
+    font-weight: 900; /* Match font weight */
+    font-size: 1.2em; /* Adjusted font size for better visibility */
+    margin-left: 10px; /* Space between logo and back to home */
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.toHome:hover {
+    color: #0fc26d !important; /* Change color on hover */
+}
+
+.q {
+    color: #0fc26d; /* Green color for the 'Q' */
+    font-size: 40px; /* Font size for the 'Q' */
+    font-weight: bolder; /* Bolder font weight for emphasis */
+    font-family: sans-serif; /* Font family */
+    margin: 0; /* Remove default margin */
+}
+
+.sticky-header {
+    position: sticky !important;
+    top: 0;
+    padding: 10px 16px;
+    z-index: 9999;
+}
+
+.whatsapp-button {
+    position: fixed;
+    bottom: 20px; /* Distance from the bottom of the screen */
+    right: 20px; /* Distance from the right of the screen */
+    background-color: #25D366; /* WhatsApp green color */
+    border-radius: 50%; /* Circular button */
+    padding: 10px; /* Padding around the icon */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    z-index: 9999 !important; /* Ensure it appears above other content */
+}
+
+.whatsapp-button img {
+    width: 50px !important; /* Size of the WhatsApp icon */
+    height: 50px !important; /* Size of the WhatsApp icon */
+}
+
+.scroll-down {
+    position: absolute;
+    bottom: 30px; /* Position from the bottom */
+    left: 50%; /* Center horizontally */
+    margin-left: -16px; /* Adjust for the width of the button */
+    display: block;
+    width: 32px; /* Width of the button */
+    height: 32px; /* Height of the button */
+    border: 2px solid #FFF; /* Border color */
+    border-radius: 50%; /* Circular button */
+    z-index: 2; /* Ensure it appears above other content */
+    animation: bounce 2s infinite; /* Add bounce animation */
+}
+
+.scroll-down:before {
+    position: absolute;
+    top: calc(50% - 8px); /* Center vertically */
+    left: calc(50% - 6px); /* Center horizontally */
+    transform: rotate(-45deg); /* Rotate for arrow effect */
+    display: block;
+    width: 12px; /* Width of the arrow */
+    height: 12px; /* Height of the arrow */
+    content: "";
+    border: 2px solid white; /* Arrow color */
+    border-width: 0px 0 2px 2px; /* Arrow shape */
+}
+
+@keyframes bounce {
+    0%, 100%, 20%, 50%, 80% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-8px);
+    }
+    60% {
+      transform: translateY(-4px);
+    }
+}
+
+.h1span {
+    color: #0fc26d;
+    font-size: 2.5rem;
+}
+
+/* Landing page intro */
+.intro {
+    position: relative; /* Ensure positioning for the intro section */
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center;
+    text-align: left;
+    width: 90%; /* Use percentage for width */
+    max-width: 900px; /* Limit max width */
+    margin: 150px auto; /* Center the intro section */
+    height: 50vh;
+}
+
+.intro--banner {
+    position: relative; /* Positioning for the banner */
+    padding: 20px; /* Add padding for spacing */
+    text-align: justify;
+}
+
+.intro--banner h1 {
+    margin-left: 24px; /* Left margin for the heading */
+    padding: 0; /* Remove padding */
+    font-size: 2.5em; /* Adjust font size as needed */
+    font-weight: 900; /* Bold font weight */
+}
+
+.intro--banner p {
+    padding: 0 0 0 24px; /* Left padding for the paragraph */
+    color: #b5b2b2 !important; /* White text color */
+    line-height: 1.6; /* Line height for readability */
+}
+
+#features {
+    padding-top: 0;
+    margin-top: 80px;
+}
+
+#features .heading {
+    color: #0fc26d;
+    margin: 80px auto;
+    text-align: left !important;
+}
+
+#features p{
+    text-align: left !important;
+}
+
+#features .img-thumbnail {
+    border: none;
+    max-width: 100%; /* Make images responsive */
+    height: auto; /* Maintain aspect ratio */
+    margin: auto;
+}
+
+.media i {
+    color: #0fc26d !important;
+    font-weight: 700;
+    margin: 10px 10px;
+}
+
+#features .media .media-right {
+    text-align: center;
+    min-width: 55px;
+}
+
+#features .media .media-body h3 {
+    font-weight: bold !important;
+    margin-top: 0;
+    font-size: 1.250em;
+    font-family: 'Montserrat-Black', sans-serif; /* Ensure Montserrat-Black is used */
+}
+
+#features .media .media-body p {
+    font-size: 0.875em;
+    color: #dee2e65a !important;
+}
+
+#features .media .media-body a {
+    text-decoration: none;
+}
+
+/* Call-to-action Section */
+.qbt-cta-section {
+    position: relative; /* Ensure positioning for the section */
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center align items */
+    text-align: center; /* Center text */
+    width: 90%; /* Use percentage for width */
+    max-width: 900px; /* Limit max width */
+    margin: 70px auto; /* Center horizontally with auto margin */
+    padding: 20px; /* Add padding for spacing */
+    background-color: #f7f7f7; /* Light background color */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.qbt-cta-section h2 {
+    margin-bottom: 16px; /* Space between title and text */
+    font-size: 2.2em; /* Adjust font size */
+    font-weight: 700; /* Bold font weight */
+    color: #333; /* Dark color for the title */
+}
+
+.qbt-cta-section .qbt-text {
+    padding: 0; /* Remove padding */
+    color: #666 !important; /* Lighter text color for the description */
+    line-height: 1.6; /* Line height for readability */
+    margin-bottom: 24px; /* Space between text and button */
+    font-size: 1.2em; /* Adjust font size */
+}
+
+.qbt-cta-section .qbt-contact-link {
+    font-size: 1.1em; /* Button text size */
+    color: #fff; /* White text color */
+    background-color: #0fc26d; /* Green button background */
+    padding: 12px 24px; /* Button padding */
+    border-radius: 5px; /* Rounded button corners */
+    text-decoration: none; /* Remove underline */
+    font-weight: 700; /* Bold font weight */
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+.qbt-cta-section .qbt-contact-link:hover {
+    background-color: #08b155; /* Darker green on hover */
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+    .header {
+        flex-direction: column; /* Stack header items vertically */
+        align-items: flex-start; /* Align items to the start */
+    }
+    
+}
+
+@media (max-width: 992px) {
+    .intro {
+        margin: 100px 0; /* Adjust margin for smaller screens */
+        height: auto; /* Allow height to adjust based on content */
+    }
+
+    #features .media {
+        flex-direction: column; /* Stack media items vertically */
+        align-items: center; /* Center items */
+        text-align: center;
+    }
+
+    .qbt-cta-section {
+        padding: 1.5rem; /* Adjust padding for smaller screens */
+        margin-top: 25px auto;
+    }
+
+    .qbt-cta-section h2 {
+        font-size: 1.8rem; /* Adjust font size for smaller screens */
+    }
+
+    .qbt-cta-section .qbt-text {
+        font-size: 1rem; /* Adjust font size for smaller screens */
+        color: #666 !important; /* Lighter text color for the description */
+    }
+
+    .qbt-cta-section .qbt-contact-link {
+        font-size: 1rem; /* Adjust button text size for smaller screens */
+        padding: 0.5rem 1rem; /* Adjust button padding for smaller screens */
+    }
+    
+}
+
+@media (max-width: 768px) {
+    
+    .scroll-down {
+        bottom: 20px; /* Adjust position for mobile */
+        width: 24px; /* Adjust width for mobile */
+        height: 24px; /* Adjust height for mobile */
+    }
+
+    .whatsapp-button {
+        bottom: 15px; /* Adjust position for mobile */
+        right: 15px; /* Adjust position for mobile */
+    }
+
+    .qbt-cta-section {
+        padding: 1rem; /* Further adjust padding for very small screens */
+    }
+
+    .qbt-cta-section h2 {
+        font-size: 1.5rem; /* Further adjust font size for very small screens */
+    }
+
+    .qbt-cta-section .qbt-text {
+        font-size: 0.9rem; /* Further adjust font size for very small screens */
+        color: #666 !important; /* Lighter text color for the description */
+
+    }
+
+    .qbt-cta-section .qbt-contact-link {
+        font-size: 0.9rem; /* Further adjust button text size for very small screens */
+        padding: 0.5rem; /* Adjust button padding for very small screens */
+    }
+    #features .heading {
+        color: #0fc26d;
+        margin: 80px auto;
+        text-align: center !important;
+    }
+    
+    #features p{
+        text-align: center !important;
+    }
+}
+
+@media (max-width: 480px) {
+
+    #features .heading {
+        color: #0fc26d;
+        margin: 80px auto;
+        text-align: center !important;
+    }
+    
+    #features p{
+        text-align: center !important;
+    }
+    .intro {
+        position: relative; /* Ensure positioning for the intro section */
+        display: flex; /* Use flexbox for layout */
+        flex-direction: column; /* Stack elements vertically */
+        align-items: center;
+        text-align: left;
+        width: 90%; /* Use percentage for width */
+        max-width: 900px; /* Limit max width */
+        height: 70vh;
+    }
+
+}
