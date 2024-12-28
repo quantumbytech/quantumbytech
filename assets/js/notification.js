@@ -33,12 +33,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Close notification button event listener
-    closeButton.addEventListener('click', function() {
-        notification.classList.remove('show'); // Remove show class to hide the notification
-        setTimeout(() => {
-            notification.classList.add('hidden'); // Add hidden class after transition
-        }, 500); // Match the duration of the transition
-    });
+    if (closeButton) {
+        closeButton.addEventListener('click', function() {
+            notification.classList.remove('show'); // Remove show class to hide the notification
+            setTimeout(() => {
+                notification.classList.add('hidden'); // Add hidden class after transition
+            }, 500); // Match the duration of the transition
+        });
+    }
 });
 
 // Validate form on submission
