@@ -93,7 +93,7 @@ html {
   width: 100%; /* Full width */
   max-width: 900px; /* Limit max width */
   margin:  150px 50px 150px 0; /* Center the intro section */
-  text-wrap: nowrap;
+  text-wrap: wrap;
   height: 50vh;
 }
 
