@@ -86,10 +86,11 @@ html {
 
 .intro {
   position: relative; /* Ensure positioning for the intro section */
-  display: flex; /* Use flexbox for layout */
-  flex-direction: column; /* Stack elements vertically */
-  align-items: center;
-  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  text-align: left; /* Center text */
   width: 100%; /* Full width */
   max-width: 900px; /* Limit max width */
   margin:  150px 50px 150px 0; /* Center the intro section */
