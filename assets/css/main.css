@@ -41,26 +41,9 @@
   background-color: #08b155; /* Darker green on hover */
 }
 
-
-@media (min-width: 768px) and (max-width: 1024px) {
-    .device-notification {
-      display: flex; /* Show the notification message */
-      position: fixed; /* Keep it fixed on the screen */
-      top: 0; /* Position it at the top */
-      left: 0; /* Align it to the left */
-      width: 100%; /* Full width */
-      height: auto; /* Adjust height as needed */
-      background-color: rgba(0, 0, 0, 0.8); /* Background color */
-      color: #fff; /* Text color */
-      z-index: 1000; /* Ensure it appears above other content */
-      justify-content: center; /* Center the text */
-      align-items: center; /* Center vertically */
-      padding: 10px; /* Add some padding */
-    }
-  }
   @media (min-width: 768px) and (max-width: 1024px) {
     .device-notification {
-      display: flex; /* Show the notification message */
+      display: none; /* Show the notification message */
       position: fixed; /* Keep it fixed on the screen */
       top: 0; /* Position it at the top */
       left: 0; /* Align it to the left */
