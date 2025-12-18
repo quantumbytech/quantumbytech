@@ -125,7 +125,7 @@ export const Services = () => {
                     whileHover={{ rotate: 360 }}
                     transition={{ duration: 0.6 }}
                   >
-                    <service.icon className="text-white" size={32} />
+                    <service.icon className="text-white w-8 h-8" />
                   </motion.div>
 
                   {/* Content */}
