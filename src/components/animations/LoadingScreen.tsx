@@ -10,7 +10,7 @@ export const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
   const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
-    // Simulate loading progress
+    // Fast loading progress - no delays
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
@@ -18,14 +18,14 @@ export const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
           setTimeout(() => {
             setIsComplete(true);
             onLoadingComplete?.();
-          }, 500);
+          }, 200);
           return 100;
         }
-        // Faster initial load, slower at the end for smooth finish
-        const increment = prev < 60 ? Math.random() * 15 + 10 : Math.random() * 5 + 2;
+        // Much faster loading
+        const increment = Math.random() * 25 + 20;
         return Math.min(prev + increment, 100);
       });
-    }, 150);
+    }, 50);
 
     return () => clearInterval(interval);
   }, [onLoadingComplete]);
@@ -35,8 +35,8 @@ export const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
       {!isComplete && (
         <motion.div
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, scale: 1.1 }}
-          transition={{ duration: 0.6, ease: 'easeInOut' }}
+          exit={{ opacity: 0, scale: 1.05 }}
+          transition={{ duration: 0.3, ease: 'easeOut' }}
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-gradient-to-br from-dark-500 via-dark-400 to-dark-500"
         >
           {/* Animated Background Orbs */}

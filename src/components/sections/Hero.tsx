@@ -23,7 +23,7 @@ export const Hero = () => {
   return (
     <section
       ref={ref}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-0"
+      className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-32 pb-24 md:pb-32 px-4 sm:px-6 lg:px-8"
     >
       {/* Animated Background */}
       <div className="absolute inset-0 z-0">
@@ -64,26 +64,26 @@ export const Hero = () => {
       {/* Content */}
       <motion.div
         style={{ y, opacity }}
-        className="container mx-auto px-4 z-10"
+        className="container mx-auto z-10 w-full"
       >
-        <div className="max-w-5xl mx-auto text-center">
+        <div className="max-w-7xl mx-auto text-center">
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="inline-flex items-center space-x-2 glass-effect px-3 py-2 md:px-4 md:py-2 rounded-full mb-6 md:mb-8"
+            transition={{ duration: 0.3 }}
+            className="inline-flex items-center space-x-2 glass-effect px-3 py-1.5 md:px-4 md:py-2 rounded-full mb-4 md:mb-6"
           >
-            <Sparkles className="text-primary-500" size={16} />
-            <span className="text-xs md:text-sm">Transforming Ideas into Digital Reality</span>
+            <Sparkles className="text-primary-500" size={14} />
+            <span className="text-xs">Transforming Ideas into Digital Reality</span>
           </motion.div>
 
           {/* Main Heading */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl md:text-7xl lg:text-8xl font-bold mb-4 md:mb-6 leading-tight"
+            transition={{ duration: 0.3 }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-3 md:mb-4 lg:mb-6 leading-tight"
           >
             Boost Your
             <br />
@@ -94,8 +94,8 @@ export const Hero = () => {
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-base md:text-xl text-white/70 mb-8 md:mb-12 max-w-3xl mx-auto px-4"
+            transition={{ duration: 0.3 }}
+            className="text-sm sm:text-base md:text-lg lg:text-xl text-white/70 mb-6 md:mb-8 lg:mb-10 max-w-3xl mx-auto px-4"
           >
             At Quantum ByTech, we specialize in delivering cutting-edge technology solutions 
             to elevate your business. From web development to advanced software systems, 
@@ -106,18 +106,19 @@ export const Hero = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            transition={{ duration: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4"
           >
             <motion.button
               onClick={() => handleNavigation('/contact')}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.2 }}
               className="btn-primary flex items-center space-x-2 group"
             >
               <span>Request a Quote</span>
               <ArrowRight 
-                className="group-hover:translate-x-1 transition-transform" 
+                className="group-hover:translate-x-1 transition-transform duration-200" 
                 size={20} 
               />
             </motion.button>
@@ -125,6 +126,7 @@ export const Hero = () => {
               onClick={() => handleNavigation('/services')}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.2 }}
               className="btn-secondary"
             >
               Explore Services
@@ -135,8 +137,8 @@ export const Hero = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="grid grid-cols-3 gap-4 md:gap-8 mt-12 md:mt-20 max-w-2xl mx-auto"
+            transition={{ duration: 0.3 }}
+            className="grid grid-cols-3 gap-3 md:gap-6 lg:gap-8 mt-8 md:mt-12 lg:mt-16 max-w-3xl mx-auto"
           >
             {[
               { value: '100+', label: 'Projects Completed' },
@@ -147,10 +149,10 @@ export const Hero = () => {
                 key={stat.label}
                 className="text-center"
               >
-                <div className="text-2xl md:text-4xl font-bold text-primary-500 mb-1 md:mb-2">
+                <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-primary-500 mb-1 md:mb-2">
                   {stat.value}
                 </div>
-                <div className="text-xs md:text-sm text-white/60">{stat.label}</div>
+                <div className="text-xs sm:text-sm md:text-base text-white/60">{stat.label}</div>
               </div>
             ))}
           </motion.div>

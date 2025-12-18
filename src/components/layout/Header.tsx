@@ -41,10 +41,10 @@ export const Header = () => {
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.3, ease: 'easeOut' }}
+      transition={{ duration: 0.2, ease: 'easeOut' }}
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        scrolled ? 'glass-effect shadow-lg py-3 md:py-4' : 'glass-effect py-4 md:py-6'
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-200 glass-effect',
+        scrolled ? 'shadow-lg py-3 md:py-4' : 'py-4 md:py-6'
       )}
     >
       <div className="container mx-auto px-4">

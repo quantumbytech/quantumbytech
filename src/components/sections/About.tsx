@@ -64,16 +64,16 @@ export const About = () => {
         {/* Values Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
           {values.map((value, index) => (
-            <ScrollReveal key={value.title} delay={index * 0.1} direction={index % 2 === 0 ? 'left' : 'right'}>
+            <ScrollReveal key={value.title} delay={index * 0.05} direction={index % 2 === 0 ? 'left' : 'right'}>
               <motion.div
                 className="glass-effect rounded-2xl p-8 group"
                 whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.2 }}
               >
                 <motion.div
                   className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center mb-6"
                   whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.6 }}
+                  transition={{ duration: 0.4 }}
                 >
                   <value.icon className="text-white" size={28} />
                 </motion.div>

@@ -1,31 +1,33 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { WhatsAppButton } from './components/layout/WhatsAppButton';
 import { MagneticCursor } from './components/animations/MagneticCursor';
 import { LoadingScreen } from './components/animations/LoadingScreen';
 import { Home } from './pages/Home';
-import { Services } from './pages/Services';
-import { About } from './pages/About';
-import { Contact } from './pages/Contact';
-import { ECommerce } from './pages/services/ECommerce';
-import { MobileApps } from './pages/services/MobileApps';
-import { InformativeWebsites } from './pages/services/InformativeWebsites';
-import { DatabaseSolutions } from './pages/services/DatabaseSolutions';
-import { Maintenance } from './pages/services/Maintenance';
-import { TechSupport } from './pages/services/TechSupport';
+
+// Lazy load pages for better performance
+const Services = lazy(() => import('./pages/Services').then(module => ({ default: module.Services })));
+const About = lazy(() => import('./pages/About').then(module => ({ default: module.About })));
+const Contact = lazy(() => import('./pages/Contact').then(module => ({ default: module.Contact })));
+const ECommerce = lazy(() => import('./pages/services/ECommerce').then(module => ({ default: module.ECommerce })));
+const MobileApps = lazy(() => import('./pages/services/MobileApps').then(module => ({ default: module.MobileApps })));
+const InformativeWebsites = lazy(() => import('./pages/services/InformativeWebsites').then(module => ({ default: module.InformativeWebsites })));
+const DatabaseSolutions = lazy(() => import('./pages/services/DatabaseSolutions').then(module => ({ default: module.DatabaseSolutions })));
+const Maintenance = lazy(() => import('./pages/services/Maintenance').then(module => ({ default: module.Maintenance })));
+const TechSupport = lazy(() => import('./pages/services/TechSupport').then(module => ({ default: module.TechSupport })));
 
 function AppContent() {
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Ensure minimum loading time for smooth experience
+    // Fast loading - no artificial delays
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
+    }, 800);
 
     return () => clearTimeout(timer);
   }, []);
@@ -40,20 +42,22 @@ function AppContent() {
           <Header />
           
           <main>
-            <AnimatePresence mode="wait">
-              <Routes location={location} key={location.pathname}>
-                <Route path="/" element={<Home />} />
-                <Route path="/services" element={<Services />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/services/e-commerce" element={<ECommerce />} />
-                <Route path="/services/mobile-apps" element={<MobileApps />} />
-                <Route path="/services/informative-websites" element={<InformativeWebsites />} />
-                <Route path="/services/database-solutions" element={<DatabaseSolutions />} />
-                <Route path="/services/maintenance" element={<Maintenance />} />
-                <Route path="/services/tech-support" element={<TechSupport />} />
-              </Routes>
-            </AnimatePresence>
+            <Suspense fallback={<div className="min-h-screen" />}>
+              <AnimatePresence mode="wait">
+                <Routes location={location} key={location.pathname}>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/services" element={<Services />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/services/e-commerce" element={<ECommerce />} />
+                  <Route path="/services/mobile-apps" element={<MobileApps />} />
+                  <Route path="/services/informative-websites" element={<InformativeWebsites />} />
+                  <Route path="/services/database-solutions" element={<DatabaseSolutions />} />
+                  <Route path="/services/maintenance" element={<Maintenance />} />
+                  <Route path="/services/tech-support" element={<TechSupport />} />
+                </Routes>
+              </AnimatePresence>
+            </Suspense>
           </main>
 
           <Footer />

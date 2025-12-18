@@ -15,13 +15,13 @@ export const ScrollReveal = ({
   className = ''
 }: ScrollRevealProps) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, margin: '-50px' });
 
   const directions = {
-    up: { y: 60, x: 0 },
-    down: { y: -60, x: 0 },
-    left: { y: 0, x: 60 },
-    right: { y: 0, x: -60 },
+    up: { y: 30, x: 0 },
+    down: { y: -30, x: 0 },
+    left: { y: 0, x: 30 },
+    right: { y: 0, x: -30 },
   };
 
   return (
@@ -37,9 +37,9 @@ export const ScrollReveal = ({
         x: 0 
       } : {}}
       transition={{
-        duration: 0.7,
-        delay,
-        ease: [0.6, -0.05, 0.01, 0.99],
+        duration: 0.3,
+        delay: delay * 0.5, // Reduce delay impact by 50%
+        ease: 'easeOut',
       }}
       className={className}
     >

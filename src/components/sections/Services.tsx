@@ -71,19 +71,19 @@ export const Services = () => {
   };
 
   return (
-    <section id="services" className="py-20 md:py-32 relative overflow-hidden">
+    <section id="services" className="py-20 md:py-32 lg:py-40 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary-600/10 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-0 w-96 h-96 lg:w-[600px] lg:h-[600px] bg-primary-500/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 lg:w-[600px] lg:h-[600px] bg-primary-600/10 rounded-full blur-3xl" />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <ScrollReveal>
-          <div className="text-center mb-16">
+          <div className="text-center mb-12 md:mb-16 lg:mb-20">
             <motion.h2
-              className="text-4xl md:text-6xl font-bold mb-6"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -92,7 +92,7 @@ export const Services = () => {
               Our <span className="text-gradient">Services</span>
             </motion.h2>
             <motion.p
-              className="text-lg text-white/70 max-w-2xl mx-auto"
+              className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/70 max-w-3xl mx-auto px-4"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -105,14 +105,14 @@ export const Services = () => {
         </ScrollReveal>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
           {services.map((service, index) => (
-            <ScrollReveal key={service.title} delay={index * 0.1}>
+            <ScrollReveal key={service.title} delay={index * 0.05}>
               <motion.div
                 onClick={() => handleServiceClick(service.link)}
                 className="group relative glass-effect rounded-2xl p-8 h-full overflow-hidden cursor-pointer"
                 whileHover={{ y: -10 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.2 }}
               >
                   {/* Gradient Background on Hover */}
                   <motion.div
@@ -123,7 +123,7 @@ export const Services = () => {
                   <motion.div
                     className={`w-16 h-16 rounded-xl bg-gradient-to-br ${service.gradient} flex items-center justify-center mb-6 relative z-10`}
                     whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.6 }}
+                    transition={{ duration: 0.4 }}
                   >
                     <service.icon className="text-white w-8 h-8" />
                   </motion.div>

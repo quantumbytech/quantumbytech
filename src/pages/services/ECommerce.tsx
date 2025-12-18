@@ -49,7 +49,7 @@ const benefits = [
 export const ECommerce = () => {
   return (
     <PageTransition>
-      <div className="min-h-screen pt-24 pb-20">
+      <div className="min-h-screen pt-24 md:pt-28 lg:pt-32 pb-20">
         {/* Hero Section */}
         <section className="py-20 relative overflow-hidden">
           <div className="absolute inset-0 z-0">
