@@ -23,15 +23,15 @@ export const Hero = () => {
   return (
     <section
       ref={ref}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-0"
     >
       {/* Animated Background */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-dark-500 via-dark-400 to-dark-500" />
         
-        {/* Animated Orbs */}
+        {/* Animated Orbs - Reduced complexity on mobile */}
         <motion.div
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500/20 rounded-full blur-3xl"
+          className="absolute top-1/4 left-1/4 w-64 h-64 md:w-96 md:h-96 bg-primary-500/20 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
             x: [0, 50, 0],
@@ -44,7 +44,7 @@ export const Hero = () => {
           }}
         />
         <motion.div
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary-600/20 rounded-full blur-3xl"
+          className="absolute bottom-1/4 right-1/4 w-64 h-64 md:w-96 md:h-96 bg-primary-600/20 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.3, 1],
             x: [0, -50, 0],
@@ -57,8 +57,8 @@ export const Hero = () => {
           }}
         />
 
-        {/* Grid Pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(15,194,109,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(15,194,109,0.05)_1px,transparent_1px)] bg-[size:100px_100px]" />
+        {/* Grid Pattern - Hidden on mobile for better performance */}
+        <div className="hidden md:block absolute inset-0 bg-[linear-gradient(rgba(15,194,109,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(15,194,109,0.05)_1px,transparent_1px)] bg-[size:100px_100px]" />
       </div>
 
       {/* Content */}
@@ -71,19 +71,19 @@ export const Hero = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center space-x-2 glass-effect px-4 py-2 rounded-full mb-8"
+            transition={{ duration: 0.4 }}
+            className="inline-flex items-center space-x-2 glass-effect px-3 py-2 md:px-4 md:py-2 rounded-full mb-6 md:mb-8"
           >
-            <Sparkles className="text-primary-500" size={20} />
-            <span className="text-sm">Transforming Ideas into Digital Reality</span>
+            <Sparkles className="text-primary-500" size={16} />
+            <span className="text-xs md:text-sm">Transforming Ideas into Digital Reality</span>
           </motion.div>
 
           {/* Main Heading */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight"
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-4xl md:text-7xl lg:text-8xl font-bold mb-4 md:mb-6 leading-tight"
           >
             Boost Your
             <br />
@@ -94,8 +94,8 @@ export const Hero = () => {
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-lg md:text-xl text-white/70 mb-12 max-w-3xl mx-auto"
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-base md:text-xl text-white/70 mb-8 md:mb-12 max-w-3xl mx-auto px-4"
           >
             At Quantum ByTech, we specialize in delivering cutting-edge technology solutions 
             to elevate your business. From web development to advanced software systems, 
@@ -106,8 +106,8 @@ export const Hero = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4"
           >
             <motion.button
               onClick={() => handleNavigation('/contact')}
@@ -135,26 +135,23 @@ export const Hero = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="grid grid-cols-3 gap-8 mt-20 max-w-2xl mx-auto"
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="grid grid-cols-3 gap-4 md:gap-8 mt-12 md:mt-20 max-w-2xl mx-auto"
           >
             {[
               { value: '100+', label: 'Projects Completed' },
               { value: '50+', label: 'Happy Clients' },
               { value: '24/7', label: 'Support Available' },
-            ].map((stat, index) => (
-              <motion.div
+            ].map((stat) => (
+              <div
                 key={stat.label}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 1 + index * 0.1 }}
                 className="text-center"
               >
-                <div className="text-3xl md:text-4xl font-bold text-primary-500 mb-2">
+                <div className="text-2xl md:text-4xl font-bold text-primary-500 mb-1 md:mb-2">
                   {stat.value}
                 </div>
-                <div className="text-sm text-white/60">{stat.label}</div>
-              </motion.div>
+                <div className="text-xs md:text-sm text-white/60">{stat.label}</div>
+              </div>
             ))}
           </motion.div>
         </div>

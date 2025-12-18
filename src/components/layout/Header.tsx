@@ -41,9 +41,10 @@ export const Header = () => {
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        scrolled ? 'glass-effect shadow-lg py-4' : 'bg-transparent py-6'
+        scrolled ? 'glass-effect shadow-lg py-3 md:py-4' : 'glass-effect py-4 md:py-6'
       )}
     >
       <div className="container mx-auto px-4">
@@ -108,36 +109,28 @@ export const Header = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass-effect mt-4"
+            transition={{ duration: 0.2, ease: 'easeInOut' }}
+            className="md:hidden glass-effect mt-2 overflow-hidden"
           >
-            <nav className="container mx-auto px-4 py-6 flex flex-col space-y-4">
-              {navItems.map((item, index) => (
-                <motion.div
+            <nav className="container mx-auto px-4 py-4 flex flex-col space-y-3">
+              {navItems.map((item) => (
+                <button
                   key={item.name}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
+                  onClick={() => handleNavClick(item.path)}
+                  className={cn(
+                    "text-white/80 hover:text-white transition-colors block py-2 text-left w-full",
+                    location.pathname === item.path && "text-white font-semibold"
+                  )}
                 >
-                  <button
-                    onClick={() => handleNavClick(item.path)}
-                    className={cn(
-                      "text-white/80 hover:text-white transition-colors block py-2 text-left w-full",
-                      location.pathname === item.path && "text-white font-semibold"
-                    )}
-                  >
-                    {item.name}
-                  </button>
-                </motion.div>
+                  {item.name}
+                </button>
               ))}
-              <motion.button
+              <button
                 onClick={() => handleNavClick('/contact')}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: navItems.length * 0.1 }}
-                className="btn-primary w-full"
+                className="btn-primary w-full mt-2"
               >
                 Request a Quote
-              </motion.button>
+              </button>
             </nav>
           </motion.div>
         )}
