@@ -2,7 +2,7 @@ name: Deploy React App to GitHub Pages
 
 on:
   push:
-    branches: ["react-website"]
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
