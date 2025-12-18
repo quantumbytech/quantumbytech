@@ -24,10 +24,10 @@ function AppContent() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Fast loading - no artificial delays
+    // Smooth loading experience
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 800);
+    }, 1200);
 
     return () => clearTimeout(timer);
   }, []);

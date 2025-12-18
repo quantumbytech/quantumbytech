@@ -10,7 +10,7 @@ export const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
   const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
-    // Fast loading progress - no delays
+    // Smooth loading progress
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
@@ -18,14 +18,14 @@ export const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
           setTimeout(() => {
             setIsComplete(true);
             onLoadingComplete?.();
-          }, 200);
+          }, 300);
           return 100;
         }
-        // Much faster loading
-        const increment = Math.random() * 25 + 20;
+        // Smooth incremental loading
+        const increment = prev < 70 ? Math.random() * 12 + 8 : Math.random() * 6 + 3;
         return Math.min(prev + increment, 100);
       });
-    }, 50);
+    }, 80);
 
     return () => clearInterval(interval);
   }, [onLoadingComplete]);
