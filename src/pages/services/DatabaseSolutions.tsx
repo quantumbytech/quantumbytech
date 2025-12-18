@@ -161,19 +161,21 @@ export const DatabaseSolutions = () => {
                   {technologies.map((tech, index) => (
                     <motion.div
                       key={tech.name}
-                      className="text-center p-6 rounded-xl bg-white/5 hover:bg-white/10 transition-colors"
+                      className="text-center p-6 rounded-xl bg-white/5 hover:bg-white/10 transition-colors group"
                       initial={{ opacity: 0, scale: 0.8 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
+                      transition={{ delay: index * 0.05 }}
                       whileHover={{ scale: 1.05 }}
                     >
                       <div className="flex justify-center mb-4">
-                        <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${tech.color} p-3 flex items-center justify-center`}>
-                          <img src={tech.icon} alt={tech.name} className="w-full h-full object-contain" />
+                        <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${tech.color} p-4 flex items-center justify-center shadow-lg group-hover:shadow-2xl transition-shadow`}>
+                          <div className="w-full h-full bg-white rounded-lg p-2 flex items-center justify-center">
+                            <img src={tech.icon} alt={tech.name} className="w-full h-full object-contain" />
+                          </div>
                         </div>
                       </div>
-                      <h3 className="text-lg font-semibold">{tech.name}</h3>
+                      <h3 className="text-base md:text-lg font-semibold text-white">{tech.name}</h3>
                     </motion.div>
                   ))}
                 </div>
