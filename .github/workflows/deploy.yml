@@ -33,11 +33,14 @@ jobs:
       - name: Build
         run: npm run build
         
-      - name: Copy necessary files to dist
+      - name: Verify and ensure critical files
         run: |
+          echo "Ensuring .nojekyll exists..."
           touch dist/.nojekyll
-          cp public/404.html dist/404.html 2>/dev/null || true
-          cp public/CNAME dist/CNAME 2>/dev/null || true
+          echo "Verifying files in dist..."
+          ls -la dist/
+          echo "Checking if .nojekyll exists..."
+          test -f dist/.nojekyll && echo ".nojekyll exists" || echo ".nojekyll missing!"
         
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -46,6 +49,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
+          retention-days: 1
           
   deploy:
     environment:
