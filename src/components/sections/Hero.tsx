@@ -162,21 +162,28 @@ export const Hero = () => {
       {/* Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
+        animate={{ opacity: [0, 1, 0.7, 1] }}
+        transition={{ 
+          duration: 2,
+          times: [0, 0.3, 0.6, 1],
+          repeat: Infinity,
+          repeatDelay: 1
+        }}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
       >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2"
-        >
+        <div className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2">
           <motion.div
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 1, 0.5, 1] }}
+            transition={{ 
+              duration: 2,
+              times: [0, 0.3, 0.6, 1],
+              repeat: Infinity,
+              repeatDelay: 1
+            }}
             className="w-1.5 h-1.5 bg-primary-500 rounded-full"
           />
-        </motion.div>
+        </div>
       </motion.div>
     </section>
   );

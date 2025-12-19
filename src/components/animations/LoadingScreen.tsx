@@ -145,21 +145,16 @@ export const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
             {/* Loading Text */}
             <motion.div
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.7 }}
-              className="flex items-center space-x-2 text-white/40 text-sm md:text-base"
+              animate={{ opacity: [0, 1, 0.8, 1] }}
+              transition={{ 
+                duration: 2,
+                times: [0, 0.4, 0.7, 1],
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+              className="text-white/40 text-sm md:text-base"
             >
-              <span>Loading your experience</span>
-              <motion.span
-                animate={{ opacity: [0, 1, 0] }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                }}
-              >
-                ...
-              </motion.span>
+              Loading your experience...
             </motion.div>
 
             {/* Floating Particles */}
