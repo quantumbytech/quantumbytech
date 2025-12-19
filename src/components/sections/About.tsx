@@ -40,19 +40,19 @@ export const About = () => {
           <div className="text-center mb-16">
             <motion.h2
               className="text-4xl md:text-6xl font-bold mb-6"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0.5, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.4, ease: 'easeOut' }}
             >
               We Believe in <span className="text-gradient">Passionate People</span>
             </motion.h2>
             <motion.p
               className="text-lg text-white/70 max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0.5, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.4, ease: 'easeOut', delay: 0.1 }}
             >
               At Quantum ByTech, we're more than just a tech company. We're your partners 
               in digital transformation, committed to turning your vision into reality through 
@@ -64,7 +64,7 @@ export const About = () => {
         {/* Values Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
           {values.map((value, index) => (
-            <ScrollReveal key={value.title} delay={index * 0.05} direction={index % 2 === 0 ? 'left' : 'right'}>
+            <ScrollReveal key={value.title} delay={index * 0.02} direction={index % 2 === 0 ? 'left' : 'right'}>
               <motion.div
                 className="glass-effect rounded-2xl p-8 group"
                 whileHover={{ scale: 1.02 }}
@@ -102,10 +102,10 @@ export const About = () => {
                   <motion.div
                     key={stat.label}
                     className="text-center"
-                    initial={{ opacity: 0, scale: 0.8 }}
+                    initial={{ opacity: 0.5, scale: 0.95 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    transition={{ duration: 0.4, delay: index * 0.05, ease: 'easeOut' }}
                   >
                     <motion.div
                       className="text-4xl md:text-5xl font-bold text-primary-500 mb-2"

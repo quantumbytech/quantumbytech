@@ -69,9 +69,9 @@ export const Hero = () => {
         <div className="max-w-7xl mx-auto text-center">
           {/* Badge */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0.3, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
             className="inline-flex items-center space-x-2 glass-effect px-3 py-1.5 md:px-4 md:py-2 rounded-full mb-4 md:mb-6"
           >
             <Sparkles className="text-primary-500" size={14} />
@@ -80,9 +80,9 @@ export const Hero = () => {
 
           {/* Main Heading */}
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0.3, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-3 md:mb-4 lg:mb-6 leading-tight"
           >
             Boost Your
@@ -92,9 +92,9 @@ export const Hero = () => {
 
           {/* Subtitle */}
           <motion.p
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0.3, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }}
             className="text-sm sm:text-base md:text-lg lg:text-xl text-white/70 mb-6 md:mb-8 lg:mb-10 max-w-3xl mx-auto px-4"
           >
             At Quantum ByTech, we specialize in delivering cutting-edge technology solutions 
@@ -104,9 +104,9 @@ export const Hero = () => {
 
           {/* CTA Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0.3, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4"
           >
             <motion.button
@@ -135,9 +135,9 @@ export const Hero = () => {
 
           {/* Stats */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0.3, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.5, ease: 'easeOut', delay: 0.3 }}
             className="grid grid-cols-3 gap-3 md:gap-6 lg:gap-8 mt-8 md:mt-12 lg:mt-16 max-w-3xl mx-auto"
           >
             {[

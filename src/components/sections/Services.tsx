@@ -84,19 +84,19 @@ export const Services = () => {
           <div className="text-center mb-12 md:mb-16 lg:mb-20">
             <motion.h2
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0.5, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.4, ease: 'easeOut' }}
             >
               Our <span className="text-gradient">Services</span>
             </motion.h2>
             <motion.p
               className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/70 max-w-3xl mx-auto px-4"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0.5, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.4, ease: 'easeOut', delay: 0.1 }}
             >
               Comprehensive solutions tailored to your business needs, 
               powered by cutting-edge technology and expert craftsmanship.
@@ -107,12 +107,12 @@ export const Services = () => {
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
           {services.map((service, index) => (
-            <ScrollReveal key={service.title} delay={index * 0.05}>
+            <ScrollReveal key={service.title} delay={index * 0.02}>
               <motion.div
                 onClick={() => handleServiceClick(service.link)}
                 className="group relative glass-effect rounded-2xl p-8 h-full overflow-hidden cursor-pointer"
-                whileHover={{ y: -10 }}
-                transition={{ duration: 0.2 }}
+                whileHover={{ y: -8 }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
               >
                   {/* Gradient Background on Hover */}
                   <motion.div
