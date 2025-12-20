@@ -76,8 +76,9 @@ export const TechSupport = () => {
               <motion.div className="max-w-4xl mx-auto text-center">
                 <motion.div
                   className="inline-flex items-center space-x-2 glass-effect px-4 py-2 rounded-full mb-6"
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0.5, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, ease: 'easeOut' }}
                 >
                   <ChatBubbleLeftRightIcon className="text-teal-500 w-5 h-5" />
                   <span className="text-sm">Technical Support</span>
@@ -194,10 +195,10 @@ export const TechSupport = () => {
                     <motion.div
                       key={item.priority}
                       className="text-center p-6 rounded-xl bg-white/5"
-                      initial={{ opacity: 0, y: 20 }}
+                      initial={{ opacity: 0.5, y: 10 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
+                      transition={{ delay: index * 0.03, duration: 0.4, ease: 'easeOut' }}
                       whileHover={{ scale: 1.05 }}
                     >
                       <div className="text-3xl font-bold bg-gradient-to-r from-teal-400 to-green-400 bg-clip-text text-transparent mb-2">
@@ -231,10 +232,10 @@ export const TechSupport = () => {
                     <motion.div
                       key={contact.method}
                       className="flex items-center space-x-4 p-6 rounded-xl bg-white/5"
-                      initial={{ opacity: 0, x: -20 }}
+                      initial={{ opacity: 0.5, x: -10 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
+                      transition={{ delay: index * 0.03, duration: 0.4, ease: 'easeOut' }}
                       whileHover={{ scale: 1.02 }}
                     >
                       <div className="text-4xl">{contact.icon}</div>

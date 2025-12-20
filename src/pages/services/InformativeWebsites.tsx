@@ -53,8 +53,9 @@ export const InformativeWebsites = () => {
               <motion.div className="max-w-4xl mx-auto text-center">
                 <motion.div
                   className="inline-flex items-center space-x-2 glass-effect px-4 py-2 rounded-full mb-6"
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0.5, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, ease: 'easeOut' }}
                 >
                   <Globe className="text-purple-500" size={20} />
                   <span className="text-sm">Informative Websites</span>
@@ -134,10 +135,10 @@ export const InformativeWebsites = () => {
                       <motion.li
                         key={item}
                         className="flex items-center space-x-3"
-                        initial={{ opacity: 0, x: -20 }}
+                        initial={{ opacity: 0.5, x: -10 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={{ delay: index * 0.1 }}
+                        transition={{ delay: index * 0.03, duration: 0.4, ease: 'easeOut' }}
                       >
                         <div className="w-2 h-2 rounded-full bg-purple-500" />
                         <span className="text-white/80">{item}</span>
@@ -168,10 +169,10 @@ export const InformativeWebsites = () => {
                       <motion.li
                         key={item}
                         className="flex items-start space-x-3"
-                        initial={{ opacity: 0, x: 20 }}
+                        initial={{ opacity: 0.5, x: 10 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={{ delay: index * 0.1 }}
+                        transition={{ delay: index * 0.03, duration: 0.4, ease: 'easeOut' }}
                       >
                         <div className="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0 mt-1">
                           <div className="w-2 h-2 rounded-full bg-purple-500" />
