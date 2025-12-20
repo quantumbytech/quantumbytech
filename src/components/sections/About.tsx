@@ -40,19 +40,19 @@ export const About = () => {
           <div className="text-center mb-16">
             <motion.h2
               className="text-4xl md:text-6xl font-bold mb-6"
-              initial={{ opacity: 0.9, y: 5 }}
+              initial={{ opacity: 0.85, y: 5 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
+              transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
               We Believe in <span className="text-gradient">Passionate People</span>
             </motion.h2>
             <motion.p
               className="text-lg text-white/70 max-w-3xl mx-auto"
-              initial={{ opacity: 0.9, y: 5 }}
+              initial={{ opacity: 0.85, y: 5 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.25, ease: 'easeOut', delay: 0.05 }}
+              transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.1 }}
             >
               At Quantum ByTech, we're more than just a tech company. We're your partners 
               in digital transformation, committed to turning your vision into reality through 
@@ -102,10 +102,10 @@ export const About = () => {
                   <motion.div
                     key={stat.label}
                     className="text-center"
-                    initial={{ opacity: 0.9, scale: 0.98 }}
+                    initial={{ opacity: 0.85, scale: 0.98 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.25, delay: index * 0.02, ease: 'easeOut' }}
+                    transition={{ duration: 0.6, delay: index * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
                   >
                     <motion.div
                       className="text-4xl md:text-5xl font-bold text-primary-500 mb-2"

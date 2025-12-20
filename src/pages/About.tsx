@@ -15,9 +15,9 @@ export const About = () => {
 
           <div className="container mx-auto px-4 relative z-10">
             <motion.div
-              initial={{ opacity: 0.9, y: 5 }}
+              initial={{ opacity: 0.85, y: 5 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
+              transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="text-center mb-16"
             >
               <h1 className="text-5xl md:text-7xl font-bold mb-6">

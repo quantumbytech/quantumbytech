@@ -53,9 +53,9 @@ export const MobileApps = () => {
               <motion.div className="max-w-4xl mx-auto text-center">
                 <motion.div
                   className="inline-flex items-center space-x-2 glass-effect px-4 py-2 rounded-full mb-6"
-                  initial={{ opacity: 0.9, y: 5 }}
+                  initial={{ opacity: 0.85, y: 5 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.25, ease: 'easeOut' }}
+                  transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
                 >
                   <Smartphone className="text-blue-500" size={20} />
                   <span className="text-sm">Mobile App Development</span>
