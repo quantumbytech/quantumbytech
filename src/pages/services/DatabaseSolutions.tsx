@@ -86,9 +86,9 @@ export const DatabaseSolutions = () => {
               <motion.div className="max-w-4xl mx-auto text-center">
                 <motion.div
                   className="inline-flex items-center space-x-2 glass-effect px-4 py-2 rounded-full mb-6"
-                  initial={{ opacity: 0.5, y: 10 }}
+                  initial={{ opacity: 0.9, y: 5 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, ease: 'easeOut' }}
+                  transition={{ duration: 0.25, ease: 'easeOut' }}
                 >
                   <CircleStackIcon className="text-orange-500 w-5 h-5" />
                   <span className="text-sm">Database Solutions</span>
@@ -163,10 +163,10 @@ export const DatabaseSolutions = () => {
                     <motion.div
                       key={tech.name}
                       className="text-center p-6 rounded-xl bg-white/5 hover:bg-white/10 transition-colors group"
-                      initial={{ opacity: 0.5, scale: 0.95 }}
+                      initial={{ opacity: 0.9, scale: 0.98 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
-                      transition={{ delay: index * 0.02, duration: 0.4, ease: 'easeOut' }}
+                      transition={{ delay: index * 0.01, duration: 0.25, ease: 'easeOut' }}
                       whileHover={{ scale: 1.05 }}
                     >
                       <div className="flex justify-center mb-4">
@@ -205,10 +205,10 @@ export const DatabaseSolutions = () => {
                     <motion.div
                       key={benefit}
                       className="flex items-center space-x-4"
-                      initial={{ opacity: 0.5, x: -10 }}
+                      initial={{ opacity: 0.9, x: -5 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
-                      transition={{ delay: index * 0.03, duration: 0.4, ease: 'easeOut' }}
+                      transition={{ delay: index * 0.01, duration: 0.25, ease: 'easeOut' }}
                     >
                       <div className="w-2 h-2 rounded-full bg-gradient-to-r from-orange-500 to-red-500 flex-shrink-0" />
                       <p className="text-lg text-white/80">{benefit}</p>
@@ -251,4 +251,5 @@ export const DatabaseSolutions = () => {
     </PageTransition>
   );
 };
+
 

@@ -84,19 +84,19 @@ export const Services = () => {
           <div className="text-center mb-12 md:mb-16 lg:mb-20">
             <motion.h2
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6"
-              initial={{ opacity: 0.5, y: 10 }}
+              initial={{ opacity: 0.9, y: 5 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, ease: 'easeOut' }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
             >
               Our <span className="text-gradient">Services</span>
             </motion.h2>
             <motion.p
               className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/70 max-w-3xl mx-auto px-4"
-              initial={{ opacity: 0.5, y: 10 }}
+              initial={{ opacity: 0.9, y: 5 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, ease: 'easeOut', delay: 0.1 }}
+              transition={{ duration: 0.25, ease: 'easeOut', delay: 0.05 }}
             >
               Comprehensive solutions tailored to your business needs, 
               powered by cutting-edge technology and expert craftsmanship.

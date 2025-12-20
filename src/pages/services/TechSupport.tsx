@@ -76,9 +76,9 @@ export const TechSupport = () => {
               <motion.div className="max-w-4xl mx-auto text-center">
                 <motion.div
                   className="inline-flex items-center space-x-2 glass-effect px-4 py-2 rounded-full mb-6"
-                  initial={{ opacity: 0.5, y: 10 }}
+                  initial={{ opacity: 0.9, y: 5 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, ease: 'easeOut' }}
+                  transition={{ duration: 0.25, ease: 'easeOut' }}
                 >
                   <ChatBubbleLeftRightIcon className="text-teal-500 w-5 h-5" />
                   <span className="text-sm">Technical Support</span>

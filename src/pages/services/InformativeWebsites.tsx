@@ -53,9 +53,9 @@ export const InformativeWebsites = () => {
               <motion.div className="max-w-4xl mx-auto text-center">
                 <motion.div
                   className="inline-flex items-center space-x-2 glass-effect px-4 py-2 rounded-full mb-6"
-                  initial={{ opacity: 0.5, y: 10 }}
+                  initial={{ opacity: 0.9, y: 5 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, ease: 'easeOut' }}
+                  transition={{ duration: 0.25, ease: 'easeOut' }}
                 >
                   <Globe className="text-purple-500" size={20} />
                   <span className="text-sm">Informative Websites</span>
