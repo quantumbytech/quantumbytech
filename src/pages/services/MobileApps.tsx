@@ -93,8 +93,8 @@ export const MobileApps = () => {
             </ScrollReveal>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {features.map((feature, index) => (
-                <ScrollReveal key={feature.title} delay={index * 0.1}>
+              {features.map((feature) => (
+                <ScrollReveal key={feature.title}>
                   <motion.div
                     className="glass-effect rounded-2xl p-8"
                     whileHover={{ y: -10 }}

@@ -111,7 +111,7 @@ export const Hero = () => {
             >
               Explore Services
             </motion.button>
-          </motion.div>
+          </div>
 
           {/* Stats */}
           <div className="grid grid-cols-3 gap-3 md:gap-6 lg:gap-8 mt-8 md:mt-12 lg:mt-16 max-w-3xl mx-auto">
@@ -130,7 +130,7 @@ export const Hero = () => {
                 <div className="text-xs sm:text-sm md:text-base text-white/60">{stat.label}</div>
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </motion.div>
 

@@ -93,8 +93,8 @@ export const InformativeWebsites = () => {
             </ScrollReveal>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {features.map((feature, index) => (
-                <ScrollReveal key={feature.title} delay={index * 0.1}>
+              {features.map((feature) => (
+                <ScrollReveal key={feature.title}>
                   <motion.div
                     className="glass-effect rounded-2xl p-8"
                     whileHover={{ y: -10 }}
@@ -115,7 +115,7 @@ export const InformativeWebsites = () => {
         <section className="py-20">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <ScrollReveal direction="left">
+              <ScrollReveal>
                 <div className="glass-effect rounded-2xl p-8">
                   <h3 className="text-3xl font-bold mb-6">Perfect For</h3>
                   <ul className="space-y-4">
@@ -143,7 +143,7 @@ export const InformativeWebsites = () => {
                 </div>
               </ScrollReveal>
 
-              <ScrollReveal direction="right">
+              <ScrollReveal>
                 <div>
                   <h2 className="text-4xl font-bold mb-6">
                     Why Choose Our <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Websites?</span>

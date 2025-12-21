@@ -99,8 +99,8 @@ export const ECommerce = () => {
             </ScrollReveal>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {features.map((feature, index) => (
-                <ScrollReveal key={feature.title} delay={index * 0.1}>
+              {features.map((feature) => (
+                <ScrollReveal key={feature.title}>
                   <motion.div
                     className="glass-effect rounded-2xl p-8"
                     whileHover={{ y: -10 }}
@@ -121,7 +121,7 @@ export const ECommerce = () => {
         <section className="py-20">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <ScrollReveal direction="left">
+              <ScrollReveal>
                 <div>
                   <h2 className="text-4xl md:text-5xl font-bold mb-8">
                     Key <span className="text-gradient">Features</span>
@@ -150,7 +150,7 @@ export const ECommerce = () => {
                 </div>
               </ScrollReveal>
 
-              <ScrollReveal direction="right">
+              <ScrollReveal>
                 <div className="glass-effect rounded-2xl p-8">
                   <h3 className="text-3xl font-bold mb-6">Why Choose Us?</h3>
                   <div className="space-y-6">

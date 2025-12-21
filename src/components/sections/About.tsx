@@ -51,8 +51,8 @@ export const About = () => {
 
         {/* Values Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
-          {values.map((value, index) => (
-            <ScrollReveal key={value.title} delay={index * 0.02} direction={index % 2 === 0 ? 'left' : 'right'}>
+          {values.map((value) => (
+            <ScrollReveal key={value.title}>
               <motion.div
                 className="glass-effect rounded-2xl p-8 group"
                 whileHover={{ scale: 1.02 }}
@@ -86,7 +86,7 @@ export const About = () => {
                   { value: '50+', label: 'Happy Clients' },
                   { value: '5+', label: 'Years Experience' },
                   { value: '24/7', label: 'Support' },
-                ].map((stat, index) => (
+                ].map((stat) => (
                   <div
                     key={stat.label}
                     className="text-center"

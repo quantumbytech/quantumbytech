@@ -73,7 +73,7 @@ export const Contact = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Information */}
-          <ScrollReveal direction="left">
+          <ScrollReveal>
             <div className="space-y-8">
               <h3 className="text-3xl font-bold mb-8">Contact Information</h3>
               
@@ -129,7 +129,7 @@ export const Contact = () => {
           </ScrollReveal>
 
           {/* Map or Additional Info */}
-          <ScrollReveal direction="right">
+          <ScrollReveal>
             <div className="glass-effect rounded-2xl p-8 h-full flex flex-col justify-center">
               <h3 className="text-3xl font-bold mb-6">Why Choose Us?</h3>
               <ul className="space-y-4">

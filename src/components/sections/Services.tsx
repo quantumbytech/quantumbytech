@@ -94,8 +94,8 @@ export const Services = () => {
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
-          {services.map((service, index) => (
-            <ScrollReveal key={service.title} delay={index * 0.02}>
+          {services.map((service) => (
+            <ScrollReveal key={service.title}>
               <motion.div
                 onClick={() => handleServiceClick(service.link)}
                 className="group relative glass-effect rounded-2xl p-8 h-full overflow-hidden cursor-pointer"
@@ -168,7 +168,7 @@ export const Services = () => {
         </div>
 
         {/* CTA */}
-        <ScrollReveal delay={0.6}>
+        <ScrollReveal>
           <div className="text-center mt-16">
             <motion.button
               onClick={() => handleServiceClick('/contact')}

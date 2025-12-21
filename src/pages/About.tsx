@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { PageTransition } from '@/components/animations/PageTransition';
 import { About as AboutSection } from '@/components/sections/About';
 

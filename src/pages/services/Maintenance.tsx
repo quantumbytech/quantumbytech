@@ -113,8 +113,8 @@ export const Maintenance = () => {
             </ScrollReveal>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {features.map((feature, index) => (
-                <ScrollReveal key={feature.title} delay={index * 0.1}>
+              {features.map((feature) => (
+                <ScrollReveal key={feature.title}>
                   <motion.div
                     className="glass-effect rounded-2xl p-8"
                     whileHover={{ y: -10 }}
@@ -144,8 +144,8 @@ export const Maintenance = () => {
             </ScrollReveal>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              {maintenancePlans.map((plan, index) => (
-                <ScrollReveal key={plan.name} delay={index * 0.1}>
+              {maintenancePlans.map((plan) => (
+                <ScrollReveal key={plan.name}>
                   <motion.div
                     className={`glass-effect rounded-2xl p-8 relative ${plan.popular ? 'border-2 border-orange-500' : ''}`}
                     whileHover={{ y: -10 }}
