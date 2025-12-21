@@ -39,14 +39,14 @@ export const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
           transition={{ duration: 0.3, ease: 'easeOut' }}
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-gradient-to-br from-dark-500 via-dark-400 to-dark-500"
         >
-          {/* Animated Background Orbs */}
+          {/* Animated Background Orbs - Responsive sizes */}
           <div className="absolute inset-0 overflow-hidden">
             <motion.div
-              className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500/30 rounded-full blur-3xl"
+              className="absolute top-1/4 left-1/4 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-primary-500/30 rounded-full blur-3xl"
               animate={{
                 scale: [1, 1.3, 1],
-                x: [0, 100, 0],
-                y: [0, 50, 0],
+                x: [0, 50, 0],
+                y: [0, 30, 0],
               }}
               transition={{
                 duration: 4,
@@ -55,11 +55,11 @@ export const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
               }}
             />
             <motion.div
-              className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary-600/30 rounded-full blur-3xl"
+              className="absolute bottom-1/4 right-1/4 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-primary-600/30 rounded-full blur-3xl"
               animate={{
                 scale: [1, 1.4, 1],
-                x: [0, -100, 0],
-                y: [0, -50, 0],
+                x: [0, -50, 0],
+                y: [0, -30, 0],
               }}
               transition={{
                 duration: 5,
@@ -70,7 +70,7 @@ export const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
           </div>
 
           {/* Content */}
-          <div className="relative z-10 flex flex-col items-center space-y-8 px-4">
+          <div className="relative z-10 flex flex-col items-center space-y-6 sm:space-y-8 px-4 w-full max-w-md sm:max-w-lg">
             {/* Logo Animation */}
             <motion.div
               initial={{ scale: 0.5, opacity: 0 }}
@@ -91,23 +91,23 @@ export const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
                   repeat: Infinity,
                   ease: 'easeInOut',
                 }}
-                className="text-5xl md:text-7xl font-bold"
+                className="text-4xl sm:text-5xl md:text-7xl font-bold"
               >
-                <span className="text-primary-500 text-6xl md:text-8xl">Q</span>
+                <span className="text-primary-500 text-5xl sm:text-6xl md:text-8xl">Q</span>
                 <span className="text-white">uantum</span>
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.5 }}
-                className="text-2xl md:text-4xl font-bold text-white mt-2"
+                className="text-xl sm:text-2xl md:text-4xl font-bold text-white mt-2"
               >
                 ByTech
               </motion.div>
             </motion.div>
 
             {/* Animated Loading Bar */}
-            <div className="w-64 md:w-96 space-y-4">
+            <div className="w-full max-w-xs sm:w-64 md:w-96 space-y-3 sm:space-y-4">
               {/* Progress Bar Container */}
               <div className="relative h-2 bg-white/10 rounded-full overflow-hidden backdrop-blur-sm">
                 <motion.div
@@ -152,7 +152,7 @@ export const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
                 repeat: Infinity,
                 ease: 'easeInOut',
               }}
-              className="text-white/40 text-sm md:text-base"
+              className="text-white/40 text-xs sm:text-sm md:text-base"
             >
               Loading your experience...
             </motion.div>
@@ -188,9 +188,9 @@ export const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 0.5 }}
-            className="absolute bottom-12 left-0 right-0 text-center"
+            className="absolute bottom-8 sm:bottom-12 left-0 right-0 text-center px-4"
           >
-            <p className="text-white/30 text-xs md:text-sm">
+            <p className="text-white/30 text-xs sm:text-sm">
               Transforming Ideas into Digital Reality
             </p>
           </motion.div>

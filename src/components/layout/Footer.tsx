@@ -17,27 +17,17 @@ export const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Company Info */}
-          <motion.div
-            initial={{ opacity: 0.85, y: 5 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-          >
+          <div>
             <h3 className="text-2xl font-bold mb-4">
               <span className="text-primary-500">Q</span>uantum ByTech
             </h3>
             <p className="text-white/60 mb-4">
               Your trusted partner for professional website development, innovative software solutions, and IT consulting.
             </p>
-          </motion.div>
+          </div>
 
           {/* Quick Links */}
-          <motion.div
-            initial={{ opacity: 0.85, y: 5 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.1 }}
-          >
+          <div>
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
               {[
@@ -56,15 +46,10 @@ export const Footer = () => {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
 
           {/* Services */}
-          <motion.div
-            initial={{ opacity: 0.85, y: 5 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.2 }}
-          >
+          <div>
             <h4 className="text-lg font-semibold mb-4">Services</h4>
             <ul className="space-y-2">
               {[
@@ -85,15 +70,10 @@ export const Footer = () => {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
 
           {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0.85, y: 5 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.3 }}
-          >
+          <div>
             <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
             <ul className="space-y-3">
               <li className="flex items-center space-x-2 text-white/60">
@@ -151,19 +131,13 @@ export const Footer = () => {
                 <Mail size={24} />
               </motion.a>
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* Bottom Bar */}
-        <motion.div
-          initial={{ opacity: 0.85 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.4 }}
-          className="border-t border-white/10 pt-8 text-center text-white/60"
-        >
+        <div className="border-t border-white/10 pt-8 text-center text-white/60">
           <p>© {currentYear} Quantum ByTech. All rights reserved.</p>
-        </motion.div>
+        </div>
       </div>
     </footer>
   );

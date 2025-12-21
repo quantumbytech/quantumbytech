@@ -17,34 +17,11 @@ export const ScrollReveal = ({
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-50px' });
 
-  const directions = {
-    up: { y: 5, x: 0 },
-    down: { y: -5, x: 0 },
-    left: { y: 0, x: 5 },
-    right: { y: 0, x: -5 },
-  };
-
+  // NO ANIMATIONS - instant visibility to prevent any blinking/flashing
   return (
-    <motion.div
-      ref={ref}
-      initial={{ 
-        opacity: 0.85, 
-        ...directions[direction]
-      }}
-      animate={isInView ? { 
-        opacity: 1, 
-        y: 0, 
-        x: 0 
-      } : {}}
-      transition={{
-        duration: 0.6,
-        delay: delay * 0.15,
-        ease: [0.25, 0.46, 0.45, 0.94], // Smooth, graceful easing
-      }}
-      className={className}
-    >
+    <div className={className}>
       {children}
-    </motion.div>
+    </div>
   );
 };
 

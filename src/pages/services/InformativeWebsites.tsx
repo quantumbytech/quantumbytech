@@ -51,15 +51,10 @@ export const InformativeWebsites = () => {
           <div className="container mx-auto px-4 relative z-10">
             <ScrollReveal>
               <motion.div className="max-w-4xl mx-auto text-center">
-                <motion.div
-                  className="inline-flex items-center space-x-2 glass-effect px-4 py-2 rounded-full mb-6"
-                  initial={{ opacity: 0.85, y: 5 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-                >
+                <div className="inline-flex items-center space-x-2 glass-effect px-4 py-2 rounded-full mb-6">
                   <Globe className="text-purple-500" size={20} />
                   <span className="text-sm">Informative Websites</span>
-                </motion.div>
+                </div>
 
                 <h1 className="text-5xl md:text-7xl font-bold mb-6">
                   Knowledge. Innovation.

@@ -14,12 +14,7 @@ export const About = () => {
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
-            <motion.div
-              initial={{ opacity: 0.85, y: 5 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="text-center mb-16"
-            >
+            <div className="text-center mb-16">
               <h1 className="text-5xl md:text-7xl font-bold mb-6">
                 About <span className="text-gradient">Quantum ByTech</span>
               </h1>
@@ -27,7 +22,7 @@ export const About = () => {
                 Pioneering the future of digital innovation with cutting-edge technology 
                 and unparalleled expertise.
               </p>
-            </motion.div>
+            </div>
           </div>
         </section>
 
