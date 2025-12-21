@@ -24,12 +24,20 @@ function AppContent() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Smooth loading experience
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1200);
+    // Ensure loading screen shows for full 5 seconds
+    const minLoadingTime = 5000;
+    const startTime = Date.now();
 
-    return () => clearTimeout(timer);
+    const checkLoading = () => {
+      const elapsed = Date.now() - startTime;
+      if (elapsed >= minLoadingTime) {
+        setIsLoading(false);
+      } else {
+        setTimeout(checkLoading, minLoadingTime - elapsed);
+      }
+    };
+
+    checkLoading();
   }, []);
 
   return (

@@ -128,11 +128,87 @@ export const Contact = () => {
             </div>
           </ScrollReveal>
 
-          {/* Map or Additional Info */}
+          {/* Contact Form */}
           <ScrollReveal>
-            <div className="glass-effect rounded-2xl p-8 h-full flex flex-col justify-center">
-              <h3 className="text-3xl font-bold mb-6">Why Choose Us?</h3>
-              <ul className="space-y-4">
+            <div className="glass-effect rounded-2xl p-8">
+              <h3 className="text-3xl font-bold mb-6">Request a Quote</h3>
+              <form action="https://formspree.io/f/xovavqrg" method="POST" className="space-y-6">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium mb-2">Name *</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-primary-500 transition-colors"
+                    placeholder="Your name"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium mb-2">Email *</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-primary-500 transition-colors"
+                    placeholder="your@email.com"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium mb-2">Phone</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-primary-500 transition-colors"
+                    placeholder="+961 XX XXX XXX"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="service" className="block text-sm font-medium mb-2">Service Interested In</label>
+                  <select
+                    id="service"
+                    name="service"
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-primary-500 transition-colors"
+                  >
+                    <option value="">Select a service</option>
+                    <option value="e-commerce">E-Commerce</option>
+                    <option value="mobile-apps">Mobile Apps</option>
+                    <option value="informative-websites">Informative Websites</option>
+                    <option value="database-solutions">Database Solutions</option>
+                    <option value="maintenance">Maintenance</option>
+                    <option value="tech-support">Tech Support</option>
+                  </select>
+                </div>
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium mb-2">Message *</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    required
+                    rows={4}
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-primary-500 transition-colors resize-none"
+                    placeholder="Tell us about your project..."
+                  ></textarea>
+                </div>
+                <button
+                  type="submit"
+                  className="w-full btn-primary"
+                >
+                  Send Message
+                </button>
+              </form>
+            </div>
+          </ScrollReveal>
+        </div>
+
+        {/* Why Choose Us Section */}
+        <div className="mt-16">
+          <ScrollReveal>
+            <div className="glass-effect rounded-2xl p-8">
+              <h3 className="text-3xl font-bold mb-6 text-center">Why Choose Us?</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[
                   'Expert team with years of experience',
                   'Cutting-edge technology solutions',
@@ -140,31 +216,16 @@ export const Contact = () => {
                   'Competitive pricing',
                   '24/7 support and maintenance',
                   'Proven track record of success',
-                ].map((item, index) => (
-                  <motion.li
+                ].map((item) => (
+                  <div
                     key={item}
-                    className="flex items-center space-x-3"
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="flex items-center space-x-3 p-4 bg-white/5 rounded-lg"
                   >
                     <div className="w-2 h-2 rounded-full bg-primary-500 flex-shrink-0" />
                     <span className="text-white/80">{item}</span>
-                  </motion.li>
+                  </div>
                 ))}
-              </ul>
-
-              <motion.div
-                className="mt-8 p-6 bg-gradient-to-br from-primary-500/20 to-primary-600/20 rounded-xl border border-primary-500/30"
-                whileHover={{ scale: 1.02 }}
-              >
-                <p className="text-white/90 italic">
-                  "Quantum ByTech transformed our online presence completely. 
-                  Their expertise and dedication are unmatched!"
-                </p>
-                <p className="text-primary-500 font-semibold mt-2">- Happy Client</p>
-              </motion.div>
+              </div>
             </div>
           </ScrollReveal>
         </div>

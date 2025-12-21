@@ -5,29 +5,55 @@ interface LoadingScreenProps {
   onLoadingComplete?: () => void;
 }
 
+const loadingPhrases = [
+  "Initializing quantum systems...",
+  "Loading cutting-edge technology...",
+  "Preparing your experience...",
+  "Optimizing performance...",
+  "Almost there...",
+  "Welcome to Quantum ByTech!"
+];
+
 export const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
   const [progress, setProgress] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
+  const [currentPhrase, setCurrentPhrase] = useState(0);
 
   useEffect(() => {
-    // Smooth loading progress
+    // 5-second loading with smooth progress
+    const totalDuration = 5000; // 5 seconds
+    const intervalTime = 50; // Update every 50ms
+    const totalSteps = totalDuration / intervalTime;
+    const incrementPerStep = 100 / totalSteps;
+
     const interval = setInterval(() => {
       setProgress((prev) => {
-        if (prev >= 100) {
+        const newProgress = Math.min(prev + incrementPerStep, 100);
+        if (newProgress >= 100) {
           clearInterval(interval);
           setTimeout(() => {
             setIsComplete(true);
             onLoadingComplete?.();
           }, 300);
-          return 100;
         }
-        // Smooth incremental loading
-        const increment = prev < 70 ? Math.random() * 12 + 8 : Math.random() * 6 + 3;
-        return Math.min(prev + increment, 100);
+        return newProgress;
       });
-    }, 80);
+    }, intervalTime);
 
-    return () => clearInterval(interval);
+    // Change phrases every ~800ms
+    const phraseInterval = setInterval(() => {
+      setCurrentPhrase((prev) => {
+        if (prev < loadingPhrases.length - 1) {
+          return prev + 1;
+        }
+        return prev;
+      });
+    }, 800);
+
+    return () => {
+      clearInterval(interval);
+      clearInterval(phraseInterval);
+    };
   }, [onLoadingComplete]);
 
   return (
@@ -142,19 +168,16 @@ export const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
               </motion.div>
             </div>
 
-            {/* Loading Text */}
+            {/* Loading Text with Phrases */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: [0, 1, 0.8, 1] }}
-              transition={{ 
-                duration: 2,
-                times: [0, 0.4, 0.7, 1],
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-              className="text-white/40 text-xs sm:text-sm md:text-base"
+              key={currentPhrase}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+              className="text-white/70 text-xs sm:text-sm md:text-base font-medium text-center min-h-[24px]"
             >
-              Loading your experience...
+              {loadingPhrases[currentPhrase]}
             </motion.div>
 
             {/* Floating Particles */}

@@ -16,8 +16,23 @@ export const Hero = () => {
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
 
   const handleNavigation = (path: string) => {
-    navigate(path);
-    scrollToTop();
+    if (path === '/contact') {
+      // Scroll to contact section on same page
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        // If not on home page, navigate to home and then scroll
+        navigate('/');
+        setTimeout(() => {
+          const section = document.getElementById('contact');
+          section?.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    } else {
+      navigate(path);
+      scrollToTop();
+    }
   };
 
   return (
@@ -137,24 +152,20 @@ export const Hero = () => {
       {/* Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: [0, 1, 0.7, 1] }}
-        transition={{ 
-          duration: 2,
-          times: [0, 0.3, 0.6, 1],
-          repeat: Infinity,
-          repeatDelay: 1
-        }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 0.5 }}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
       >
         <div className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2">
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: [0, 1, 0.5, 1] }}
+            animate={{ 
+              y: [0, 16, 0],
+              opacity: [1, 0.5, 1]
+            }}
             transition={{ 
-              duration: 2,
-              times: [0, 0.3, 0.6, 1],
+              duration: 1.5,
               repeat: Infinity,
-              repeatDelay: 1
+              ease: "easeInOut"
             }}
             className="w-1.5 h-1.5 bg-primary-500 rounded-full"
           />
