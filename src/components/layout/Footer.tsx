@@ -4,7 +4,6 @@ import { Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 import { scrollToTop } from '@/lib/scrollToTop';
 
 export const Footer = () => {
-  const currentYear = new Date().getFullYear();
   const navigate = useNavigate();
 
   const handleNavigation = (path: string) => {
