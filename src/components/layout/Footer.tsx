@@ -136,7 +136,7 @@ export const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="border-t border-white/10 pt-8 text-center text-white/60">
-          <p>© {currentYear} Quantum ByTech. All rights reserved.</p>
+          <p>© 2023 Quantum ByTech. All rights reserved.</p>
         </div>
       </div>
     </footer>
