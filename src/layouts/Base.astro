@@ -3,30 +3,54 @@ import '@fontsource-variable/schibsted-grotesk';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import fontUrl from '@fontsource-variable/schibsted-grotesk/files/schibsted-grotesk-latin-wght-normal.woff2?url';
 import { site } from '../data/site';
 
 interface Props {
+  /** Page title; the brand is appended unless the title already names it */
   title?: string;
   description?: string;
+  /** Keep the page out of search results (404) */
+  noindex?: boolean;
+  /** Extra schema.org nodes for this page (services, breadcrumbs, FAQs) */
+  schema?: Record<string, unknown>[];
 }
 
-const { title, description = site.description } = Astro.props;
-const fullTitle = title ? `${title} | ${site.name}` : `${site.name} | Websites, online stores and mobile apps`;
+const { title, description = site.description, noindex = false, schema = [] } = Astro.props;
+const fullTitle = !title
+  ? `Web Design & App Development in Beirut | ${site.name}`
+  : title.includes(site.name) ? title : `${title} | ${site.name}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL('/og-image.png', Astro.site);
+const orgId = `${site.url}/#organization`;
 
-const organization = {
+const graph = {
   '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
-  name: site.name,
-  url: site.url,
-  logo: new URL('/apple-touch-icon.png', Astro.site).href,
-  image: ogImage.href,
-  description: site.description,
-  email: site.email,
-  telephone: site.phone.replace(/\s/g, ''),
-  address: { '@type': 'PostalAddress', addressLocality: 'Beirut', addressCountry: 'LB' },
-  sameAs: Object.values(site.social),
+  '@graph': [
+    {
+      '@type': 'ProfessionalService',
+      '@id': orgId,
+      name: site.name,
+      url: `${site.url}/`,
+      logo: new URL('/brand/logo-classic.png', Astro.site).href,
+      image: ogImage.href,
+      description: site.description,
+      email: site.email,
+      telephone: site.phone.replace(/\s/g, ''),
+      address: { '@type': 'PostalAddress', addressLocality: 'Beirut', addressCountry: 'LB' },
+      areaServed: { '@type': 'Country', name: 'Lebanon' },
+      sameAs: Object.values(site.social),
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${site.url}/#website`,
+      url: `${site.url}/`,
+      name: site.name,
+      publisher: { '@id': orgId },
+      inLanguage: 'en',
+    },
+    ...schema,
+  ],
 };
 ---
 
@@ -37,14 +61,16 @@ const organization = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     <meta name="theme-color" content="#0b3d2e" />
+    <link rel="preload" href={fontUrl} as="font" type="font/woff2" crossorigin />
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
@@ -52,9 +78,10 @@ const organization = {
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Quantum ByTech logo with the headline: Websites and apps that make your business easier to buy from." />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <script type="application/ld+json" set:html={JSON.stringify(organization)} />
+    <script type="application/ld+json" set:html={JSON.stringify(graph)} />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>

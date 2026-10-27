@@ -2,16 +2,18 @@
 import Base from '../layouts/Base.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { partners } from '../data/partners';
-import { site } from '../data/site';
 ---
 
-<Base title="Partners" description="The companies Quantum ByTech works with to deliver websites, stores, apps and social media for clients.">
+<Base
+  title="Our Clients and Recent Projects"
+  description="Brands that trust Quantum ByTech: Radyofone, Khatwa, GalaCards, dlimits, Bechara Issa and Kelly Rissi. See the websites, apps and stores we have built."
+>
   <section class="page-hero">
     <div class="wrap">
-      <h1>The partners behind our work.</h1>
+      <h1>Brands that trust us with their digital work.</h1>
       <p class="lead">
-        The apps, agencies and brands we work alongside, from live audio and digital invitations to fine jewelry and
-        fashion.
+        We design, build and look after websites, apps and online stores for these businesses, from live radio and
+        step rewards to digital invitations, fine jewelry and fashion.
       </p>
     </div>
   </section>
@@ -27,6 +29,8 @@ import { site } from '../data/site';
                   <img
                     src={p.logo}
                     alt=""
+                    width={p.logoSize?.[0]}
+                    height={p.logoSize?.[1]}
                     loading="lazy"
                     style={p.logoWidth && `width:${p.logoWidth};max-width:none;max-height:none`}
                   />
@@ -41,22 +45,12 @@ import { site } from '../data/site';
           ))}
         </ul>
       ) : (
-        <p class="empty">Our partner list is being updated.</p>
+        <p class="empty">Our client list is being updated.</p>
       )}
     </div>
   </section>
 
-  <section class="section">
-    <div class="wrap become">
-      <div>
-        <h2>Become a partner</h2>
-        <p>If your product or service would help our clients, we would like to hear from you.</p>
-      </div>
-      <a class="btn btn--ghost" href={`mailto:${site.email}?subject=Partnership`}>Email us about partnering</a>
-    </div>
-  </section>
-
-  <CtaBand />
+  <CtaBand title="Want your brand on this page?" />
 </Base>
 
 <style>
@@ -93,6 +87,4 @@ import { site } from '../data/site';
   @media (max-width: 880px) { .partners { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 560px) { .partners { grid-template-columns: 1fr; } }
 
-  .become { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px 64px; flex-wrap: wrap; }
-  .become p { margin-top: 12px; color: var(--muted); font-size: var(--step-1); max-width: 48ch; }
 </style>

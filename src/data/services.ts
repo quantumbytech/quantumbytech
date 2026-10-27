@@ -1,6 +1,9 @@
 export interface Service {
   slug: string;
   name: string;
+  /** Search result title (under 60 characters) and description (140-160 characters) */
+  seoTitle: string;
+  seoDescription: string;
   summary: string;
   title: string;
   lead: string;
@@ -12,6 +15,8 @@ export interface Service {
 export const services: Service[] = [
   {
     slug: 'websites',
+    seoTitle: 'Business Website Design in Lebanon',
+    seoDescription: 'Custom business websites designed and built in Beirut: fast, mobile-first and easy to update, with SEO foundations and enquiry forms. Get a fixed-price quote.',
     name: 'Business websites',
     summary: 'Clear, fast sites that explain what you do and turn visitors into enquiries. Easy for your team to update.',
     title: 'Business websites that explain what you do and bring in enquiries.',
@@ -42,6 +47,8 @@ export const services: Service[] = [
   },
   {
     slug: 'online-stores',
+    seoTitle: 'Online Store Development in Lebanon',
+    seoDescription: 'Online stores built in Beirut with cash on delivery, card payments, delivery zones and an admin panel you can run from your phone. Get a fixed-price quote.',
     name: 'Online stores',
     summary: 'Shops with local and card payments, delivery options and stock you can manage from your phone.',
     title: 'Online stores that are easy to buy from and easy to run.',
@@ -72,6 +79,8 @@ export const services: Service[] = [
   },
   {
     slug: 'mobile-apps',
+    seoTitle: 'Mobile App Development in Lebanon',
+    seoDescription: 'iOS and Android apps designed and built in Beirut from one codebase, with an admin panel, notifications and App Store release. Get a fixed-price quote.',
     name: 'Mobile apps',
     summary: 'iOS and Android apps built from one codebase, from first sketch to App Store and Google Play release.',
     title: 'Mobile apps for iOS and Android, from first sketch to release.',
@@ -102,6 +111,8 @@ export const services: Service[] = [
   },
   {
     slug: 'social-media',
+    seoTitle: 'Social Media Management in Lebanon',
+    seoDescription: 'Monthly social media management from Beirut: content plans, post and reel design, scheduling, paid campaigns and a report on what is working.',
     name: 'Social media',
     summary: 'Planning, design and posting for your social accounts, with a monthly report on what is working.',
     title: 'Social media that keeps your brand visible and brings customers to you.',
@@ -132,6 +143,8 @@ export const services: Service[] = [
   },
   {
     slug: 'custom-software',
+    seoTitle: 'Custom Software Development in Lebanon',
+    seoDescription: 'Custom software from Beirut: dashboards, databases and integrations that replace spreadsheets and manual work, with hosting and daily backups.',
     name: 'Custom software and databases',
     summary: 'Internal tools, dashboards and databases that replace spreadsheets and manual work.',
     title: 'Custom software that replaces spreadsheets and manual work.',
@@ -162,6 +175,8 @@ export const services: Service[] = [
   },
   {
     slug: 'support',
+    seoTitle: 'Website Maintenance & Support in Lebanon',
+    seoDescription: 'Monthly care plans for websites and apps: hosting, SSL, security updates, daily backups, uptime monitoring and direct help on WhatsApp.',
     name: 'Care and support',
     summary: 'Hosting, updates, backups and a person to call when something breaks.',
     title: 'Care and support, so your website or app keeps working.',

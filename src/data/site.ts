@@ -3,7 +3,7 @@ export const site = {
   url: 'https://quantumbytech.com',
   tagline: 'Websites, online stores, mobile apps and social media, from Beirut.',
   description:
-    'Quantum ByTech is a digital studio in Beirut. We design, build and look after websites, online stores and mobile apps, and run the social media that brings customers to them.',
+    'Quantum ByTech is a digital studio in Beirut, Lebanon. We design, build and maintain websites, online stores, apps and social media for growing businesses.',
   email: 'info@quantumbytech.com',
   phone: '+961 70 790 677',
   whatsapp: 'https://wa.me/96170790677',
