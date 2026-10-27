@@ -5,8 +5,8 @@ export const site = {
   description:
     'Quantum ByTech is a digital studio in Beirut, Lebanon. We design, build and maintain websites, online stores, apps and social media for growing businesses.',
   email: 'info@quantumbytech.com',
-  phone: '+961 70 790 677',
-  whatsapp: 'https://wa.me/96170790677',
+  phone: '+961 78 780 049',
+  whatsapp: 'https://wa.me/96178780049',
   location: 'Beirut, Lebanon',
   social: {
     linkedin: 'https://www.linkedin.com/company/quantumbytech/',
