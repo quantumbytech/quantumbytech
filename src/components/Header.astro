@@ -1,5 +1,4 @@
 ---
-import Mark from './Mark.astro';
 import { nav, site } from '../data/site';
 
 const path = Astro.url.pathname;
@@ -9,8 +8,7 @@ const isCurrent = (href: string) => !href.includes('#') && path.startsWith(href)
 <header class="site-header">
   <div class="wrap inner">
     <a class="brand" href="/" aria-label={`${site.name} home`}>
-      <Mark />
-      <span>{site.name}</span>
+      <img src="/brand/logo-classic.svg" alt={site.name} width="146" height="62" />
     </a>
 
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
@@ -68,7 +66,7 @@ const isCurrent = (href: string) => !href.includes('#') && path.startsWith(href)
     font-size: 1.125rem;
     letter-spacing: -0.02em;
   }
-  .brand :global(.mark) { width: 30px; height: 30px; }
+  .brand img { display: block; height: 62px; width: auto; }
 
   .nav { display: flex; align-items: center; gap: 30px; margin-left: auto; }
   .nav a:not(.btn) {

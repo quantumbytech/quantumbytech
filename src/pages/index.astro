@@ -82,15 +82,18 @@ import { site, faqs } from '../data/site';
   .lead { margin-top: 28px; }
   .actions { margin-top: 40px; }
 
+  /* The Q as a large watermark behind the headline */
   .hero :global(.hero-mark) {
     position: absolute;
     z-index: 0;
-    right: clamp(-260px, -14vw, -80px);
+    right: clamp(-380px, -20vw, -120px);
     top: 50%;
-    width: clamp(360px, 50vw, 720px);
+    width: clamp(520px, 70vw, 1040px);
     height: auto;
     aspect-ratio: 1;
     color: var(--pine);
+    opacity: 0.07;
+    pointer-events: none;
     transform: translateY(-50%);
   }
   .hero :global(.hero-mark .bar) { animation: bar-in 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.15s both; }
@@ -100,7 +103,7 @@ import { site, faqs } from '../data/site';
   }
 
   @media (max-width: 880px) {
-    .hero :global(.hero-mark) { opacity: 0.07; right: -35%; }
+    .hero :global(.hero-mark) { right: -45%; }
   }
 
   .faq-layout { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 48px 80px; align-items: start; }

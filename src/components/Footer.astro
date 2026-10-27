@@ -7,11 +7,11 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
+  <Mark class="footer-mark" />
   <div class="wrap grid">
     <div class="about">
-      <a class="brand" href="/">
-        <Mark />
-        <span>{site.name}</span>
+      <a class="brand" href="/" aria-label={`${site.name} home`}>
+        <img src="/brand/logo-classic-white.svg" alt={site.name} width="179" height="76" />
       </a>
       <p>{site.tagline}</p>
     </div>
@@ -65,7 +65,21 @@ const year = new Date().getFullYear();
     font-size: 1.125rem;
     letter-spacing: -0.02em;
   }
-  .brand :global(.mark) { width: 30px; height: 30px; }
+  .brand img { display: block; height: 76px; width: auto; }
+
+  /* The Q as a watermark behind the footer */
+  .site-footer { position: relative; overflow: hidden; }
+  .site-footer .grid { position: relative; z-index: 1; }
+  .site-footer :global(.footer-mark) {
+    position: absolute;
+    right: -120px;
+    bottom: -140px;
+    width: 520px;
+    height: 520px;
+    color: var(--white);
+    opacity: 0.05;
+    pointer-events: none;
+  }
   .about p { margin-top: 14px; max-width: 32ch; }
   h2 { color: var(--white); font-size: var(--step-0); font-weight: 600; letter-spacing: 0; margin-bottom: 14px; }
   ul { list-style: none; display: grid; gap: 10px; }
