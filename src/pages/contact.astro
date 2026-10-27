@@ -1,0 +1,51 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { site } from '../data/site';
+---
+
+<Base title="Contact" description="Tell Quantum ByTech about your website, online store or app project. We reply within one working day.">
+  <section class="contact">
+    <div class="wrap layout">
+      <div>
+        <h1>Tell us about your project</h1>
+        <p class="lead">We reply within one working day with next steps, or a few questions.</p>
+
+        <dl class="details">
+          <div>
+            <dt>WhatsApp or phone</dt>
+            <dd><a href={site.whatsapp} target="_blank" rel="noopener">{site.phone}</a></dd>
+          </div>
+          <div>
+            <dt>Email</dt>
+            <dd><a href={`mailto:${site.email}`}>{site.email}</a></dd>
+          </div>
+          <div>
+            <dt>Office</dt>
+            <dd>{site.location}</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="panel">
+        <ContactForm />
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact { padding-block: clamp(56px, 8vw, 112px) var(--section); }
+  .layout { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 48px clamp(40px, 6vw, 96px); align-items: start; }
+  h1 { font-size: var(--step-2); max-width: 14ch; }
+  .lead { margin-top: 20px; }
+
+  .details { display: grid; gap: 22px; margin: 40px 0 0; padding-top: 32px; border-top: 1px solid var(--line); }
+  dt { font-size: var(--step--1); color: var(--muted); }
+  dd { margin: 2px 0 0; font-weight: 600; font-size: var(--step-1); }
+  dd a { color: var(--pine); text-underline-offset: 5px; text-decoration-thickness: 1.5px; }
+
+  .panel { background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: clamp(24px, 4vw, 48px); }
+
+  @media (max-width: 880px) { .layout { grid-template-columns: 1fr; } }
+</style>

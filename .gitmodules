@@ -1,0 +1,3 @@
+[submodule "quantumbytech"]
+	path = quantumbytech
+	url = https://github.com/quantumbytech/quantumbytech.git

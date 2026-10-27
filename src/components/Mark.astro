@@ -1,0 +1,17 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<svg class:list={['mark', className]} viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+  <circle class="ring" cx="18" cy="20" r="12" stroke-width="8"></circle>
+  <rect class="bar" x="19" y="19" width="21" height="8"></rect>
+</svg>
+
+<style>
+  .mark { color: inherit; overflow: visible; }
+  .ring { fill: none; stroke: currentColor; }
+  .bar { fill: var(--signal); }
+</style>

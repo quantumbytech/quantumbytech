@@ -1,0 +1,81 @@
+---
+import Mark from './Mark.astro';
+import { site } from '../data/site';
+import { services } from '../data/services';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap grid">
+    <div class="about">
+      <a class="brand" href="/">
+        <Mark />
+        <span>{site.name}</span>
+      </a>
+      <p>{site.tagline}</p>
+    </div>
+
+    <div>
+      <h2>Services</h2>
+      <ul>
+        {services.map((s) => <li><a href={`/services/${s.slug}/`}>{s.name}</a></li>)}
+      </ul>
+    </div>
+
+    <div>
+      <h2>Company</h2>
+      <ul>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/#process">How we work</a></li>
+        <li><a href="/partners/">Partners</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h2>Get in touch</h2>
+      <ul>
+        <li><a href={site.whatsapp} target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href={`mailto:${site.email}`}>Email</a></li>
+        <li><a href={site.social.linkedin} target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href={site.social.instagram} target="_blank" rel="noopener">Instagram</a></li>
+      </ul>
+    </div>
+
+    <p class="legal">© {year} {site.name}. {site.location}.</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--pine);
+    color: var(--on-pine-muted);
+    padding-block: 64px 40px;
+    font-size: 0.9375rem;
+  }
+  .grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px 32px; }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.125rem;
+    letter-spacing: -0.02em;
+  }
+  .brand :global(.mark) { width: 30px; height: 30px; }
+  .about p { margin-top: 14px; max-width: 32ch; }
+  h2 { color: var(--white); font-size: var(--step-0); font-weight: 600; letter-spacing: 0; margin-bottom: 14px; }
+  ul { list-style: none; display: grid; gap: 10px; }
+  a { text-decoration: none; }
+  a:hover { color: var(--white); text-decoration: underline; text-underline-offset: 4px; }
+  :focus-visible { outline-color: var(--signal); }
+  .legal { grid-column: 1 / -1; padding-top: 24px; border-top: 1px solid var(--on-pine-line); }
+
+  @media (max-width: 880px) {
+    .grid { grid-template-columns: 1fr 1fr; }
+    .about { grid-column: 1 / -1; }
+  }
+</style>

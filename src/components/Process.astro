@@ -1,0 +1,43 @@
+---
+import { process } from '../data/site';
+---
+
+<ol class="steps">
+  {process.map((step) => (
+    <li>
+      <h3>{step.title}</h3>
+      <p>{step.text}</p>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .steps {
+    list-style: none;
+    counter-reset: step;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 28px;
+  }
+  li { counter-increment: step; padding-top: 20px; border-top: 2px solid var(--pine); }
+  li::before {
+    content: counter(step);
+    display: block;
+    margin-bottom: 16px;
+    font-weight: 700;
+    font-size: var(--step-2);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--pine);
+    font-variant-numeric: tabular-nums;
+  }
+  h3 { font-size: var(--step-0); margin-bottom: 8px; }
+  p { color: var(--muted); font-size: 0.9375rem; }
+
+  @media (max-width: 960px) {
+    .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 44px; }
+  }
+  @media (max-width: 560px) {
+    .steps { grid-template-columns: 1fr; row-gap: 36px; }
+  }
+</style>
