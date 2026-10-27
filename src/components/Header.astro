@@ -1,0 +1,116 @@
+---
+import Mark from './Mark.astro';
+import { nav, site } from '../data/site';
+
+const path = Astro.url.pathname;
+const isCurrent = (href: string) => !href.includes('#') && path.startsWith(href);
+---
+
+<header class="site-header">
+  <div class="wrap inner">
+    <a class="brand" href="/" aria-label={`${site.name} home`}>
+      <Mark />
+      <span>{site.name}</span>
+    </a>
+
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="menu-label">Menu</span>
+    </button>
+
+    <nav class="nav" id="site-nav" aria-label="Main">
+      {nav.map((item) => (
+        <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>
+      ))}
+      <a class="btn btn--primary nav-cta" href="/contact/">Request a quote</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const nav = document.getElementById('site-nav');
+  const label = toggle?.querySelector('.menu-label');
+
+  function setOpen(open: boolean) {
+    nav?.classList.toggle('is-open', open);
+    toggle?.setAttribute('aria-expanded', String(open));
+    if (label) label.textContent = open ? 'Close' : 'Menu';
+  }
+
+  toggle?.addEventListener('click', () => setOpen(!nav?.classList.contains('is-open')));
+  nav?.addEventListener('click', (e) => {
+    if ((e.target as HTMLElement).closest('a')) setOpen(false);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setOpen(false);
+  });
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--paper) 90%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .inner { display: flex; align-items: center; height: var(--header-h); }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--pine);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.125rem;
+    letter-spacing: -0.02em;
+  }
+  .brand :global(.mark) { width: 30px; height: 30px; }
+
+  .nav { display: flex; align-items: center; gap: 30px; margin-left: auto; }
+  .nav a:not(.btn) {
+    text-decoration: none;
+    color: var(--ink);
+    font-weight: 500;
+    text-underline-offset: 8px;
+    text-decoration-thickness: 2px;
+  }
+  .nav a:not(.btn):hover,
+  .nav a[aria-current='page'] { color: var(--pine); text-decoration-line: underline; }
+  .nav-cta { min-height: 42px; padding: 0 18px; margin-left: 4px; }
+
+  .menu-toggle {
+    display: none;
+    margin-left: auto;
+    min-height: 44px;
+    padding: 0 4px;
+    background: none;
+    border: 0;
+    color: var(--pine);
+    font: 600 var(--step-0) var(--font);
+    cursor: pointer;
+  }
+
+  @media (max-width: 880px) {
+    .menu-toggle { display: block; }
+    .nav {
+      display: none;
+      position: absolute;
+      top: var(--header-h);
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: 8px var(--gutter) 24px;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav:global(.is-open) { display: flex; }
+    .nav a:not(.btn) { padding: 14px 0; border-bottom: 1px solid var(--line); font-size: var(--step-1); }
+    .nav-cta { margin: 20px 0 0; min-height: 48px; }
+  }
+</style>

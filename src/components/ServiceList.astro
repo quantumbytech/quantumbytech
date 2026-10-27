@@ -1,0 +1,56 @@
+---
+import { services } from '../data/services';
+
+interface Props {
+  exclude?: string;
+}
+const { exclude } = Astro.props;
+const list = services.filter((s) => s.slug !== exclude);
+---
+
+<ul class="services">
+  {list.map((s) => (
+    <li>
+      <a href={`/services/${s.slug}/`}>
+        <h3>{s.name}</h3>
+        <p>{s.summary}</p>
+        <span class="more">View service</span>
+      </a>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .services { list-style: none; border-top: 1px solid var(--line); }
+  li { border-bottom: 1px solid var(--line); }
+  a {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 6fr) 9rem;
+    gap: 24px;
+    align-items: baseline;
+    padding: 30px 16px;
+    margin-inline: -16px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: background-color 0.15s;
+  }
+  p { color: var(--muted); max-width: 56ch; }
+  .more {
+    justify-self: end;
+    font-weight: 600;
+    color: var(--pine);
+    text-decoration: underline;
+    text-decoration-color: var(--line);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
+    transition: text-decoration-color 0.15s;
+  }
+  a:hover { background: var(--paper); }
+  a:hover .more { text-decoration-color: var(--pine); }
+
+  @media (max-width: 880px) {
+    a { grid-template-columns: 1fr; gap: 8px; padding: 24px 0; margin-inline: 0; }
+    a:hover { background: none; }
+    .more { justify-self: start; margin-top: 4px; }
+  }
+</style>

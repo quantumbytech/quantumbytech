@@ -1,0 +1,53 @@
+---
+import Base from '../../layouts/Base.astro';
+import ServiceList from '../../components/ServiceList.astro';
+import Showcase from '../../components/Showcase.astro';
+import Process from '../../components/Process.astro';
+import CtaBand from '../../components/CtaBand.astro';
+---
+
+<Base
+  title="Services"
+  description="Business websites, online stores, mobile apps, social media, custom software and ongoing support from Quantum ByTech in Beirut."
+>
+  <section class="page-hero">
+    <div class="wrap">
+      <h1>Everything you need to sell and work online.</h1>
+      <p class="lead">One team for your website, store, app, social media and the systems behind them. Start with one service and add the rest as you grow.</p>
+    </div>
+  </section>
+
+  <section class="section section--white">
+    <div class="wrap">
+      <ServiceList />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Designed for the screens your customers use</h2>
+        <p>Every website we build works on a phone first. Every app ships to both iOS and Android.</p>
+      </div>
+      <Showcase />
+    </div>
+  </section>
+
+  <section class="section section--white">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>How a project runs</h2>
+        <p>The same five steps for every service, so you always know what happens next.</p>
+      </div>
+      <Process />
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .page-hero { padding-block: clamp(64px, 9vw, 120px) clamp(48px, 6vw, 80px); }
+  h1 { max-width: 16ch; }
+  .lead { margin-top: 24px; }
+</style>

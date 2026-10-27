@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+
+# Previous site, kept locally for reference (it is in git history)
+legacy-site/
+# Source logo, the site uses public/partners/galacards.webp
+galacards-logo.png

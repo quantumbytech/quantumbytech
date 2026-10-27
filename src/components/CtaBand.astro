@@ -1,0 +1,32 @@
+---
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  text?: string;
+}
+const {
+  title = 'Have a project in mind?',
+  text = 'Tell us what you need. We reply within one working day with next steps, or a few questions.',
+} = Astro.props;
+---
+
+<section class="cta section--white">
+  <div class="wrap inner">
+    <div>
+      <h2>{title}</h2>
+      <p>{text}</p>
+    </div>
+    <div class="actions">
+      <a class="btn btn--primary" href="/contact/">Request a quote</a>
+      <a class="btn btn--ghost" href={site.whatsapp} target="_blank" rel="noopener">Message us on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta { padding-block: clamp(64px, 8vw, 104px); border-top: 1px solid var(--line); }
+  .inner { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px 64px; flex-wrap: wrap; }
+  h2 { max-width: 18ch; }
+  p { margin-top: 16px; color: var(--muted); font-size: var(--step-1); max-width: 46ch; }
+</style>

@@ -1,0 +1,56 @@
+---
+import { projects } from '../data/projects';
+---
+
+{projects.length > 0 && (
+  <section class="section" id="work">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Recent work</h2>
+        <p>Websites, stores, platforms and apps we have designed and built.</p>
+      </div>
+      <ul class="work">
+        {projects.map((p) => (
+          <li>
+            <a href={p.url} target="_blank" rel="noopener">
+              <img src={p.image} alt={p.imageAlt} loading="lazy" decoding="async" width="1440" height="900" />
+              <div class="title">
+                <h3>{p.client}</h3>
+                <span class="service">{p.service}</span>
+              </div>
+              <p>{p.summary}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)}
+
+<style>
+  .work {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(40px, 5vw, 64px) clamp(24px, 3vw, 40px);
+  }
+  a { display: grid; gap: 14px; text-decoration: none; }
+  img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: 8px;
+    background: var(--mint);
+    outline: 1px solid var(--line);
+    outline-offset: -1px;
+  }
+  .title { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-top: 6px; }
+  .service { flex: none; color: var(--muted); font-size: var(--step--1); }
+  p { color: var(--muted); max-width: 52ch; }
+  a:hover h3 { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 2px; }
+
+  @media (max-width: 760px) {
+    .work { grid-template-columns: 1fr; }
+  }
+</style>

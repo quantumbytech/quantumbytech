@@ -1,0 +1,156 @@
+---
+import { site } from '../data/site';
+import { services } from '../data/services';
+---
+
+<form class="form" action={site.formEndpoint} method="POST" data-contact-form>
+  <input type="hidden" name="_subject" value="New project request from quantumbytech.com" />
+  <input type="text" name="_gotcha" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+  <fieldset>
+    <legend>What do you need?</legend>
+    <div class="chips">
+      {services.map((s) => (
+        <label class="chip">
+          <input type="checkbox" name="services[]" value={s.name} data-slug={s.slug} />
+          <span>{s.name}</span>
+        </label>
+      ))}
+    </div>
+  </fieldset>
+
+  <div class="row">
+    <div class="field">
+      <label for="name">Your name</label>
+      <input id="name" name="name" type="text" autocomplete="name" required />
+    </div>
+    <div class="field">
+      <label for="company">Company <span class="optional">(optional)</span></label>
+      <input id="company" name="company" type="text" autocomplete="organization" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="field">
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" autocomplete="email" required />
+    </div>
+    <div class="field">
+      <label for="phone">Phone or WhatsApp <span class="optional">(optional)</span></label>
+      <input id="phone" name="phone" type="tel" autocomplete="tel" />
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="message">About the project</label>
+    <textarea id="message" name="message" rows="5" placeholder="What are you building, and is there a deadline?"></textarea>
+  </div>
+
+  <div class="submit">
+    <button class="btn btn--primary" type="submit">Send request</button>
+    <p class="status" role="status" aria-live="polite"></p>
+  </div>
+</form>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+  const status = form?.querySelector<HTMLElement>('.status');
+  const button = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+  // Links like /contact/?service=websites tick the matching service
+  const preselect = new URLSearchParams(location.search).get('service');
+  if (preselect) {
+    const box = form?.querySelector<HTMLInputElement>(`input[data-slug="${CSS.escape(preselect)}"]`);
+    if (box) box.checked = true;
+  }
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!status || !button) return;
+
+    button.disabled = true;
+    button.textContent = 'Sending…';
+    status.textContent = '';
+    status.classList.remove('is-error');
+
+    // Give up after 15 s so a dropped mobile connection doesn't leave the button stuck
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+        signal: controller.signal,
+      });
+
+      if (!res.ok) {
+        // Formspree explains rejections (unconfirmed form, spam check, bad email) in its JSON body
+        const data = await res.json().catch(() => null);
+        const reason = data?.errors?.map((err: { message: string }) => err.message).join(' ');
+        throw new Error(reason || `Formspree returned ${res.status}`);
+      }
+
+      form.reset();
+      status.textContent = 'Request sent. We will reply within one working day.';
+      button.textContent = 'Send another request';
+    } catch (err) {
+      status.classList.add('is-error');
+      const offline = err instanceof DOMException || err instanceof TypeError;
+      status.textContent = offline
+        ? 'Your request did not send. Check your connection and try again, or message us on WhatsApp.'
+        : `Your request did not send: ${(err as Error).message} Try again, or message us on WhatsApp.`;
+      button.textContent = 'Send request';
+    } finally {
+      clearTimeout(timeout);
+      button.disabled = false;
+    }
+  });
+</script>
+
+<style>
+  .form { display: grid; gap: 24px; }
+  fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+  legend,
+  .field label { display: block; margin-bottom: 10px; font-weight: 600; color: var(--pine); }
+  .optional { font-weight: 400; color: var(--muted); }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chip { position: relative; }
+  .chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .chip span {
+    display: block;
+    padding: 10px 16px;
+    border: 1.5px solid var(--line);
+    border-radius: 999px;
+    background: var(--white);
+    transition: border-color 0.15s, background-color 0.15s, color 0.15s;
+  }
+  .chip:hover span { border-color: var(--pine); }
+  .chip input:checked + span { background: var(--pine); border-color: var(--pine); color: var(--white); }
+  .chip input:focus-visible + span { outline: 3px solid var(--pine); outline-offset: 3px; }
+
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 560px) { .row { grid-template-columns: 1fr; } }
+
+  input:not([type='checkbox']),
+  textarea {
+    width: 100%;
+    padding: 12px 14px;
+    font: inherit;
+    color: var(--ink);
+    background: var(--white);
+    border: 1.5px solid var(--line);
+    border-radius: var(--radius);
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  input:not([type='checkbox']):focus,
+  textarea:focus { border-color: var(--pine); outline: none; box-shadow: 0 0 0 3px var(--mint); }
+  textarea { resize: vertical; min-height: 140px; }
+
+  .submit { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .status { color: var(--pine); font-weight: 600; }
+  .status:global(.is-error) { color: #a3261b; }
+  button:disabled { opacity: 0.7; cursor: default; }
+</style>

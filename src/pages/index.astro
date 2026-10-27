@@ -1,0 +1,112 @@
+---
+import Base from '../layouts/Base.astro';
+import Mark from '../components/Mark.astro';
+import ServiceList from '../components/ServiceList.astro';
+import Process from '../components/Process.astro';
+import Principles from '../components/Principles.astro';
+import Work from '../components/Work.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site, faqs } from '../data/site';
+---
+
+<Base>
+  <section class="hero">
+    <Mark class="hero-mark" />
+    <div class="wrap">
+      <h1>Websites and apps that make your business easier to buy from.</h1>
+      <p class="lead">
+        Quantum ByTech is a digital studio in Beirut. We design, build and look after websites, online stores and
+        mobile apps, and run the social media that brings customers to them.
+      </p>
+      <div class="actions">
+        <a class="btn btn--primary" href="/contact/">Request a quote</a>
+        <a class="btn btn--ghost" href={site.whatsapp} target="_blank" rel="noopener">Message us on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--white" id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>What we build</h2>
+        <p>Six services, one team. Start with one and add the rest as you grow.</p>
+      </div>
+      <ServiceList />
+    </div>
+  </section>
+
+  <Work />
+
+  <section class="section section--white" id="process">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>How a project runs</h2>
+        <p>You always know what happens next, what it costs and when it will be ready.</p>
+      </div>
+      <Process />
+    </div>
+  </section>
+
+  <section class="section section--pine">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Why businesses work with us</h2>
+        <p>We are a small team on purpose. The people you meet on the first call are the people who build your project.</p>
+      </div>
+      <Principles />
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="wrap faq-layout">
+      <div class="section-head">
+        <h2>Common questions</h2>
+        <p>Anything else, <a href={site.whatsapp} target="_blank" rel="noopener">ask us on WhatsApp</a>.</p>
+      </div>
+      <Faq items={faqs} />
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(64px, 10vw, 136px) clamp(72px, 11vw, 152px);
+  }
+  .hero .wrap { position: relative; z-index: 1; }
+  h1 { max-width: 13ch; }
+  .lead { margin-top: 28px; }
+  .actions { margin-top: 40px; }
+
+  .hero :global(.hero-mark) {
+    position: absolute;
+    z-index: 0;
+    right: clamp(-260px, -14vw, -80px);
+    top: 50%;
+    width: clamp(360px, 50vw, 720px);
+    height: auto;
+    aspect-ratio: 1;
+    color: var(--pine);
+    transform: translateY(-50%);
+  }
+  .hero :global(.hero-mark .bar) { animation: bar-in 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.15s both; }
+  @keyframes bar-in {
+    from { transform: translateX(45%); opacity: 0; }
+    to { transform: none; opacity: 1; }
+  }
+
+  @media (max-width: 880px) {
+    .hero :global(.hero-mark) { opacity: 0.07; right: -35%; }
+  }
+
+  .faq-layout { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 48px 80px; align-items: start; }
+  .faq-layout .section-head { margin-bottom: 0; }
+  .faq-layout a { color: var(--pine); font-weight: 600; text-underline-offset: 4px; }
+  @media (max-width: 880px) {
+    .faq-layout { grid-template-columns: 1fr; }
+  }
+</style>

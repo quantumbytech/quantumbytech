@@ -1,0 +1,146 @@
+/* Quantum ByTech identity
+   Pine is the brand colour. Signal is the heritage green, used sparingly:
+   the bar in the Q mark and focus rings on dark surfaces. */
+:root {
+  --pine: #0b3d2e;
+  --pine-hover: #145a43;
+  --signal: #1fc77a;
+  --mint: #e1f0e6;
+  --paper: #f3f5f2;
+  --white: #ffffff;
+  --ink: #1a2420;
+  --muted: #55635d;
+  --line: #d5ddd8;
+  --on-pine: #d7e6dd;
+  --on-pine-muted: #a9c4b5;
+  --on-pine-line: rgba(255, 255, 255, 0.16);
+
+  --font: 'Schibsted Grotesk Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --step--1: 0.875rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.25rem;
+  --step-2: clamp(1.875rem, 1.3rem + 2.2vw, 2.75rem);
+  --step-3: clamp(2.625rem, 1.4rem + 4.8vw, 5rem);
+
+  --gutter: clamp(16px, 4vw, 40px);
+  --wrap: 1180px;
+  --section: clamp(72px, 10vw, 128px);
+  --radius: 6px;
+  --header-h: 72px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 16px);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  color: var(--pine);
+  line-height: 1.1;
+  text-wrap: balance;
+}
+h1 { font-size: var(--step-3); font-weight: 700; letter-spacing: -0.035em; line-height: 1.02; }
+h2 { font-size: var(--step-2); font-weight: 650; letter-spacing: -0.025em; }
+h3 { font-size: var(--step-1); font-weight: 600; letter-spacing: -0.01em; }
+p { margin: 0; text-wrap: pretty; }
+a { color: inherit; }
+img,
+svg { display: block; max-width: 100%; }
+ul,
+ol { margin: 0; padding: 0; }
+
+::selection { background: var(--mint); color: var(--pine); }
+
+:focus-visible {
+  outline: 3px solid var(--pine);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.wrap {
+  width: min(var(--wrap), 100% - 2 * var(--gutter));
+  margin-inline: auto;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 22px;
+  font: 600 var(--step-0) / 1 var(--font);
+  text-decoration: none;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--pine);
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+}
+.btn--primary { background: var(--pine); color: var(--white); }
+.btn--primary:hover { background: var(--pine-hover); border-color: var(--pine-hover); }
+.btn--ghost { background: transparent; color: var(--pine); }
+.btn--ghost:hover { background: var(--mint); }
+.btn--light { background: var(--white); color: var(--pine); border-color: var(--white); }
+.btn--light:hover { background: var(--mint); border-color: var(--mint); }
+
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* Sections */
+.section { padding-block: var(--section); }
+.section--white { background: var(--white); }
+.section--pine { background: var(--pine); color: var(--on-pine); }
+.section--pine h2,
+.section--pine h3 { color: var(--white); }
+.section--pine :focus-visible { outline-color: var(--signal); }
+
+.section-head {
+  display: grid;
+  gap: 16px;
+  max-width: 62ch;
+  margin-bottom: clamp(40px, 6vw, 64px);
+}
+.section-head p { color: var(--muted); font-size: var(--step-1); line-height: 1.5; }
+.section--pine .section-head p { color: var(--on-pine-muted); }
+
+.lead { font-size: var(--step-1); line-height: 1.55; color: var(--muted); max-width: 54ch; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
