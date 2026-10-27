@@ -86,10 +86,19 @@ import { services } from '../data/services';
       });
 
       if (!res.ok) {
-        // Formspree explains rejections (unconfirmed form, spam check, bad email) in its JSON body
+        // Formspree explains rejections (unconfirmed form, spam check, bad email) in its JSON body,
+        // either as { error } or as { errors: [{ message }] }
         const data = await res.json().catch(() => null);
-        const reason = data?.errors?.map((err: { message: string }) => err.message).join(' ');
-        throw new Error(reason || `Formspree returned ${res.status}`);
+        const reason: string =
+          data?.errors?.map((err: { message: string }) => err.message).join(' ') || data?.error || '';
+
+        // With reCAPTCHA on, Formspree refuses background submissions: send it the classic way,
+        // so the visitor completes the captcha on Formspree's page and the request still arrives
+        if (/recaptcha/i.test(reason)) {
+          form.submit();
+          return;
+        }
+        throw new Error(reason || `Formspree returned ${res.status}.`);
       }
 
       form.reset();
