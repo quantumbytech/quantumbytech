@@ -3,7 +3,7 @@ import { site } from '../data/site';
 import { services } from '../data/services';
 ---
 
-<form class="form" action={site.formEndpoint} method="POST" data-contact-form>
+<form class="form" action={site.formEndpoint} method="POST" data-contact-form data-admin={site.adminEndpoint}>
   <input type="hidden" name="_subject" value="New project request from quantumbytech.com" />
   <input type="text" name="_gotcha" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
@@ -77,6 +77,19 @@ import { services } from '../data/services';
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 15000);
 
+    // Save the request in the admin panel alongside the Formspree email; either one arriving counts
+    const toPanel = new FormData(form);
+    toPanel.append('source', location.pathname);
+    const saved = fetch(form.dataset.admin ?? '', { method: 'POST', body: toPanel, signal: controller.signal })
+      .then((r) => r.ok)
+      .catch(() => false);
+
+    const sent = () => {
+      form.reset();
+      status.textContent = 'Request sent. We will reply within one working day.';
+      button.textContent = 'Send another request';
+    };
+
     try {
       const res = await fetch(form.action, {
         method: 'POST',
@@ -101,10 +114,11 @@ import { services } from '../data/services';
         throw new Error(reason || `Formspree returned ${res.status}.`);
       }
 
-      form.reset();
-      status.textContent = 'Request sent. We will reply within one working day.';
-      button.textContent = 'Send another request';
+      sent();
     } catch (err) {
+      // The email failed, but the request reached the admin panel, so nothing is lost
+      if (await saved) return sent();
+
       status.classList.add('is-error');
       const offline = err instanceof DOMException || err instanceof TypeError;
       status.textContent = offline

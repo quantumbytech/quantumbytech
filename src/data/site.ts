@@ -13,6 +13,8 @@ export const site = {
     instagram: 'https://www.instagram.com/quantumbytech/',
   },
   formEndpoint: 'https://formspree.io/f/xanybdvr',
+  /** Saves each request in the admin panel; Formspree keeps sending the email */
+  adminEndpoint: 'https://admin.quantumbytech.com/api/public/request',
 };
 
 export const nav = [
