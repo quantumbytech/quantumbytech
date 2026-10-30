@@ -1,0 +1,87 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+
+<Base
+  title="Privacy Policy | Quantum ByTech"
+  description="How Quantum ByTech collects, uses and protects the information you share through our website, by email and on WhatsApp, and how to ask us to change or delete it."
+>
+  <section class="page-hero">
+    <div class="wrap">
+      <h1>Privacy policy</h1>
+      <p class="updated">Last updated October 30, 2026</p>
+    </div>
+  </section>
+
+  <section class="section section--white">
+    <div class="wrap legal-copy">
+      <p>
+        {site.name} ("we") is a digital studio in {site.location}. This page explains what information we collect, why,
+        and what you can ask us to do with it. Questions: <a href={`mailto:${site.email}`}>{site.email}</a>.
+      </p>
+
+      <h2>What we collect</h2>
+      <ul>
+        <li><strong>Contact form:</strong> your name, company, email, phone or WhatsApp number, the services you tick, your message and the page you sent it from.</li>
+        <li><strong>Messages you send us</strong> by email, WhatsApp or social media.</li>
+        <li><strong>Client records</strong> when we work together: contact details, meetings, quotations, payments and project notes.</li>
+      </ul>
+      <p>Our website does not use advertising or analytics cookies, and we do not track you across other sites.</p>
+
+      <h2>How we use it</h2>
+      <ul>
+        <li>To reply to you, prepare quotations and schedule meetings.</li>
+        <li>To deliver and support the work you hire us for, including invoices and payment reminders.</li>
+        <li>To keep the business records we are required to keep.</li>
+      </ul>
+      <p>We never sell your information or use it for advertising.</p>
+
+      <h2>Services that process it for us</h2>
+      <ul>
+        <li><strong>Cloudflare</strong> hosts our internal admin panel and its database, and handles our email.</li>
+        <li><strong>Formspree</strong> delivers contact-form messages to our inbox.</li>
+        <li><strong>Resend</strong> sends emails from {site.email}, such as meeting invitations, quotations and reminders.</li>
+        <li><strong>Google Calendar and Google Meet</strong> hold the meetings we book with you and their video links.</li>
+        <li><strong>GitHub Pages</strong> hosts this website.</li>
+      </ul>
+      <p>Each of them only processes the information needed for that task.</p>
+
+      <h2>Google account data</h2>
+      <p>
+        Our admin panel connects to Google Calendar only through our own company Google account, to create meetings and
+        Google Meet links. We do not ask for or access the Google accounts of visitors or clients. Our use of
+        information received from Google APIs follows the
+        <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google API Services User Data Policy</a>,
+        including the Limited Use requirements.
+      </p>
+
+      <h2>How long we keep it</h2>
+      <p>
+        Enquiries that do not become projects are kept for up to two years. Client records are kept for as long as we
+        work together and for as long as the law requires afterwards.
+      </p>
+
+      <h2>Your choices</h2>
+      <p>
+        You can ask us to show, correct or delete the information we hold about you, or to stop sending you reminders,
+        by emailing <a href={`mailto:${site.email}`}>{site.email}</a>. We reply within one working day.
+      </p>
+
+      <h2>Security</h2>
+      <p>
+        Our admin panel is private: every team member signs in with a password and an authenticator app, and the
+        information is sent only over encrypted connections.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .page-hero { padding-block: clamp(56px, 8vw, 104px) clamp(32px, 4vw, 48px); }
+  .updated { margin-top: 16px; color: var(--muted); }
+  .legal-copy { max-width: 72ch; display: grid; gap: 16px; }
+  .legal-copy h2 { font-size: var(--step-1); margin-top: 24px; }
+  .legal-copy ul { display: grid; gap: 8px; padding-left: 1.2em; }
+  .legal-copy a { color: var(--pine); font-weight: 600; }
+</style>
