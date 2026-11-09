@@ -1,0 +1,1193 @@
+---
+/*
+  Book a Google Meet. Shared by link only: noindex, left out of the sitemap, and not linked from the site.
+  Free times come from the admin panel (GET {API}/slots); a request goes to POST {API} and the team
+  approves it there, which sends the person an invite with the Meet link.
+*/
+import Base from '../../layouts/Base.astro';
+import Mark from '../../components/Mark.astro';
+import { site } from '../../data/site';
+
+const api = new URL('/api/public/meet', site.adminEndpoint).href;
+const topics = [
+  'Website',
+  'Online store',
+  'Mobile app',
+  'Custom software',
+  'Social media',
+  'Support and maintenance',
+  'Something else',
+];
+const weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+---
+
+<Base
+  title="Book a call"
+  description="Pick a time for a free 30-minute Google Meet with Quantum ByTech."
+  noindex
+>
+  <section class="meet">
+    <div class="wrap">
+      <div class="card" data-meet data-api={api}>
+        <aside class="info">
+          <Mark class="info-mark" />
+          <div class="info-body">
+            <h1>Book a call with Quantum ByTech</h1>
+            <p class="facts">
+              <span>30 minutes</span><span class="dot" aria-hidden="true">·</span><span>Google Meet</span><span
+                class="dot"
+                aria-hidden="true">·</span
+              ><span>Free</span>
+            </p>
+            <p class="expect">
+              Pick a time that suits you. We confirm by email with your Google Meet link, usually within a few hours.
+            </p>
+            <div class="agenda">
+              <h2>On the call</h2>
+              <ul>
+                <li>Your business and your goals</li>
+                <li>What you need, and by when</li>
+                <li>Budget and next steps</li>
+              </ul>
+              <p>Afterwards we send a written proposal with a fixed price, within a few days.</p>
+            </div>
+          </div>
+          <p class="info-foot">
+            Prefer to message?{' '}
+            <a href={site.whatsapp} target="_blank" rel="noopener">WhatsApp <span class="nowrap">{site.phone}</span></a>
+          </p>
+        </aside>
+
+        <div class="flow" data-flow aria-busy="true">
+          <noscript>
+            <p class="noscript">
+              This booking page needs JavaScript. You can also <a href="/contact/">use the contact form</a> or
+              <a href={site.whatsapp}>message us on WhatsApp</a>.
+            </p>
+          </noscript>
+
+          <!-- Steps 1 and 2: day and time -->
+          <div class="view view--pick" data-view="pick">
+            <p class="notice" data-notice tabindex="-1" hidden></p>
+
+            <div class="picker" data-picker>
+              <div class="col">
+                <div class="step-head">
+                  <span class="num" aria-hidden="true">1</span>
+                  <h2>Choose a day</h2>
+                  <span class="month" data-month></span>
+                </div>
+                <div class="weekdays" aria-hidden="true">
+                  {weekdays.map((d) => <span>{d}</span>)}
+                </div>
+                <div class="days" data-days role="group" aria-label="Days">
+                  {Array.from({ length: 21 }, () => <span class="sk sk-day" />)}
+                </div>
+              </div>
+
+              <div class="col">
+                <div class="step-head">
+                  <span class="num" aria-hidden="true">2</span>
+                  <h2>Choose a time</h2>
+                </div>
+                <p class="day-title" data-day-title><span class="sk sk-line"></span></p>
+                <p class="tz" data-tz></p>
+                <div class="times" data-times role="group" aria-label="Times">
+                  {Array.from({ length: 9 }, () => <span class="sk sk-time" />)}
+                </div>
+              </div>
+            </div>
+
+            <div class="state" data-error hidden>
+              <span class="state-icon state-icon--warn" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 6.5v7.5M12 18.2h.01"></path></svg>
+              </span>
+              <h2>We couldn't load the calendar</h2>
+              <p>Please try again in a moment. If it still doesn't load, send us a message and we will find a time with you.</p>
+              <div class="actions">
+                <button class="btn btn--primary" type="button" data-retry>Try again</button>
+                <a class="btn btn--ghost" href={site.whatsapp} target="_blank" rel="noopener">Message us on WhatsApp</a>
+              </div>
+              <p class="state-alt">Or use the <a href="/contact/">contact form</a>.</p>
+            </div>
+
+            <div class="state" data-empty hidden>
+              <span class="state-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg>
+              </span>
+              <h2>No free times in the next few weeks</h2>
+              <p>Our calendar is full for now. Tell us when suits you and we will find a time.</p>
+              <div class="actions">
+                <a class="btn btn--primary" href="/contact/">Go to the contact page</a>
+                <a class="btn btn--ghost" href={site.whatsapp} target="_blank" rel="noopener">Message us on WhatsApp</a>
+              </div>
+            </div>
+
+            <div class="bar" data-bar>
+              <p class="bar-text" data-bar-text>Choose a time to continue.</p>
+              <button class="btn btn--primary" type="button" data-continue disabled>Continue</button>
+            </div>
+          </div>
+
+          <!-- Step 3: details -->
+          <form class="view view--details" data-view="details" novalidate hidden>
+            <div class="step-head">
+              <span class="num" aria-hidden="true">3</span>
+              <h2 tabindex="-1" data-details-heading>Your details</h2>
+            </div>
+
+            <div class="chosen">
+              <span class="chosen-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg>
+              </span>
+              <div class="chosen-text">
+                <p class="chosen-main" data-chosen-main></p>
+                <p class="chosen-sub" data-chosen-sub></p>
+                <p class="chosen-hint" data-chosen-hint></p>
+              </div>
+              <button class="link-btn" type="button" data-change>
+                Change<span class="visually-hidden"> the time</span>
+              </button>
+            </div>
+
+            <div class="row">
+              <div class="field">
+                <label for="m-name">Your name</label>
+                <input id="m-name" name="name" type="text" autocomplete="name" maxlength="120" required aria-describedby="m-name-err" />
+                <p class="err" id="m-name-err"></p>
+              </div>
+              <div class="field">
+                <label for="m-email">Email</label>
+                <input id="m-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="200" required aria-describedby="m-email-err" />
+                <p class="err" id="m-email-err"></p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="field">
+                <label for="m-phone">Phone or WhatsApp <span class="optional">(optional)</span></label>
+                <input id="m-phone" name="phone" type="tel" autocomplete="tel" maxlength="40" />
+              </div>
+              <div class="field">
+                <label for="m-company">Company <span class="optional">(optional)</span></label>
+                <input id="m-company" name="company" type="text" autocomplete="organization" maxlength="120" />
+              </div>
+            </div>
+
+            <fieldset class="field" aria-describedby="m-topic-err">
+              <legend>What would you like to talk about?</legend>
+              <div class="chips">
+                {topics.map((t) => (
+                  <label class="chip">
+                    <input type="radio" name="topic" value={t} />
+                    <span>{t}</span>
+                  </label>
+                ))}
+              </div>
+              <p class="err" id="m-topic-err"></p>
+            </fieldset>
+
+            <div class="field">
+              <label for="m-notes">Anything we should know? <span class="optional">(optional)</span></label>
+              <textarea
+                id="m-notes"
+                name="notes"
+                rows="4"
+                maxlength="2000"
+                placeholder="A link to your current website, a deadline, or anything else useful."></textarea>
+            </div>
+
+            <div class="hp" aria-hidden="true">
+              <label for="m-website">Website</label>
+              <input id="m-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <div class="submit">
+              <button class="btn btn--primary" type="submit" data-submit>Request this time</button>
+              <p class="status" data-form-status role="status" aria-live="polite"></p>
+            </div>
+            <p class="small">We use these details only to arrange the call. <a href="/privacy/">Privacy policy</a></p>
+          </form>
+
+          <!-- Done -->
+          <div class="view view--done" data-view="done" hidden>
+            <span class="done-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+            </span>
+            <h2 tabindex="-1" data-done-heading>Request sent</h2>
+            <p class="done-lead">
+              We'll email you at <strong data-done-email></strong> to confirm <strong data-done-when></strong> (Beirut time).
+            </p>
+            <p class="done-local" data-done-local hidden></p>
+
+            <h3>What happens next</h3>
+            <ol class="next">
+              <li><strong>We confirm the time.</strong> Usually within a few hours, by email. If you don't see it, check your spam folder.</li>
+              <li><strong>You get the invite.</strong> A calendar invite with your Google Meet link.</li>
+              <li><strong>We talk.</strong> Open the link at the time of the call, in your browser or the Google Meet app.</li>
+            </ol>
+            <p class="done-foot">
+              Need a different time? Reply to our email or <a href={site.whatsapp} target="_blank" rel="noopener">message us on WhatsApp</a>.
+            </p>
+            <a class="btn btn--ghost" href="/">Back to the website</a>
+          </div>
+
+          <p class="visually-hidden" data-live role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  type Day = { date: string; slots: string[] };
+
+  const BEIRUT = 'Asia/Beirut';
+  const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const TIMEOUT = 15000;
+
+  const root = document.querySelector<HTMLElement>('[data-meet]');
+  if (root) init(root);
+
+  /* ---------- Time zones, with Intl only ---------- */
+
+  const formats = new Map<string, Intl.DateTimeFormat>();
+  function format(key: string, make: () => Intl.DateTimeFormat) {
+    let f = formats.get(key);
+    if (!f) formats.set(key, (f = make()));
+    return f;
+  }
+  function partsOf(f: Intl.DateTimeFormat, ms: number) {
+    const o: Record<string, string> = {};
+    for (const p of f.formatToParts(ms)) o[p.type] = p.value;
+    return o;
+  }
+  /** Wall-clock parts of an instant in a time zone */
+  function wall(tz: string, ms: number) {
+    const f = format(`wall:${tz}`, () =>
+      new Intl.DateTimeFormat('en-US', {
+        timeZone: tz,
+        hourCycle: 'h23',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      }),
+    );
+    const o = partsOf(f, ms);
+    return { y: +o.year, m: +o.month, d: +o.day, h: +o.hour % 24, mi: +o.minute, s: +o.second };
+  }
+  /** How far the zone's clock is ahead of UTC at that instant */
+  function offset(tz: string, ms: number) {
+    const p = wall(tz, ms);
+    return Date.UTC(p.y, p.m - 1, p.d, p.h, p.mi, p.s) - (ms - (ms % 1000));
+  }
+  /** "2026-11-10T11:00" on the clock in tz, to an instant. The second pass corrects across a DST change. */
+  function toInstant(local: string, tz: string) {
+    const [y, m, d, h, mi] = (local.match(/\d+/g) ?? []).map(Number);
+    const guess = Date.UTC(y, m - 1, d, h, mi);
+    let t = guess - offset(tz, guess);
+    const o = offset(tz, t);
+    if (guess - o !== t) t = guess - o;
+    return t;
+  }
+  const pad = (n: number) => String(n).padStart(2, '0');
+  function dateIn(tz: string, ms: number) {
+    const p = wall(tz, ms);
+    return `${p.y}-${pad(p.m)}-${pad(p.d)}`;
+  }
+  function timeIn(tz: string, ms: number) {
+    const p = wall(tz, ms);
+    return `${pad(p.h)}:${pad(p.mi)}`;
+  }
+  const noon = (key: string) => {
+    const [y, m, d] = key.split('-').map(Number);
+    return Date.UTC(y, m - 1, d, 12);
+  };
+  function addDays(key: string, n: number) {
+    return new Date(noon(key) + n * 864e5).toISOString().slice(0, 10);
+  }
+  /** Monday = 0 */
+  const weekdayIndex = (key: string) => (new Date(noon(key)).getUTCDay() + 6) % 7;
+  /** "Tuesday 10 November" or "Tue 10 Nov" for a calendar date */
+  function dateLabel(key: string, style: 'long' | 'short' = 'long') {
+    const f = format(`date:${style}`, () =>
+      new Intl.DateTimeFormat('en-GB', { timeZone: 'UTC', weekday: style, day: 'numeric', month: style }),
+    );
+    const o = partsOf(f, noon(key));
+    return `${o.weekday} ${o.day} ${o.month}`;
+  }
+  function monthLabel(key: string) {
+    const f = format('month', () => new Intl.DateTimeFormat('en-GB', { timeZone: 'UTC', month: 'long', year: 'numeric' }));
+    const o = partsOf(f, noon(key));
+    return { month: o.month, year: o.year };
+  }
+  function validZone(tz: string | null | undefined) {
+    if (!tz) return null;
+    try {
+      new Intl.DateTimeFormat('en-US', { timeZone: tz });
+      return tz;
+    } catch {
+      return null;
+    }
+  }
+
+  /* ---------- Page ---------- */
+
+  function init(root: HTMLElement) {
+    // Local testing only: ?api=<base> and ?tz=<zone> are read on localhost and ignored everywhere else
+    const local = location.hostname === 'localhost';
+    const params = new URLSearchParams(location.search);
+    const API = ((local && params.get('api')) || root.dataset.api || '').replace(/\/+$/, '');
+    const visitorTz =
+      (local && validZone(params.get('tz'))) || validZone(Intl.DateTimeFormat().resolvedOptions().timeZone) || BEIRUT;
+
+    const q = <T extends HTMLElement = HTMLElement>(sel: string) => root.querySelector(sel) as T;
+    const flow = q('[data-flow]');
+    const views = {
+      pick: q('[data-view="pick"]'),
+      details: q<HTMLFormElement>('[data-view="details"]'),
+      done: q('[data-view="done"]'),
+    };
+    const picker = q('[data-picker]');
+    const daysEl = q('[data-days]');
+    const timesEl = q('[data-times]');
+    const monthEl = q('[data-month]');
+    const dayTitle = q('[data-day-title]');
+    const tzNote = q('[data-tz]');
+    const notice = q('[data-notice]');
+    const errorState = q('[data-error]');
+    const emptyState = q('[data-empty]');
+    const bar = q('[data-bar]');
+    const barText = q('[data-bar-text]');
+    const continueBtn = q<HTMLButtonElement>('[data-continue]');
+    const form = views.details;
+    const submitBtn = q<HTMLButtonElement>('[data-submit]');
+    const formStatus = q('[data-form-status]');
+    const live = q('[data-live]');
+    const whatsapp = q<HTMLAnchorElement>('.info-foot a').href;
+
+    let srcTz = BEIRUT;
+    let duration = 30;
+    let byDate = new Map<string, string[]>();
+    let showLocal = false;
+    let selectedDate = '';
+    let selectedSlot = '';
+    let sending = false;
+
+    const announce = (text: string) => {
+      live.textContent = '';
+      requestAnimationFrame(() => (live.textContent = text));
+    };
+    const el = <K extends keyof HTMLElementTagNameMap>(tag: K, cls?: string, text?: string) => {
+      const n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text) n.textContent = text;
+      return n;
+    };
+    const slotInstant = (slot: string) => toInstant(slot, srcTz);
+    const endOf = (ms: number) => ms + duration * 60000;
+    const zoneName = (tz: string) => tz.replace(/_/g, ' ');
+
+    function fetchWithTimeout(url: string, init: RequestInit = {}) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), TIMEOUT);
+      return fetch(url, { ...init, signal: controller.signal }).finally(() => clearTimeout(timer));
+    }
+
+    function showView(name: keyof typeof views, focus?: HTMLElement | null) {
+      for (const [key, view] of Object.entries(views)) view.hidden = key !== name;
+      if (flow.getBoundingClientRect().top < 0) flow.scrollIntoView({ block: 'start' });
+      focus?.focus({ preventScroll: true });
+    }
+
+    /* ----- Loading the free times ----- */
+
+    function skeleton() {
+      picker.hidden = false;
+      bar.hidden = false;
+      errorState.hidden = true;
+      emptyState.hidden = true;
+      daysEl.replaceChildren(...Array.from({ length: 21 }, () => el('span', 'sk sk-day')));
+      timesEl.replaceChildren(...Array.from({ length: 9 }, () => el('span', 'sk sk-time')));
+      dayTitle.replaceChildren(el('span', 'sk sk-line'));
+      tzNote.textContent = '';
+      monthEl.textContent = '';
+      continueBtn.disabled = true;
+      barText.textContent = 'Loading free times…';
+    }
+
+    function showState(state: HTMLElement) {
+      picker.hidden = true;
+      bar.hidden = true;
+      state.hidden = false;
+    }
+
+    async function load(keepDate = false) {
+      skeleton();
+      flow.setAttribute('aria-busy', 'true');
+      let days: Day[];
+      try {
+        const res = await fetchWithTimeout(`${API}/slots`, { headers: { Accept: 'application/json' } });
+        if (!res.ok) throw new Error(`Slots returned ${res.status}`);
+        const data = await res.json();
+        srcTz = validZone(data?.timezone) || BEIRUT;
+        duration = Number(data?.duration_min) > 0 ? Number(data.duration_min) : 30;
+        const valid = (s: unknown): s is string => typeof s === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(s);
+        days = (Array.isArray(data?.days) ? data.days : [])
+          .map((d: Day) => ({ date: String(d?.date ?? ''), slots: (Array.isArray(d?.slots) ? d.slots : []).filter(valid).sort() }))
+          .filter((d: Day) => /^\d{4}-\d{2}-\d{2}$/.test(d.date) && d.slots.length)
+          .sort((a: Day, b: Day) => a.date.localeCompare(b.date));
+      } catch {
+        flow.setAttribute('aria-busy', 'false');
+        showState(errorState);
+        announce("We couldn't load the calendar.");
+        return;
+      }
+      flow.setAttribute('aria-busy', 'false');
+
+      if (!days.length) {
+        showState(emptyState);
+        announce('No free times in the next few weeks.');
+        return;
+      }
+
+      byDate = new Map(days.map((d) => [d.date, d.slots]));
+      const all = days.flatMap((d) => d.slots);
+      showLocal =
+        visitorTz !== srcTz &&
+        all.some((s) => {
+          const t = slotInstant(s);
+          return timeIn(visitorTz, t) !== s.slice(11) || dateIn(visitorTz, t) !== s.slice(0, 10);
+        });
+
+      if (!(keepDate && byDate.has(selectedDate))) selectedDate = days[0].date;
+      if (!byDate.get(selectedDate)?.includes(selectedSlot)) selectedSlot = '';
+
+      tzNote.textContent = showLocal
+        ? `Times shown in your time zone (${zoneName(visitorTz)}). Beirut time in grey.`
+        : visitorTz === srcTz
+          ? 'Times are Beirut time.'
+          : 'Times are Beirut time, the same as your time zone.';
+
+      renderDays();
+      renderTimes();
+      updateBar();
+      announce(`${days.length} days with free times.`);
+    }
+
+    /* ----- Step 1: day ----- */
+
+    function renderDays() {
+      const keys = [...byDate.keys()];
+      const today = dateIn(srcTz, Date.now());
+      const first = keys[0] < today ? keys[0] : today;
+      const lastSlot = keys[keys.length - 1];
+      const horizon = addDays(today, 20);
+      const last = lastSlot > horizon ? lastSlot : horizon;
+      const start = addDays(first, -weekdayIndex(first));
+      const end = addDays(last, 6 - weekdayIndex(last));
+
+      const a = monthLabel(keys[0] > today ? today : keys[0]);
+      const b = monthLabel(lastSlot);
+      monthEl.textContent =
+        a.month === b.month && a.year === b.year
+          ? `${a.month} ${a.year}`
+          : a.year === b.year
+            ? `${a.month} – ${b.month} ${b.year}`
+            : `${a.month} ${a.year} – ${b.month} ${b.year}`;
+
+      const cells: HTMLElement[] = [];
+      for (let key = start; key <= end; key = addDays(key, 1)) {
+        const slots = byDate.get(key);
+        const btn = el('button', 'day');
+        btn.type = 'button';
+        btn.dataset.date = key;
+        const dayNum = Number(key.slice(8));
+        if (dayNum === 1 && key !== start) btn.append(el('span', 'day-m', dateLabel(key, 'short').split(' ')[2]));
+        btn.append(el('span', 'day-n', String(dayNum)));
+        if (key === today) btn.classList.add('is-today');
+        if (slots) {
+          btn.setAttribute('aria-label', `${dateLabel(key)}, ${slots.length} free ${slots.length === 1 ? 'time' : 'times'}`);
+          btn.setAttribute('aria-pressed', String(key === selectedDate));
+          btn.tabIndex = key === selectedDate ? 0 : -1;
+        } else {
+          btn.disabled = true;
+          btn.setAttribute('aria-label', `${dateLabel(key)}, ${key < today ? 'past' : 'no free times'}`);
+        }
+        cells.push(btn);
+      }
+      daysEl.replaceChildren(...cells);
+    }
+
+    function selectDay(key: string) {
+      if (!byDate.has(key)) return;
+      selectedDate = key;
+      if (!selectedSlot.startsWith(key)) selectedSlot = '';
+      for (const btn of daysEl.querySelectorAll<HTMLButtonElement>('button:not(:disabled)')) {
+        const on = btn.dataset.date === key;
+        btn.setAttribute('aria-pressed', String(on));
+        btn.tabIndex = on ? 0 : -1;
+      }
+      renderTimes();
+      updateBar();
+    }
+
+    daysEl.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('button.day');
+      if (btn && !btn.disabled) selectDay(btn.dataset.date ?? '');
+    });
+
+    /* ----- Step 2: time ----- */
+
+    function renderTimes() {
+      const slots = byDate.get(selectedDate) ?? [];
+      const label = dateLabel(selectedDate);
+      dayTitle.textContent = label;
+      timesEl.setAttribute('aria-label', `Free times on ${label}`);
+      const firstFocusable = slots.includes(selectedSlot) ? selectedSlot : slots[0];
+
+      timesEl.replaceChildren(
+        ...slots.map((slot) => {
+          const beirut = slot.slice(11);
+          const btn = el('button', 'time');
+          btn.type = 'button';
+          btn.dataset.slot = slot;
+          btn.setAttribute('aria-pressed', String(slot === selectedSlot));
+          btn.tabIndex = slot === firstFocusable ? 0 : -1;
+          if (showLocal) {
+            const t = slotInstant(slot);
+            const mine = timeIn(visitorTz, t);
+            const myDate = dateIn(visitorTz, t);
+            const main = el('span', 'time-main', mine);
+            if (myDate !== selectedDate) main.append(el('span', 'time-day', dateLabel(myDate, 'short').split(' ')[0]));
+            btn.append(main, el('span', 'hint', `Beirut ${beirut}`));
+            const shift = myDate !== selectedDate ? ` on ${dateLabel(myDate)}` : '';
+            btn.setAttribute('aria-label', `${mine}${shift} your time, ${beirut} Beirut time`);
+          } else {
+            btn.append(el('span', 'time-main', beirut));
+          }
+          return btn;
+        }),
+      );
+    }
+
+    timesEl.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('button.time');
+      if (!btn) return;
+      selectedSlot = btn.dataset.slot ?? '';
+      for (const b of timesEl.querySelectorAll<HTMLButtonElement>('button')) {
+        const on = b === btn;
+        b.setAttribute('aria-pressed', String(on));
+        b.tabIndex = on ? 0 : -1;
+      }
+      notice.hidden = true;
+      updateBar();
+    });
+
+    // Arrow keys move between days and times; Tab moves on to the next group
+    function arrowKeys(container: HTMLElement, cols: number) {
+      container.addEventListener('keydown', (e) => {
+        const items = [...container.querySelectorAll<HTMLButtonElement>('button')];
+        const i = items.indexOf(document.activeElement as HTMLButtonElement);
+        if (i < 0) return;
+        const enabled = items.filter((b) => !b.disabled);
+        let target: HTMLButtonElement | undefined;
+        if (e.key === 'Home') target = enabled[0];
+        else if (e.key === 'End') target = enabled[enabled.length - 1];
+        else {
+          const steps: Record<string, number> = { ArrowRight: 1, ArrowLeft: -1, ArrowDown: cols, ArrowUp: -cols };
+          const step = steps[e.key];
+          if (!step) return;
+          let j = i + step;
+          while (j >= 0 && j < items.length && items[j].disabled) j += Math.sign(step);
+          target = items[j];
+        }
+        e.preventDefault();
+        if (!target || target.disabled) return;
+        items[i].tabIndex = -1;
+        target.tabIndex = 0;
+        target.focus();
+      });
+    }
+    arrowKeys(daysEl, 7);
+    arrowKeys(timesEl, 1);
+
+    /* ----- Summary of the chosen slot ----- */
+
+    function describe(slot: string) {
+      const t = slotInstant(slot);
+      const beirut = `${slot.slice(11)} – ${timeIn(srcTz, endOf(t))}`;
+      if (!showLocal) {
+        return {
+          short: `${dateLabel(slot.slice(0, 10), 'short')}, ${beirut}`,
+          main: dateLabel(slot.slice(0, 10)),
+          sub: `${beirut} Beirut time`,
+          hint: '',
+          local: '',
+        };
+      }
+      const myDate = dateIn(visitorTz, t);
+      const mine = `${timeIn(visitorTz, t)} – ${timeIn(visitorTz, endOf(t))}`;
+      return {
+        short: `${dateLabel(myDate, 'short')}, ${mine}`,
+        main: dateLabel(myDate),
+        sub: `${mine} your time`,
+        hint: `${beirut} in Beirut`,
+        local: `That is ${dateLabel(myDate)} at ${timeIn(visitorTz, t)} in your time zone (${zoneName(visitorTz)}).`,
+      };
+    }
+
+    function updateBar() {
+      continueBtn.disabled = !selectedSlot;
+      bar.classList.toggle('is-ready', Boolean(selectedSlot));
+      barText.textContent = selectedSlot ? describe(selectedSlot).short : 'Choose a time to continue.';
+    }
+
+    continueBtn.addEventListener('click', () => {
+      if (!selectedSlot) return;
+      const d = describe(selectedSlot);
+      q('[data-chosen-main]').textContent = d.main;
+      q('[data-chosen-sub]').textContent = d.sub;
+      q('[data-chosen-hint]').textContent = d.hint;
+      formStatus.textContent = '';
+      showView('details', q('[data-details-heading]'));
+    });
+
+    q('[data-change]').addEventListener('click', () => {
+      showView('pick', timesEl.querySelector<HTMLButtonElement>('[aria-pressed="true"]') ?? continueBtn);
+    });
+
+    q('[data-retry]').addEventListener('click', () => load(true));
+
+    /* ----- Step 3: details and sending ----- */
+
+    function setError(input: HTMLElement, errId: string, message: string) {
+      const err = q(`#${errId}`);
+      err.textContent = message;
+      if (input instanceof HTMLInputElement) input.setAttribute('aria-invalid', String(Boolean(message)));
+    }
+
+    function validate() {
+      const name = q<HTMLInputElement>('#m-name');
+      const email = q<HTMLInputElement>('#m-email');
+      const topic = form.querySelector<HTMLInputElement>('input[name="topic"]:checked');
+      const emailValue = email.value.trim();
+      const problems: HTMLElement[] = [];
+
+      setError(name, 'm-name-err', name.value.trim() ? '' : 'Enter your name.');
+      if (!name.value.trim()) problems.push(name);
+
+      const emailMsg = !emailValue
+        ? 'Enter your email address.'
+        : EMAIL.test(emailValue)
+          ? ''
+          : 'Enter a full email address.';
+      setError(email, 'm-email-err', emailMsg);
+      if (emailMsg) problems.push(email);
+
+      const firstChip = form.querySelector<HTMLInputElement>('input[name="topic"]')!;
+      setError(firstChip, 'm-topic-err', topic ? '' : 'Choose a topic.');
+      if (!topic) problems.push(firstChip);
+
+      if (problems.length) problems[0].focus();
+      return !problems.length;
+    }
+
+    form.addEventListener('input', (e) => {
+      const t = e.target as HTMLInputElement;
+      if (t.name === 'name' || t.name === 'email') setError(t, `m-${t.name}-err`, '');
+    });
+    form.addEventListener('change', (e) => {
+      if ((e.target as HTMLInputElement).name === 'topic') q('#m-topic-err').textContent = '';
+    });
+
+    function formError(message: string, withWhatsApp = true) {
+      formStatus.classList.add('is-error');
+      formStatus.replaceChildren(message);
+      if (withWhatsApp) {
+        const a = el('a', '', 'message us on WhatsApp');
+        a.href = whatsapp;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        formStatus.append(' You can also ', a, '.');
+      }
+    }
+
+    async function taken(message: string) {
+      selectedSlot = '';
+      showView('pick');
+      notice.textContent = message;
+      notice.hidden = false;
+      await load(true);
+      notice.focus();
+      announce(message);
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (sending || !selectedSlot) return;
+      formStatus.textContent = '';
+      formStatus.classList.remove('is-error');
+      if (!validate()) return;
+
+      const data = new FormData(form);
+      const value = (k: string) => String(data.get(k) ?? '').trim();
+      const body: Record<string, string> = {
+        name: value('name'),
+        email: value('email'),
+        topic: value('topic'),
+        starts_at: selectedSlot,
+        website: String(data.get('website') ?? ''),
+      };
+      for (const k of ['phone', 'company', 'notes']) if (value(k)) body[k] = value(k);
+
+      sending = true;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+      try {
+        const res = await fetchWithTimeout(API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(body),
+        });
+        const reply = await res.json().catch(() => null);
+        if (res.ok && reply?.ok !== false) return finish(body, reply?.when);
+
+        const message = typeof reply?.error === 'string' && reply.error ? reply.error : '';
+        if (res.status === 409) return await taken(message || 'That time was just taken. Please choose another.');
+        if (res.status === 429) return formError(message || 'Too many requests. Please wait a few minutes and try again.');
+        if (res.status === 400) return formError(message || 'Please check your details and try again.', false);
+        formError(message || 'Your request did not send. Please try again.');
+      } catch {
+        formError('Your request did not send. Check your connection and try again.');
+      } finally {
+        sending = false;
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Request this time';
+      }
+    });
+
+    function finish(body: Record<string, string>, when?: string) {
+      const slot = body.starts_at;
+      q('[data-done-email]').textContent = body.email;
+      q('[data-done-when]').textContent =
+        typeof when === 'string' && when ? when : `${dateLabel(slot.slice(0, 10))} at ${slot.slice(11)}`;
+      const localLine = q('[data-done-local]');
+      localLine.textContent = describe(slot).local;
+      localLine.hidden = !showLocal;
+      showView('done', q('[data-done-heading]'));
+    }
+
+    load();
+  }
+</script>
+
+<style>
+  .meet { padding-block: clamp(32px, 5vw, 64px) var(--section); }
+  .card :global([hidden]) { display: none !important; }
+
+  .card {
+    display: grid;
+    grid-template-columns: minmax(300px, 4fr) minmax(0, 8fr);
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+  }
+
+  /* Left: what the call is */
+  .info {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: clamp(28px, 3.5vw, 48px);
+    background: var(--pine);
+    color: var(--on-pine);
+    border-radius: 11px 0 0 11px;
+  }
+  .info-body { position: relative; z-index: 1; }
+  .info :focus-visible { outline-color: var(--signal); }
+  .info h1 {
+    color: var(--white);
+    font-size: clamp(1.875rem, 1.2rem + 1.1vw, 2.25rem);
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+  }
+  .facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 10px;
+    margin-top: 20px;
+    color: var(--white);
+    font-weight: 600;
+  }
+  .facts .dot { color: var(--signal); }
+  .expect { margin-top: 16px; max-width: 36ch; }
+
+  .agenda { margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--on-pine-line); }
+  .agenda h2 { font-size: var(--step-0); font-weight: 600; letter-spacing: 0; color: var(--white); }
+  .agenda ul { list-style: none; display: grid; gap: 10px; margin-top: 14px; }
+  .agenda li { position: relative; padding-left: 24px; line-height: 1.45; }
+  .agenda li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.58em;
+    width: 12px;
+    height: 4px;
+    background: var(--signal);
+  }
+  .agenda p { margin-top: 18px; font-size: var(--step--1); color: var(--on-pine-muted); }
+
+  .info-foot { position: relative; z-index: 1; margin-top: auto; font-size: var(--step--1); color: var(--on-pine-muted); }
+  .info-foot a { color: var(--white); font-weight: 600; text-underline-offset: 4px; }
+  .nowrap { white-space: nowrap; }
+
+  .info :global(.info-mark) {
+    position: absolute;
+    /* Only the top of the ring shows in the corner; the bar stays below the edge */
+    right: -150px;
+    bottom: -200px;
+    width: 380px;
+    height: auto;
+    aspect-ratio: 1;
+    color: var(--white);
+    opacity: 0.07;
+    pointer-events: none;
+  }
+
+  /* Right: the steps */
+  .flow {
+    --fp: clamp(24px, 3.5vw, 44px);
+    container-type: inline-size;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: var(--fp);
+  }
+  /* The picker fills the card's height so the Continue bar sits at the bottom edge */
+  .view--pick { flex: 1; display: flex; flex-direction: column; }
+  .view--pick .picker,
+  .view--pick .state { margin-bottom: 36px; }
+  .noscript { color: var(--muted); }
+  .noscript a { color: var(--pine); font-weight: 600; }
+
+  .step-head { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; min-height: 30px; }
+  .step-head h2 { font-size: var(--step-1); letter-spacing: -0.01em; }
+  .step-head h2:focus { outline: none; }
+  .num {
+    flex: none;
+    display: inline-grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--mint);
+    color: var(--pine);
+    font-size: var(--step--1);
+    font-weight: 700;
+  }
+  .month { margin-left: auto; font-size: var(--step--1); color: var(--muted); text-align: right; }
+
+  .notice {
+    margin-bottom: 24px;
+    padding: 14px 16px;
+    border-radius: var(--radius);
+    background: #fbecea;
+    color: #8f2219;
+    font-weight: 600;
+  }
+  .notice:focus { outline: none; }
+
+  .picker { display: grid; gap: 36px; }
+  @container (min-width: 660px) {
+    .picker { grid-template-columns: minmax(316px, 352px) minmax(0, 1fr); gap: 40px; }
+  }
+
+  /* Day grid, Monday first */
+  .weekdays,
+  .days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
+  .weekdays span { padding-bottom: 6px; text-align: center; font-size: 0.8125rem; font-weight: 500; color: var(--muted); }
+  .days :global(.day) {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    height: 50px;
+    padding: 0;
+    background: var(--mint);
+    border: 1.5px solid var(--mint);
+    border-radius: var(--radius);
+    color: var(--pine);
+    font: 600 var(--step-0) / 1 var(--font);
+
+    cursor: pointer;
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .days :global(.day:hover) { border-color: var(--pine); }
+  .days :global(.day[aria-pressed='true']) { background: var(--pine); border-color: var(--pine); color: var(--white); }
+  .days :global(.day:disabled) {
+    background: transparent;
+    border-color: transparent;
+    color: #a6b1ac;
+    font-weight: 400;
+    cursor: default;
+  }
+  .days :global(.day-m) {
+    margin-bottom: 3px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+  .days :global(.is-today::after) {
+    content: '';
+    position: absolute;
+    bottom: 6px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  /* Times */
+  .day-title { font-weight: 600; color: var(--ink); min-height: 1.6em; }
+  .tz { margin: 2px 0 16px; font-size: var(--step--1); color: var(--muted); }
+  .times { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; }
+  .times :global(.time) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    min-height: 50px;
+    padding: 8px 6px;
+    background: var(--white);
+    border: 1.5px solid var(--line);
+    border-radius: var(--radius);
+    color: var(--pine);
+    font: 600 var(--step-0) / 1.15 var(--font);
+
+    cursor: pointer;
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .times :global(.time:hover) { border-color: var(--pine); }
+  .times :global(.time[aria-pressed='true']) { background: var(--pine); border-color: var(--pine); color: var(--white); }
+  .times :global(.time-day) { margin-left: 4px; font-size: 0.75rem; font-weight: 500; }
+  .times :global(.hint) { font-size: 0.8125rem; font-weight: 400; color: var(--muted); }
+  .times :global(.time[aria-pressed='true'] .hint) { color: var(--on-pine-muted); }
+
+  /* Loading placeholders */
+  .card :global(.sk) {
+    display: block;
+    border-radius: var(--radius);
+    background: linear-gradient(90deg, #edf1ee 30%, #f6f8f6 50%, #edf1ee 70%);
+    background-size: 300% 100%;
+    animation: shimmer 1.4s ease-in-out infinite;
+  }
+  .card :global(.sk-day),
+  .card :global(.sk-time) { height: 50px; }
+  .card :global(.sk-line) { width: 180px; max-width: 100%; height: 1.1em; margin-top: 0.25em; }
+  @keyframes shimmer {
+    from { background-position: 100% 0; }
+    to { background-position: 0 0; }
+  }
+
+  /* Error and empty states */
+  .state { display: grid; justify-items: start; gap: 14px; max-width: 48ch; padding-block: 8px 4px; }
+  .state h2 { font-size: var(--step-1); letter-spacing: -0.01em; }
+  .state p { color: var(--muted); }
+  .state .actions { margin-top: 8px; }
+  .state-alt a { color: var(--pine); font-weight: 600; text-underline-offset: 4px; }
+  .state-icon {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--mint);
+    color: var(--pine);
+  }
+  .state-icon--warn { background: #fbecea; color: #a3261b; }
+
+  /* Continue bar: stays in reach at the bottom of the screen while scrolling the picker */
+  .bar {
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 20px;
+    margin: auto calc(-1 * var(--fp)) calc(-1 * var(--fp));
+    padding: 16px var(--fp);
+    padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    background: var(--white);
+    border-top: 1px solid var(--line);
+    border-radius: 0 0 11px 0;
+  }
+  .bar-text { color: var(--muted); }
+  .bar.is-ready .bar-text { color: var(--pine); font-weight: 600; }
+  .bar .btn { flex: none; min-width: 148px; }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* Step 3 form, matching the contact form */
+  .view--details { display: grid; align-content: start; gap: 24px; }
+  .view--details .step-head { margin-bottom: -4px; }
+  .chosen {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 12px 12px 16px;
+    background: var(--mint);
+    border-radius: var(--radius);
+  }
+  .chosen-icon { flex: none; color: var(--pine); }
+  .chosen-text { min-width: 0; }
+  .chosen-main { font-weight: 600; color: var(--pine); line-height: 1.4; }
+  .chosen-sub { color: var(--ink); line-height: 1.4; }
+  .chosen-hint { margin-top: 2px; font-size: var(--step--1); color: var(--muted); }
+  .chosen-hint:empty { display: none; }
+  .link-btn {
+    flex: none;
+    margin-left: auto;
+    min-height: 44px;
+    padding: 0 10px;
+    background: none;
+    border: 0;
+    border-radius: var(--radius);
+    color: var(--pine);
+    font: 600 var(--step-0) / 1 var(--font);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1.5px;
+    cursor: pointer;
+  }
+  .link-btn:hover { color: var(--pine-hover); }
+
+  fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+  legend,
+  .field label { display: block; margin-bottom: 10px; padding: 0; font-weight: 600; color: var(--pine); }
+  .optional { font-weight: 400; color: var(--muted); }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @container (max-width: 520px) {
+    .row { grid-template-columns: 1fr; gap: 24px; }
+  }
+
+  input:not([type='radio']),
+  textarea {
+    width: 100%;
+    padding: 12px 14px;
+    font: inherit;
+    color: var(--ink);
+    background: var(--white);
+    border: 1.5px solid var(--line);
+    border-radius: var(--radius);
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  input:not([type='radio']):focus,
+  textarea:focus { border-color: var(--pine); outline: none; box-shadow: 0 0 0 3px var(--mint); }
+  input[aria-invalid='true'] { border-color: #a3261b; }
+  textarea { resize: vertical; min-height: 120px; }
+  .err { margin-top: 6px; font-size: var(--step--1); color: #a3261b; }
+  .err:empty { display: none; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chip { position: relative; }
+  .chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .chip span {
+    display: block;
+    padding: 10px 16px;
+    border: 1.5px solid var(--line);
+    border-radius: 999px;
+    background: var(--white);
+    line-height: 1.4;
+    transition: border-color 0.15s, background-color 0.15s, color 0.15s;
+  }
+  .chip:hover span { border-color: var(--pine); }
+  .chip input:checked + span { background: var(--pine); border-color: var(--pine); color: var(--white); }
+  .chip input:focus-visible + span { outline: 3px solid var(--pine); outline-offset: 3px; }
+
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  .submit { display: flex; align-items: center; gap: 14px 20px; flex-wrap: wrap; margin-top: 4px; }
+  .status { color: var(--pine); font-weight: 600; }
+  .status:empty { display: none; }
+  .status:global(.is-error) { color: #a3261b; font-weight: 500; }
+  .status :global(a) { color: inherit; font-weight: 600; text-underline-offset: 3px; }
+  .small { margin-top: -8px; font-size: var(--step--1); color: var(--muted); }
+  .small a { color: var(--pine); text-underline-offset: 3px; }
+
+  /* Done */
+  .view--done { max-width: 56ch; padding-block: 8px; }
+  .done-icon {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--mint);
+    color: var(--pine);
+  }
+  .view--done h2 { margin-top: 22px; font-size: var(--step-2); }
+  .view--done h2:focus { outline: none; }
+  .done-lead { margin-top: 14px; font-size: var(--step-1); line-height: 1.5; color: var(--ink); }
+  .done-lead strong { color: var(--pine); overflow-wrap: anywhere; }
+  .done-local { margin-top: 8px; color: var(--muted); }
+  .view--done h3 { margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--line); font-size: var(--step-0); font-weight: 600; letter-spacing: 0; }
+  .next { list-style: none; counter-reset: step; display: grid; gap: 14px; margin-top: 16px; }
+  .next li { position: relative; padding-left: 40px; counter-increment: step; color: var(--muted); }
+  .next li strong { color: var(--ink); font-weight: 600; }
+  .next li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--mint);
+    color: var(--pine);
+    font-size: var(--step--1);
+    font-weight: 700;
+  }
+  .done-foot { margin-top: 24px; color: var(--muted); }
+  .done-foot a { color: var(--pine); font-weight: 600; text-underline-offset: 4px; }
+  .view--done .btn { margin-top: 28px; }
+
+  /* Tablet and phone: one column, the call details on top */
+  @media (max-width: 960px) {
+    .card { grid-template-columns: 1fr; }
+    .info { gap: 20px; border-radius: 11px 11px 0 0; }
+    .info h1 { max-width: 18ch; }
+    .agenda { display: none; }
+    .info :global(.info-mark) { width: 300px; right: -120px; bottom: -158px; }
+    .bar { border-radius: 0 0 11px 11px; }
+  }
+
+  /* Phone: edge to edge, primary buttons full width */
+  @media (max-width: 640px) {
+    .meet { padding-block: 0 56px; }
+    .meet .wrap { width: 100%; }
+    .card { border: 0; border-bottom: 1px solid var(--line); border-radius: 0; }
+    .info { border-radius: 0; padding: 28px 16px; }
+    .info h1 { font-size: 1.875rem; }
+    .flow { --fp: 16px; padding-top: 28px; }
+    .bar { border-radius: 0; box-shadow: 0 -10px 24px -12px rgba(11, 61, 46, 0.18); }
+    .bar-text { font-size: var(--step--1); }
+    .bar .btn { min-width: 128px; }
+    .days { gap: 4px; }
+    .weekdays { gap: 4px; }
+    .submit .btn { width: 100%; }
+    .chosen { padding-left: 14px; gap: 12px; }
+  }
+</style>

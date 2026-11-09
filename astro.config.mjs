@@ -3,5 +3,6 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://quantumbytech.com',
-  integrations: [sitemap()],
+  // The meeting booking page is shared by link only, so it stays out of the sitemap
+  integrations: [sitemap({ filter: (page) => !page.includes('/contact/meet') })],
 });
