@@ -1,4 +1,6 @@
 export interface Project {
+  /** Page URL of the case study, /work/<slug>/, and the key in work.ts */
+  slug: string;
   client: string;
   /** What we built, in one sentence */
   summary: string;
@@ -13,6 +15,7 @@ export interface Project {
 /* Shown in "Recent work" on the home page, in this order. The section hides itself if the list is empty. */
 export const projects: Project[] = [
   {
+    slug: 'galacards',
     client: 'GalaCards',
     summary: 'Cinematic digital invitations for weddings, birthdays and dinners, with RSVP tracking, WhatsApp sharing and a dashboard for hosts.',
     service: 'Web platform',
@@ -21,6 +24,7 @@ export const projects: Project[] = [
     url: 'https://www.galacards.net/',
   },
   {
+    slug: 'bechara-issa',
     client: 'Bechara Issa',
     summary: 'A website for a fine jewelry house in Jdeideh, Lebanon, presenting its masterpieces, diamond and gold collections.',
     service: 'Website',
@@ -29,6 +33,7 @@ export const projects: Project[] = [
     url: 'https://www.becharaissa.com/',
   },
   {
+    slug: 'kelly-rissi',
     client: 'Kelly Rissi',
     summary: 'An online store for a women’s shoe designer, with collections, a wishlist and checkout.',
     service: 'Online store',
@@ -37,6 +42,7 @@ export const projects: Project[] = [
     url: 'https://kellyrissi.com/',
   },
   {
+    slug: 'khatwa',
     client: 'Khatwa',
     summary: 'An app that turns daily steps into coins you can spend on real rewards at cafés, stores and gyms across Lebanon.',
     service: 'Mobile app and website',
@@ -45,6 +51,7 @@ export const projects: Project[] = [
     url: 'https://khatwalb.com/',
   },
   {
+    slug: 'radyofone',
     client: 'Radyofone',
     summary: 'Free live radio and music streaming with more than 65 stations, on iPhone, Android, CarPlay and Android Auto.',
     service: 'Mobile app',
@@ -53,9 +60,10 @@ export const projects: Project[] = [
     url: 'https://www.radyofone.com/',
   },
   {
+    slug: 'dlimits',
     client: 'dlimits',
-    summary: 'A website for a web design and digital marketing agency in Lebanon.',
-    service: 'Website',
+    summary: 'Ongoing care and support for a web design agency in Lebanon and the websites, apps and software of its 100+ clients.',
+    service: 'Care and support',
     image: '/work/dlimits.webp',
     imageAlt: 'dlimits home page with a web design themed banner',
     url: 'https://www.dlimits.com/',

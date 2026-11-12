@@ -1,0 +1,270 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Base from '../../layouts/Base.astro';
+import WorkGrid from '../../components/WorkGrid.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { work, type WorkItem } from '../../data/work';
+import { services } from '../../data/services';
+import { site } from '../../data/site';
+
+export const getStaticPaths = (() => work.map((item) => ({ params: { slug: item.slug }, props: { item } }))) satisfies GetStaticPaths;
+
+const { item } = Astro.props as { item: WorkItem };
+const { project } = item;
+const pageUrl = new URL(`/work/${item.slug}/`, Astro.site).href;
+
+const involved = item.services
+  .map((slug) => services.find((s) => s.slug === slug))
+  .filter((s): s is (typeof services)[number] => Boolean(s));
+const primary = item.services[0];
+const contactHref = `/contact/?service=${primary}`;
+const hostname = project.url ? new URL(project.url).hostname.replace(/^www\./, '') : undefined;
+
+// Ongoing care ('care') is for work we did not build: the page gets no "created by us" node
+const workLabel = item.kind === 'care' ? 'What we do' : 'What we built';
+const workType = { website: 'WebSite', platform: 'WebApplication', app: 'MobileApplication', care: null }[item.kind];
+const workNode: Record<string, unknown> | null = workType
+  ? {
+      '@type': workType,
+      '@id': `${pageUrl}#work`,
+      name: project.client,
+      url: project.url ?? pageUrl,
+      description: project.summary,
+      creator: { '@id': `${site.url}/#organization` },
+    }
+  : null;
+if (workNode && item.kind === 'app') workNode.operatingSystem = ['iOS', 'Android'];
+
+const schema = [
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Work', item: `${site.url}/work/` },
+      { '@type': 'ListItem', position: 3, name: project.client, item: pageUrl },
+    ],
+  },
+  ...(workNode ? [workNode] : []),
+];
+---
+
+<Base title={item.seoTitle} description={item.seoDescription} schema={schema}>
+  <section class="page-hero">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <a href="/work/">Work</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{project.client}</span>
+      </nav>
+      <h1>{item.h1}</h1>
+      <p class="lead">{item.lead}</p>
+    </div>
+  </section>
+
+  <section class="section section--white">
+    <div class="wrap">
+      <dl class="facts">
+        <div>
+          <dt>Client</dt>
+          <dd>{project.client}</dd>
+        </div>
+        <div>
+          <dt>Industry</dt>
+          <dd>{item.industry}</dd>
+        </div>
+        <div>
+          <dt>{workLabel}</dt>
+          <dd>{item.built}</dd>
+        </div>
+        <div>
+          <dt>Services</dt>
+          <dd>
+            {involved.map((s, i) => (
+              <>
+                {i > 0 && ', '}
+                <a href={`/services/${s.slug}/`}>{s.name}</a>
+              </>
+            ))}
+          </dd>
+        </div>
+        {project.url && hostname && (
+          <div>
+            <dt>Website</dt>
+            <dd>
+              <a href={project.url} target="_blank" rel="noopener">{hostname}</a>
+            </dd>
+          </div>
+        )}
+      </dl>
+      <figure class="shot">
+        <img src={project.image} alt={project.imageAlt} width="1440" height="900" loading="lazy" decoding="async" />
+      </figure>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap split">
+      <div class="section-head">
+        <h2>About {project.client}</h2>
+      </div>
+      <div class="copy">
+        {item.about.map((p) => <p>{p}</p>)}
+        <p class="sources">
+          Sources:
+          {item.sources.map((url, i) => (
+            <>
+              {i > 0 && ', '}
+              <a href={url} target="_blank" rel="noopener">{url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}</a>
+            </>
+          ))}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--white">
+    <div class="wrap split">
+      <div class="section-head">
+        <h2>{workLabel}</h2>
+      </div>
+      <ul class="features">
+        {item.features.map((f) => <li>{f}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap split">
+      <div class="section-head">
+        <h2>{item.howItWorks.title}</h2>
+      </div>
+      <div class="copy">
+        {item.howItWorks.paragraphs.map((p) => <p>{p}</p>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--white">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Services involved</h2>
+      </div>
+      <ul class="services">
+        {involved.map((s) => (
+          <li>
+            <a href={`/services/${s.slug}/`}>
+              <h3>{s.name}</h3>
+              <p>{s.summary}</p>
+              <span class="more">View service</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>More work</h2>
+        <p>Other projects we have designed, built and look after.</p>
+      </div>
+      <WorkGrid exclude={item.slug} />
+    </div>
+  </section>
+
+  <CtaBand title={`Want something like this for ${project.client === 'dlimits' ? 'your agency' : 'your business'}?`} href={contactHref} />
+</Base>
+
+<style>
+  .page-hero { padding-block: clamp(48px, 7vw, 96px) clamp(64px, 9vw, 120px); }
+  .crumbs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; color: var(--muted); font-size: var(--step--1); }
+  .crumbs a { color: var(--pine); font-weight: 600; text-underline-offset: 4px; }
+  h1 { max-width: 18ch; }
+  .lead { margin-top: 24px; max-width: 60ch; }
+
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 24px 32px;
+    padding-bottom: 32px;
+    margin-bottom: clamp(32px, 5vw, 56px);
+    border-bottom: 1px solid var(--line);
+  }
+  .facts div { display: grid; gap: 6px; align-content: start; }
+  .facts dt { font-size: var(--step--1); color: var(--muted); }
+  .facts dd { margin: 0; color: var(--pine); font-weight: 600; }
+  .facts a { color: var(--pine); text-underline-offset: 4px; }
+  @media (max-width: 880px) { .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 420px) { .facts { grid-template-columns: 1fr; } }
+
+  .shot { margin: 0; }
+  .shot img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    background: var(--mint);
+    outline: 1px solid var(--line);
+    outline-offset: -1px;
+  }
+
+  .split { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 32px 80px; align-items: start; }
+  .split .section-head { margin-bottom: 0; }
+  @media (max-width: 880px) { .split { grid-template-columns: 1fr; } }
+
+  .copy { display: grid; gap: 20px; font-size: var(--step-1); line-height: 1.6; max-width: 60ch; }
+  .sources { font-size: var(--step--1); color: var(--muted); line-height: 1.6; }
+  .sources a { color: var(--pine); text-underline-offset: 4px; overflow-wrap: anywhere; }
+
+  .features { list-style: none; border-top: 1px solid var(--line); }
+  .features li {
+    display: flex;
+    gap: 16px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: var(--step-1);
+    color: var(--pine);
+  }
+  .features li::before {
+    content: '';
+    flex: none;
+    width: 10px;
+    height: 10px;
+    margin-top: 0.55em;
+    background: var(--signal);
+  }
+
+  .services { list-style: none; border-top: 1px solid var(--line); }
+  .services li { border-bottom: 1px solid var(--line); }
+  .services a {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 6fr) 9rem;
+    gap: 24px;
+    align-items: baseline;
+    padding: 30px 16px;
+    margin-inline: -16px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: background-color 0.15s;
+  }
+  .services p { color: var(--muted); max-width: 56ch; }
+  .more {
+    justify-self: end;
+    font-weight: 600;
+    color: var(--pine);
+    text-decoration: underline;
+    text-decoration-color: var(--line);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
+    transition: text-decoration-color 0.15s;
+  }
+  .services a:hover { background: var(--paper); }
+  .services a:hover .more { text-decoration-color: var(--pine); }
+  @media (max-width: 880px) {
+    .services a { grid-template-columns: 1fr; gap: 8px; padding: 24px 0; margin-inline: 0; }
+    .services a:hover { background: none; }
+    .more { justify-self: start; margin-top: 4px; }
+  }
+</style>

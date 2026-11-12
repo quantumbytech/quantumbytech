@@ -6,6 +6,7 @@ import Process from '../../components/Process.astro';
 import Faq from '../../components/Faq.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { services, type Service } from '../../data/services';
+import { workForService } from '../../data/work';
 import { site } from '../../data/site';
 
 export const getStaticPaths = (() =>
@@ -13,6 +14,10 @@ export const getStaticPaths = (() =>
 
 const { service } = Astro.props as { service: Service };
 const pageUrl = new URL(`/services/${service.slug}/`, Astro.site).href;
+const related = service.related
+  .map((slug) => services.find((s) => s.slug === slug))
+  .filter((s): s is Service => Boolean(s));
+const relatedWork = workForService(service.slug);
 
 const schema = [
   {
@@ -116,7 +121,48 @@ const schema = [
     </div>
   </section>
 
-  <CtaBand title={`Start your ${service.name.toLowerCase()} project`} />
+  {relatedWork.length > 0 && (
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Related work</h2>
+          <p>Projects that included {service.name.toLowerCase()}.</p>
+        </div>
+        <ul class="related-work">
+          {relatedWork.map(({ slug, h1, project }) => (
+            <li>
+              <a href={`/work/${slug}/`}>
+                <img src={project.image} alt={project.imageAlt} loading="lazy" decoding="async" width="1440" height="900" />
+                <h3>{project.client}</h3>
+                <p>{h1}</p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  {related.length > 0 && (
+    <section class="section section--white">
+      <div class="wrap split">
+        <div class="section-head">
+          <h2>Often combined with</h2>
+          <p>Services clients usually add to {service.name.toLowerCase()}.</p>
+        </div>
+        <ul class="related">
+          {related.map((s) => (
+            <li>
+              <a href={`/services/${s.slug}/`}>{s.name}</a>
+              <p>{s.summary}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <CtaBand title={`Start your ${service.name.toLowerCase()} project`} href={`/contact/?service=${service.slug}`} />
 </Base>
 
 <style>
@@ -160,4 +206,32 @@ const schema = [
     margin-top: 0.55em;
     background: var(--signal);
   }
+
+  .related-work {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 40px clamp(24px, 3vw, 40px);
+  }
+  .related-work a { display: grid; gap: 12px; text-decoration: none; }
+  .related-work img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: 8px;
+    background: var(--mint);
+    outline: 1px solid var(--line);
+    outline-offset: -1px;
+  }
+  .related-work h3 { margin-top: 4px; }
+  .related-work p { color: var(--muted); }
+  .related-work a:hover h3 { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 2px; }
+  @media (max-width: 880px) { .related-work { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .related-work { grid-template-columns: 1fr; } }
+
+  .related { list-style: none; border-top: 1px solid var(--line); }
+  .related li { display: grid; gap: 6px; padding: 20px 0; border-bottom: 1px solid var(--line); }
+  .related li a { color: var(--pine); font-weight: 600; font-size: var(--step-1); text-underline-offset: 5px; text-decoration-thickness: 2px; }
+  .related li p { color: var(--muted); }
 </style>

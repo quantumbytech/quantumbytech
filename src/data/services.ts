@@ -10,11 +10,14 @@ export interface Service {
   includes: { title: string; text: string }[];
   fitFor: string[];
   faqs: { q: string; a: string }[];
+  /** Slugs of services often bought together with this one, shown at the end of the page */
+  related: string[];
 }
 
 export const services: Service[] = [
   {
     slug: 'websites',
+    related: ['online-stores', 'support', 'social-media'],
     seoTitle: 'Business Website Design in Lebanon',
     seoDescription: 'Custom business websites designed and built in Beirut: fast, mobile-first and easy to update, with SEO foundations and enquiry forms. Get a fixed-price quote.',
     name: 'Business websites',
@@ -47,6 +50,7 @@ export const services: Service[] = [
   },
   {
     slug: 'online-stores',
+    related: ['support', 'social-media', 'mobile-apps'],
     seoTitle: 'Online Store Development in Lebanon',
     seoDescription: 'Online stores built in Beirut with cash on delivery, card payments, delivery zones and an admin panel you can run from your phone. Get a fixed-price quote.',
     name: 'Online stores',
@@ -79,6 +83,7 @@ export const services: Service[] = [
   },
   {
     slug: 'mobile-apps',
+    related: ['custom-software', 'support'],
     seoTitle: 'Mobile App Development in Lebanon',
     seoDescription: 'iOS and Android apps designed and built in Beirut from one codebase, with an admin panel, notifications and App Store release. Get a fixed-price quote.',
     name: 'Mobile apps',
@@ -111,6 +116,7 @@ export const services: Service[] = [
   },
   {
     slug: 'social-media',
+    related: ['websites', 'online-stores'],
     seoTitle: 'Social Media Management in Lebanon',
     seoDescription: 'Monthly social media management from Beirut: content plans, post and reel design, scheduling, paid campaigns and a report on what is working.',
     name: 'Social media',
@@ -143,6 +149,7 @@ export const services: Service[] = [
   },
   {
     slug: 'custom-software',
+    related: ['mobile-apps', 'support'],
     seoTitle: 'Custom Software Development in Lebanon',
     seoDescription: 'Custom software from Beirut: dashboards, databases and integrations that replace spreadsheets and manual work, with hosting and daily backups.',
     name: 'Custom software and databases',
@@ -175,6 +182,7 @@ export const services: Service[] = [
   },
   {
     slug: 'support',
+    related: ['websites', 'online-stores'],
     seoTitle: 'Website Maintenance & Support in Lebanon',
     seoDescription: 'Monthly care plans for websites and apps: hosting, SSL, security updates, daily backups, uptime monitoring and direct help on WhatsApp.',
     name: 'Care and support',
