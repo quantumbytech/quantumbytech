@@ -19,7 +19,7 @@ Requires Node 22.23 or newer.
 |---|---|
 | Contact details, social links, form endpoint, process steps, home FAQs | `src/data/site.ts` |
 | Services and each service page | `src/data/services.ts` |
-| Projects in "Recent work" (hidden while empty) | `src/data/projects.ts` |
+| Projects in "Recent work" and the case studies under `/work/` | `src/data/projects.ts`, `src/data/work.ts` |
 | Partners page | `src/data/partners.ts` (logos in `public/partners/`) |
 | Colours, type scale, buttons | `src/styles/global.css` |
 | Page layouts | `src/pages/` |
@@ -37,4 +37,4 @@ Requires Node 22.23 or newer.
 
 Typeface: Schibsted Grotesk (self-hosted via Fontsource).
 
-The previous site is kept in `legacy-site/` for reference and is not deployed. Old URLs such as `/ecommerce.html` redirect to their new pages (see the HTML files in `public/`).
+The previous site stays in the git history and is not deployed. Old URLs such as `/ecommerce.html` redirect to their new pages (see the HTML files in `public/`).
