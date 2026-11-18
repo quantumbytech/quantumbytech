@@ -44,10 +44,10 @@ export const projects: Project[] = [
   {
     slug: 'khatwa',
     client: 'Khatwa',
-    summary: 'An app that turns daily steps into coins you can spend on real rewards at cafés, stores and gyms across Lebanon.',
+    summary: 'A step rewards service: walk, earn coins and spend them on food, fitness, retail and travel rewards in Lebanon. Website live, app coming soon.',
     service: 'Mobile app and website',
     image: '/work/khatwa.webp',
-    imageAlt: 'Khatwa website with the headline "Every step counts for something" and a green sneaker',
+    imageAlt: 'Khatwa website with the headline "Walk. Earn. Redeem." and three app screens',
     url: 'https://khatwalb.com/',
   },
   {

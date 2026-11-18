@@ -24,7 +24,7 @@ const schema = [
     '@type': 'Service',
     '@id': `${pageUrl}#service`,
     name: service.name,
-    serviceType: service.seoTitle.replace(/ in Lebanon$/, ''),
+    serviceType: service.name,
     description: service.seoDescription,
     url: pageUrl,
     provider: { '@id': `${site.url}/#organization` },

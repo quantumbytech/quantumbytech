@@ -18,8 +18,8 @@ export const services: Service[] = [
   {
     slug: 'websites',
     related: ['online-stores', 'support', 'social-media'],
-    seoTitle: 'Business Website Design in Lebanon',
-    seoDescription: 'Custom business websites designed and built in Beirut: fast, mobile-first and easy to update, with SEO foundations and enquiry forms. Get a fixed-price quote.',
+    seoTitle: 'Website Design in Lebanon, Fixed Price',
+    seoDescription: 'Get a fast, mobile-first website that brings enquiries, not just visitors. Designed and built in Beirut, fixed price before we start, live in 3 to 6 weeks.',
     name: 'Business websites',
     summary: 'Clear, fast sites that explain what you do and turn visitors into enquiries. Easy for your team to update.',
     title: 'Business websites that explain what you do and bring in enquiries.',
@@ -51,8 +51,8 @@ export const services: Service[] = [
   {
     slug: 'online-stores',
     related: ['support', 'social-media', 'mobile-apps'],
-    seoTitle: 'Online Store Development in Lebanon',
-    seoDescription: 'Online stores built in Beirut with cash on delivery, card payments, delivery zones and an admin panel you can run from your phone. Get a fixed-price quote.',
+    seoTitle: 'Lebanon Online Stores with Cash on Delivery',
+    seoDescription: 'Sell online in Lebanon: cash on delivery, card payments, delivery zones and orders you manage from your phone. A fixed-price quote before we start.',
     name: 'Online stores',
     summary: 'Shops with local and card payments, delivery options and stock you can manage from your phone.',
     title: 'Online stores that are easy to buy from and easy to run.',
@@ -150,8 +150,8 @@ export const services: Service[] = [
   {
     slug: 'custom-software',
     related: ['mobile-apps', 'support'],
-    seoTitle: 'Custom Software Development in Lebanon',
-    seoDescription: 'Custom software from Beirut: dashboards, databases and integrations that replace spreadsheets and manual work, with hosting and daily backups.',
+    seoTitle: 'Custom Software & CRM in Lebanon',
+    seoDescription: 'Replace spreadsheets and scattered WhatsApp chats with a system built around how your team works: CRM, dashboards and automations. You own the code.',
     name: 'Custom software and databases',
     summary: 'Internal tools, dashboards and databases that replace spreadsheets and manual work.',
     title: 'Custom software that replaces spreadsheets and manual work.',

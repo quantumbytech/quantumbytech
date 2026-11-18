@@ -72,9 +72,9 @@ export const caseStudies: CaseStudy[] = [
     built: 'Brand website with collections, product pages and WhatsApp contact',
     services: ['websites'],
     kind: 'website',
-    seoTitle: 'Bechara Issa: Fine Jewelry Website',
+    seoTitle: 'Jewelry Website Case Study: Bechara Issa',
     seoDescription:
-      'How Quantum ByTech built the website for Bechara Issa, a Lebanese fine jewelry house founded in 1980, with its collections, product pages and WhatsApp contact.',
+      'See the website we built for Bechara Issa, a Lebanese fine jewelry house since 1980: collections, product pages and WhatsApp enquiries. Want one like it?',
     h1: 'A website for Bechara Issa, a fine jewelry house in Jdeideh',
     lead:
       'Bechara Issa has made fine jewelry by hand since 1980. We designed and built a website that presents its masterpieces, diamond and gold collections and makes it simple for clients in Lebanon and abroad to get in touch.',
@@ -136,32 +136,32 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'khatwa',
     industry: 'Health and rewards',
-    built: 'Mobile app for iOS and Android, a website and the coin redemption flow for partners',
+    built: 'The Khatwa website (live) and the iPhone and Android app (coming soon), with rewards redeemed by QR voucher',
     services: ['mobile-apps', 'websites', 'custom-software'],
     kind: 'app',
     seoTitle: 'Khatwa: Step Rewards App for Lebanon',
     seoDescription:
-      'How Quantum ByTech built Khatwa, a Lebanese app that turns daily steps into coins to spend at cafés, gyms and shops, together with its website.',
+      'The website and app we built for Khatwa, a Lebanese step rewards service: walk, earn coins, redeem them at partners. Website live, apps coming soon.',
     h1: 'A step rewards app and website for Khatwa',
     lead:
-      'Khatwa turns the walking you already do into coins, and coins into rewards at cafés, gyms and shops across Lebanon. We designed and built the mobile app and the website.',
+      'Khatwa turns the walking you already do into coins, and coins into rewards at partner places across Lebanon. We designed and built the website, now live at khatwalb.com, and the iPhone and Android app, which is coming soon.',
     about: [
-      'Khatwa is a Lebanese app operated by KHATWA SARL, registered in Keserouan. You walk, the app reads your step count from Apple Health or Health Connect, and every 1,000 steps becomes 100 coins. Reaching a daily goal or keeping a streak alive earns more on top.',
-      'Coins are spent at partner cafés, gyms and shops by showing a code at the counter. Khatwa is launching soon in Lebanon; the app is still being finished and will be released on the App Store and Google Play.',
+      'Khatwa is a Lebanese rewards service operated by KHATWA SARL, registered in Keserouan. You connect Apple Health or Health Connect once, and the steps you walk become Khatwa coins: walk, earn, redeem. A daily goal, streaks, levels and badges keep people going.',
+      'Coins are spent on food, fitness, retail and travel rewards at partner places, with a QR voucher at checkout. The website is live; the app is coming soon to iPhone and Android.',
     ],
     features: [
       'A mobile app that reads daily steps from Apple Health on iPhone and Health Connect on Android, with nothing to start or remember',
       'A coin wallet with a record of every coin earned or spent, daily goals and streaks',
       'A partner map that sorts nearby cafés, gyms and shops by distance, using location only on the device',
-      'Redemption at the counter with a code, with a history the user and the partner can both refer to',
+      'Redemption at checkout with a QR voucher, with a history the user and the partner can both refer to',
       'Sign-in with email, Google or Apple, invite codes that reward both friends, and push notifications the user can switch off',
-      'A website that explains the three steps (walk, earn, redeem), an invite page in English and Arabic that opens the right store for the visitor’s phone, and a plain-language privacy policy',
+      'A live website that explains the three steps (walk, earn, redeem), shows the rewards and partners, lets businesses list themselves, and offers support, terms, a plain-language privacy policy and account deletion',
     ],
     howItWorks: {
       title: 'How it works for users and partners',
       paragraphs: [
-        'For users: install the app, allow it to read your steps and walk. Coins appear as the day goes on. When you want to spend them, open the map, pick a place and show the code at the counter.',
-        'For partners: a café, gym or shop joins Khatwa as a redemption partner, appears on the map and accepts coins at the counter. The website invites businesses to apply by email.',
+        'For users (once the app is out): install it, allow it to read your steps and walk. Coins appear as the day goes on. To spend them, open the map, pick a place and show the QR voucher at checkout.',
+        'For partners: a café, gym, shop or travel business lists itself on the website, appears on the map and accepts coins at checkout, reaching people who walk nearby.',
         'Privacy was a design constraint, not a page. Location is never stored on the servers, and the policy says who stores what and for how long.',
       ],
     },
