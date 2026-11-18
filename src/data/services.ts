@@ -10,6 +10,8 @@ export interface Service {
   includes: { title: string; text: string }[];
   fitFor: string[];
   faqs: { q: string; a: string }[];
+  /** Starting price in USD (a month for ongoing services) and the usual range, in words */
+  price: { from: number; monthly?: boolean; typical: string };
   /** Slugs of services often bought together with this one, shown at the end of the page */
   related: string[];
 }
@@ -17,6 +19,7 @@ export interface Service {
 export const services: Service[] = [
   {
     slug: 'websites',
+    price: { from: 1000, typical: 'Most business websites land between $1,000 and $4,000, depending on the pages, languages and features.' },
     related: ['online-stores', 'support', 'social-media'],
     seoTitle: 'Website Design in Lebanon, Fixed Price',
     seoDescription: 'Get a fast, mobile-first website that brings enquiries, not just visitors. Designed and built in Beirut, fixed price before we start, live in 3 to 6 weeks.',
@@ -39,6 +42,10 @@ export const services: Service[] = [
     ],
     faqs: [
       {
+        q: 'How much does a business website cost?',
+        a: 'From $1,000. Most business websites land between $1,000 and $4,000, depending on the pages, languages and features. You get a fixed price in writing after a short call, before any work starts.',
+      },
+      {
         q: 'Can I update the site myself?',
         a: 'Yes. We set up an editor for the pages you change most often and show your team how to use it.',
       },
@@ -50,6 +57,7 @@ export const services: Service[] = [
   },
   {
     slug: 'online-stores',
+    price: { from: 2000, typical: 'Most online stores land between $2,000 and $6,000, depending on the products, payments and delivery options.' },
     related: ['support', 'social-media', 'mobile-apps'],
     seoTitle: 'Lebanon Online Stores with Cash on Delivery',
     seoDescription: 'Sell online in Lebanon: cash on delivery, card payments, delivery zones and orders you manage from your phone. A fixed-price quote before we start.',
@@ -72,6 +80,10 @@ export const services: Service[] = [
     ],
     faqs: [
       {
+        q: 'How much does an online store cost?',
+        a: 'From $2,000. Most online stores land between $2,000 and $6,000, depending on the products, payments and delivery options. You get a fixed price in writing after a short call, before any work starts.',
+      },
+      {
         q: 'Which payment methods can I accept?',
         a: 'Usually cash on delivery, card payments and wallets. Availability depends on your country and bank, so we recommend options in your proposal.',
       },
@@ -83,6 +95,7 @@ export const services: Service[] = [
   },
   {
     slug: 'mobile-apps',
+    price: { from: 6000, typical: 'Most apps land between $6,000 and $25,000, depending on the features and the admin panel behind them.' },
     related: ['custom-software', 'support'],
     seoTitle: 'Mobile App Development in Lebanon',
     seoDescription: 'iOS and Android apps designed and built in Beirut from one codebase, with an admin panel, notifications and App Store release. Get a fixed-price quote.',
@@ -105,6 +118,10 @@ export const services: Service[] = [
     ],
     faqs: [
       {
+        q: 'How much does a mobile app cost?',
+        a: 'From $6,000. Most apps land between $6,000 and $25,000, depending on the features and the admin panel behind them. You get a fixed price in writing after a short call, before any work starts.',
+      },
+      {
         q: 'Do you publish the app to the stores?',
         a: 'Yes. We prepare the listings, screenshots and submissions, under developer accounts in your name.',
       },
@@ -116,6 +133,7 @@ export const services: Service[] = [
   },
   {
     slug: 'social-media',
+    price: { from: 400, monthly: true, typical: 'Most plans land between $400 and $1,200 a month, depending on the platforms and how many posts and reels you need. The ad budget is separate.' },
     related: ['websites', 'online-stores'],
     seoTitle: 'Social Media Management in Lebanon',
     seoDescription: 'Monthly social media management from Beirut: content plans, post and reel design, scheduling, paid campaigns and a report on what is working.',
@@ -138,6 +156,10 @@ export const services: Service[] = [
     ],
     faqs: [
       {
+        q: 'How much does social media management cost?',
+        a: 'From $400 a month. Most plans land between $400 and $1,200 a month, depending on the platforms and how many posts and reels you need. The ad budget is separate. You get a fixed price in writing after a short call, before any work starts.',
+      },
+      {
         q: 'Do you create the content?',
         a: 'Yes. We plan, write and design the posts each month and send them for your approval before anything goes live.',
       },
@@ -149,6 +171,7 @@ export const services: Service[] = [
   },
   {
     slug: 'custom-software',
+    price: { from: 3000, typical: 'Most tools land between $3,000 and $15,000, depending on the users, screens and the systems it connects to.' },
     related: ['mobile-apps', 'support'],
     seoTitle: 'Custom Software & CRM in Lebanon',
     seoDescription: 'Replace spreadsheets and scattered WhatsApp chats with a system built around how your team works: CRM, dashboards and automations. You own the code.',
@@ -171,6 +194,10 @@ export const services: Service[] = [
     ],
     faqs: [
       {
+        q: 'How much does custom software or a CRM cost?',
+        a: 'From $3,000. Most tools land between $3,000 and $15,000, depending on the users, screens and the systems it connects to. You get a fixed price in writing after a short call, before any work starts.',
+      },
+      {
         q: 'Can you move our existing data?',
         a: 'Yes. We clean and import data from spreadsheets and older systems as part of the project.',
       },
@@ -182,6 +209,7 @@ export const services: Service[] = [
   },
   {
     slug: 'support',
+    price: { from: 150, monthly: true, typical: 'Most plans land between $150 and $400 a month, depending on the size of the site and how quickly you need help.' },
     related: ['websites', 'online-stores'],
     seoTitle: 'Website Maintenance & Support in Lebanon',
     seoDescription: 'Monthly care plans for websites and apps: hosting, SSL, security updates, daily backups, uptime monitoring and direct help on WhatsApp.',
@@ -204,6 +232,10 @@ export const services: Service[] = [
     ],
     faqs: [
       {
+        q: 'How much does a care plan cost?',
+        a: 'From $150 a month. Most plans land between $150 and $400 a month, depending on the size of the site and how quickly you need help. You get a fixed price in writing after a short call, before any work starts.',
+      },
+      {
         q: 'Do you support sites you did not build?',
         a: 'Yes. We review the site first and tell you what needs fixing before the plan starts.',
       },
@@ -214,3 +246,6 @@ export const services: Service[] = [
     ],
   },
 ];
+
+/** "From $1,000" or "From $400 a month" */
+export const priceFrom = (s: Pick<Service, 'price'>) => `From $${s.price.from.toLocaleString('en-US')}${s.price.monthly ? ' a month' : ''}`;

@@ -1,10 +1,12 @@
 ---
-import { services } from '../data/services';
+import { services, priceFrom } from '../data/services';
 
 interface Props {
   exclude?: string;
+  /** Show the starting price under each name */
+  prices?: boolean;
 }
-const { exclude } = Astro.props;
+const { exclude, prices = false } = Astro.props;
 const list = services.filter((s) => s.slug !== exclude);
 ---
 
@@ -12,7 +14,7 @@ const list = services.filter((s) => s.slug !== exclude);
   {list.map((s) => (
     <li>
       <a href={`/services/${s.slug}/`}>
-        <h3>{s.name}</h3>
+        <div class="name"><h3>{s.name}</h3>{prices && <small class="from">{priceFrom(s)}</small>}</div>
         <p>{s.summary}</p>
         <span class="more">View service</span>
       </a>
@@ -35,6 +37,8 @@ const list = services.filter((s) => s.slug !== exclude);
     transition: background-color 0.15s;
   }
   p { color: var(--muted); max-width: 56ch; }
+  .name { display: grid; gap: 6px; }
+  .from { color: var(--pine); font-weight: 600; font-size: var(--step--1); }
   .more {
     justify-self: end;
     font-weight: 600;

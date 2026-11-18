@@ -1,3 +1,4 @@
+import { services, priceFrom } from './services';
 /**
  * Guides: plain answers to what business owners search for (the site was found only by its name). No menu item:
  * linked from the footer and from the matching service pages. Facts only: no invented prices, numbers or results.
@@ -39,7 +40,7 @@ export const guides: Guide[] = [
       'What decides the price of a website, online store or app in Lebanon, the yearly costs people forget, and how to compare quotes without surprises.',
     h1: 'How much does a website cost in Lebanon?',
     answer:
-      'It depends less on the website and more on what it has to do. A simple site built on a template sits at the low end of the market, while a custom online store or a mobile app costs several times more. What moves the price is the number of pages, how custom the design is, the features (booking, payments, Arabic and French versions), who prepares the content, and what happens after launch. The only reliable number is a **fixed-price quote for a written scope**, which any serious studio can give you after a short call.',
+      'It depends less on the website and more on what it has to do. A simple site built on a template sits at the low end of the market, while a custom online store or a mobile app costs several times more. What moves the price is the number of pages, how custom the design is, the features (booking, payments, Arabic and French versions), who prepares the content, and what happens after launch. As a guide, at Quantum ByTech a business website starts **from $1,000**, an online store **from $2,000** and a mobile app **from $6,000**. The only reliable number for your project is a **fixed-price quote for a written scope**, which any serious studio can give you after a short call.',
     published: '2026-11-18',
     updated: '2026-11-18',
     minutes: 6,
@@ -115,6 +116,15 @@ export const guides: Guide[] = [
         ],
       },
       {
+        id: 'our-prices',
+        h2: 'Our starting prices',
+        paragraphs: [
+          'Every project gets its own fixed price, but these are the starting points, in US dollars:',
+          'Where your project lands in the range depends on the points above. A starting price is not a template price: it is a custom project with a smaller scope.',
+        ],
+        list: services.map((x) => ({ title: `${x.name}: ${priceFrom(x).toLowerCase()}.`, text: x.price.typical })),
+      },
+      {
         id: 'how-we-price',
         h2: 'How we price at Quantum ByTech',
         paragraphs: [
@@ -123,6 +133,7 @@ export const guides: Guide[] = [
       },
     ],
     faqs: [
+      { q: 'How much does a website cost at Quantum ByTech?', a: 'A business website starts from $1,000 and most land between $1,000 and $4,000. Online stores start from $2,000 and mobile apps from $6,000. You get a fixed price in writing after a short call.' },
       { q: 'Why do website prices in Lebanon vary so much?', a: 'Because "a website" can mean a one-page template or a custom site in three languages with booking and a CRM. Compare quotes on the same written scope, and the differences become clear.' },
       { q: 'Is a template website good enough?', a: 'For a new business that needs to be found and contacted, often yes. A custom design pays off when your website has to sell: when it is where customers decide whether to call you or a competitor.' },
       { q: 'What yearly costs should I expect after launch?', a: 'The domain renewal, hosting and maintenance every year, and for an app, the Apple developer program ($99 a year). Ask for them in writing with the quote.' },
