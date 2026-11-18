@@ -7,12 +7,14 @@ import Faq from '../../components/Faq.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { services, type Service } from '../../data/services';
 import { workForService } from '../../data/work';
+import { guidesForService } from '../../data/guides';
 import { site } from '../../data/site';
 
 export const getStaticPaths = (() =>
   services.map((service) => ({ params: { slug: service.slug }, props: { service } }))) satisfies GetStaticPaths;
 
 const { service } = Astro.props as { service: Service };
+const guideLinks = guidesForService(service.slug);
 const pageUrl = new URL(`/services/${service.slug}/`, Astro.site).href;
 const related = service.related
   .map((slug) => services.find((s) => s.slug === slug))
@@ -107,6 +109,7 @@ const schema = [
     <div class="wrap split">
       <div class="section-head">
         <h2>Questions about {service.name.toLowerCase()}</h2>
+        {guideLinks.map((g) => <p class="guide-link">Guide: <a href={`/guides/${g.slug}/`}>{g.h1}</a></p>)}
       </div>
       <Faq items={service.faqs} />
     </div>
@@ -166,6 +169,8 @@ const schema = [
 </Base>
 
 <style>
+  .guide-link { margin-top: 14px; color: var(--muted); }
+  .guide-link a { color: var(--pine); font-weight: 600; text-underline-offset: 4px; }
   .page-hero { padding-block: clamp(48px, 7vw, 96px) clamp(64px, 9vw, 120px); }
   .crumbs { display: flex; gap: 10px; margin-bottom: 32px; color: var(--muted); font-size: var(--step--1); }
   .crumbs a { color: var(--pine); font-weight: 600; text-underline-offset: 4px; }

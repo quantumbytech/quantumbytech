@@ -1,0 +1,178 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Base from '../../layouts/Base.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { guides, type Guide } from '../../data/guides';
+import { services } from '../../data/services';
+import { workBySlug } from '../../data/work';
+import { site } from '../../data/site';
+
+export const getStaticPaths = (() => guides.map((guide) => ({ params: { slug: guide.slug }, props: { guide } }))) satisfies GetStaticPaths;
+
+const { guide } = Astro.props as { guide: Guide };
+const pageUrl = new URL(`/guides/${guide.slug}/`, Astro.site).href;
+const related = guide.services.map((s) => services.find((x) => x.slug === s)).filter((s): s is (typeof services)[number] => Boolean(s));
+const cases = guide.work.map(workBySlug).filter((w): w is NonNullable<ReturnType<typeof workBySlug>> => Boolean(w));
+
+/** **bold** → <strong>, everything else escaped */
+const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const rich = (s: string) => esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+const plain = (s: string) => s.replace(/\*\*/g, '');
+const when = (d: string) => new Date(`${d}T12:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+
+const schema = [
+  {
+    '@type': 'Article',
+    '@id': `${pageUrl}#article`,
+    headline: guide.h1,
+    description: guide.seoDescription,
+    datePublished: guide.published,
+    dateModified: guide.updated,
+    inLanguage: 'en',
+    mainEntityOfPage: pageUrl,
+    image: new URL('/og-image.png', Astro.site).href,
+    author: { '@id': `${site.url}/#organization` },
+    publisher: { '@id': `${site.url}/#organization` },
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Guides', item: `${site.url}/guides/` },
+      { '@type': 'ListItem', position: 3, name: guide.h1, item: pageUrl },
+    ],
+  },
+  {
+    '@type': 'FAQPage',
+    mainEntity: guide.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: plain(f.a) } })),
+  },
+];
+---
+
+<Base title={guide.seoTitle} description={guide.seoDescription} schema={schema}>
+  <article>
+    <section class="page-hero">
+      <div class="wrap narrow">
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span aria-hidden="true">/</span>
+          <a href="/guides/">Guides</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">{guide.h1}</span>
+        </nav>
+        <h1>{guide.h1}</h1>
+        <p class="meta">Updated <time datetime={guide.updated}>{when(guide.updated)}</time> · {guide.minutes} min read · By the Quantum ByTech team</p>
+        <div class="answer">
+          <p class="answer__label">The short answer</p>
+          <p set:html={rich(guide.answer)} />
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--white">
+      <div class="wrap narrow">
+        <div class="box">
+          <h2 class="box__title">Key points</h2>
+          <ul class="ticks">{guide.takeaways.map((t) => <li set:html={rich(t)} />)}</ul>
+        </div>
+
+        <nav class="toc" aria-label="In this guide">
+          <p class="toc__title">In this guide</p>
+          <ol>
+            {guide.sections.map((s) => <li><a href={`#${s.id}`}>{s.h2}</a></li>)}
+            <li><a href="#questions">Questions</a></li>
+          </ol>
+        </nav>
+
+        <div class="body">
+          {guide.sections.map((s) => (
+            <section id={s.id} class="part">
+              <h2>{s.h2}</h2>
+              {(s.paragraphs ?? []).slice(0, s.list ? 1 : undefined).map((p) => <p set:html={rich(p)} />)}
+              {s.list && (s.numbered ? (
+                <ol class="items">{s.list.map((it) => <li>{it.title && <strong>{it.title} </strong>}<span set:html={rich(it.text)} /></li>)}</ol>
+              ) : (
+                <ul class="items">{s.list.map((it) => <li>{it.title && <strong>{it.title} </strong>}<span set:html={rich(it.text)} /></li>)}</ul>
+              ))}
+              {s.list && (s.paragraphs ?? []).slice(1).map((p) => <p set:html={rich(p)} />)}
+            </section>
+          ))}
+
+          <section id="questions" class="part">
+            <h2>Questions</h2>
+            <div class="faqs">
+              {guide.faqs.map((f) => (
+                <details>
+                  <summary>{f.q}</summary>
+                  <p set:html={rich(f.a)} />
+                </details>
+              ))}
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap narrow">
+        <h2 class="next__title">Where to go next</h2>
+        <ul class="next">
+          {related.map((s) => (
+            <li>
+              <a href={`/services/${s.slug}/`}><strong>{s.name}</strong><span>{s.summary}</span></a>
+            </li>
+          ))}
+          {cases.map((w) => (
+            <li>
+              <a href={`/work/${w.slug}/`}><strong>Case study: {w.project.client}</strong><span>{w.project.summary}</span></a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  </article>
+
+  <CtaBand title={guide.cta.title} text={guide.cta.text} href={`/contact/?service=${guide.cta.service}`} />
+</Base>
+
+<style>
+  .narrow { max-width: 760px; }
+  .page-hero { padding-block: clamp(56px, 8vw, 104px) clamp(40px, 6vw, 72px); }
+  .crumbs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; color: var(--muted); font-size: var(--step--1); }
+  .crumbs a { color: var(--pine); font-weight: 600; text-underline-offset: 4px; }
+  h1 { max-width: 20ch; }
+  .meta { margin-top: 16px; color: var(--muted); font-size: var(--step--1); }
+
+  .answer { margin-top: 28px; padding: 22px 24px; border-left: 4px solid var(--signal); background: var(--white); border-radius: 0 10px 10px 0; }
+  .answer__label { font-size: var(--step--1); font-weight: 700; color: var(--pine); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+  .answer p:last-child { font-size: var(--step-1); line-height: 1.55; }
+
+  .box { padding: 22px 24px; background: var(--mint); border-radius: 12px; }
+  .box__title { font-size: var(--step-1); margin-bottom: 12px; }
+  .ticks { list-style: none; display: grid; gap: 10px; }
+  .ticks li { padding-left: 28px; position: relative; line-height: 1.5; }
+  .ticks li::before { content: ''; position: absolute; left: 4px; top: 0.45em; width: 12px; height: 7px; border-left: 2.5px solid var(--pine); border-bottom: 2.5px solid var(--pine); transform: rotate(-45deg); }
+
+  .toc { margin-top: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+  .toc__title { font-weight: 700; margin-bottom: 10px; }
+  .toc ol { padding-left: 1.2em; display: grid; gap: 6px; }
+  .toc a { color: var(--pine); text-underline-offset: 4px; }
+
+  .body { display: grid; gap: 44px; margin-top: 40px; }
+  .part { display: grid; gap: 16px; scroll-margin-top: 96px; }
+  .part h2 { font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem); }
+  .part p, .items li { line-height: 1.65; font-size: 1.0625rem; }
+  .items { padding-left: 1.3em; display: grid; gap: 12px; }
+  .items li::marker { color: var(--pine); font-weight: 700; }
+
+  .faqs { display: grid; gap: 10px; }
+  details { border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; background: var(--white); }
+  summary { cursor: pointer; font-weight: 600; }
+  details p { margin-top: 10px; line-height: 1.6; }
+
+  .next__title { margin-bottom: 18px; }
+  .next { list-style: none; display: grid; gap: 12px; }
+  .next a { display: grid; gap: 4px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--white); text-decoration: none; }
+  .next a:hover { border-color: var(--pine); }
+  .next span { color: var(--muted); }
+</style>
