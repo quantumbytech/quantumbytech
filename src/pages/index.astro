@@ -31,6 +31,8 @@ const schema = [
       tabindex="-1"
       data-hero-video
     >
+      <!-- Phones get a 640x360 copy (0.7 MB); the footage sits under a darker shade there anyway -->
+      <source src="/video/hero-sm.mp4" type="video/mp4" media="(max-width: 900px)" />
       <source src="/video/hero.webm" type="video/webm" />
       <source src="/video/hero.mp4" type="video/mp4" />
     </video>

@@ -13,7 +13,16 @@ const list = work.filter((w) => w.slug !== exclude);
   {list.map(({ slug, project: p }) => (
     <li>
       <a href={`/work/${slug}/`}>
-        <img src={p.image} alt={p.imageAlt} loading="lazy" decoding="async" width="1440" height="900" />
+        <img
+          src={p.image}
+          srcset={`${p.image.replace(/\.webp$/, '-720.webp')} 720w, ${p.image} 1440w`}
+          sizes="(max-width: 760px) calc(100vw - 32px), 580px"
+          alt={p.imageAlt}
+          loading="lazy"
+          decoding="async"
+          width="1440"
+          height="900"
+        />
         <div class="title">
           <h3>{p.client}</h3>
           <span class="service">{p.service}</span>
